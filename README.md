@@ -1,5 +1,5 @@
 # Bugs in Quantum Computing Platforms: An Empirical Study
-Companion Repository for "Bugs in Quantum Computing Platforms: An Empirical Study", Arxiv 2021
+Companion Repository for ["Bugs in Quantum Computing Platforms: An Empirical Study"](https://arxiv.org/abs/2110.14560)
 
 In the `artifacts` folder you can find the following resources:
 1. **commits_considered_for_sampling.csv**: containing the full list of commits considered for sampling, namely all the pairs of repository name and
