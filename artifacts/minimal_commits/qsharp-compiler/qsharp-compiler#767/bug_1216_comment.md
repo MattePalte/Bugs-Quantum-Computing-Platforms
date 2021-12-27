@@ -1,0 +1,1 @@
+Fixer: "This change includes 3 fixes/updates to the ClassicallyControlled rewrite step". Reporter: "For example, the if-condition if (M(q) != One) will correctly be handled (since it is ExpressionKind.NEQ), but the condition if (not (M(q) == One)) will not be transformed and then will fail target translation at execution time."

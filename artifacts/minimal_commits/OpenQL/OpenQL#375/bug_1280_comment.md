@@ -1,0 +1,1 @@
+Fixer: "The code was not C++11 conformant, particularly due to this inane C++ standardese illogic."

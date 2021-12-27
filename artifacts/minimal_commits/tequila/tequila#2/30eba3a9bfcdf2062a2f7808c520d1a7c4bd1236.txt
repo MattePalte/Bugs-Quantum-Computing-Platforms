@@ -1,0 +1,3 @@
+Merge pull request #2 from MichiRuY/comm-fix
+
+fixed merge missmatch

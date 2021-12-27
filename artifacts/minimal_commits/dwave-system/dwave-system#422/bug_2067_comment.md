@@ -1,0 +1,1 @@
+Reporter: "LeapHybridSampler and LeapHybridDQMSampler update required solver features on kwargs level only, effectively ignoring user's config from file/env."

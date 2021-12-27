@@ -1,0 +1,42 @@
+Fix inversion of templates (#1243)
+
+* fix inversion of templates
+
+* fix
+
+* linting
+
+* more tests
+
+* fix tests
+
+* fix failing tests
+
+* changelog
+
+* suggested changes
+
+* fix sphinx
+
+* update
+
+* update
+
+* Apply suggestions from code review
+
+* rever
+
+* typo
+
+* typo
+
+* Update tests/tape/test_tape.py
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Apply suggestions from code review
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+Co-authored-by: Maria Schuld <mariaschuld@gmail.com>
+Co-authored-by: antalszava <antalszava@gmail.com>

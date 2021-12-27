@@ -1,0 +1,3 @@
+Fix incremental builds by avoiding wildcard in Outputs (#1041)
+
+The incremental build support has been broken for a little while, it turns out, and the wildcard in the QSharpCompile target's Outputs property seems to be the cause. We confirmed locally that returning this to explicitly check for the bson fixes the incremental build and meets the needs of the scenarios we cover. I'm hopeful that this will also address QSC reruns in pipeline even when it shouldn't #932 but it's possible the pipeline issue is actually unrelated.

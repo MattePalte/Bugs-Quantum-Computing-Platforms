@@ -1,0 +1,1 @@
+Fixer: "Fixed a bug in homodyne measurements in the Fock backend, where computed probability values could occasionally include small negative values due to floating point precision error."

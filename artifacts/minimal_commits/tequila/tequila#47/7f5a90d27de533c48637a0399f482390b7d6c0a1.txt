@@ -1,0 +1,3 @@
+Merge pull request #47 from aspuru-guzik-group/fix_mappings
+
+Fix mappings

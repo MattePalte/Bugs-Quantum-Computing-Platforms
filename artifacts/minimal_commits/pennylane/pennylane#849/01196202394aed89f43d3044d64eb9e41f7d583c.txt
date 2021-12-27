@@ -1,0 +1,13 @@
+Fixes if statement in default.qubit (#849)
+
+* Fixes if statement
+
+* Runs black
+
+* adding to changelog
+
+* tests and black
+
+* fix tests
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>

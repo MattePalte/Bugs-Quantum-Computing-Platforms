@@ -1,0 +1,6 @@
+MPI parallelization fix (#1278)
+
+
+
+Co-authored-by: Christopher J. Wood <cjwood@us.ibm.com>
+Co-authored-by: Victor Villar <vvilpas@gmail.com>

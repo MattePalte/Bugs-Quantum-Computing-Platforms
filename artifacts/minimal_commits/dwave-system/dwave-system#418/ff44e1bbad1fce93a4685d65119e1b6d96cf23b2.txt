@@ -1,0 +1,3 @@
+Merge pull request #418 from hhtong/fix_preprocessinig
+
+Remove use of dimod's preprocessing extra install arg

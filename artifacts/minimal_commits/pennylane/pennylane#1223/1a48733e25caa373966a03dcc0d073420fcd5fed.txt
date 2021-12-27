@@ -1,0 +1,13 @@
+Fixes bug where applying the Torch interface repeatedly after expansion caused an error (#1223)
+
+* Fixes bug where repeated Torch interface after expansion caused an error
+
+* update changelog
+
+* Update .github/CHANGELOG.md
+
+* Update .github/CHANGELOG.md
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>

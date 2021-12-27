@@ -1,0 +1,3 @@
+fix: Remove immutable default args (#268)
+
+Changed mutable default arguments (i.e. `def func(a={})`) to immutable ones (`def func(a=None)`) to avoid [unexpected bugs](https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments) down the line.

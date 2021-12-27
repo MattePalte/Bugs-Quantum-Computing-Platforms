@@ -1,0 +1,1 @@
+Fixer: "Using qml.sample once or multiple times with a shot vector [raises] an error." Chengelog: "Sampling works correctly with batches of shots specified as a list"

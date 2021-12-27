@@ -1,0 +1,1 @@
+Fixer: "Parametric gate such as ParametricRX or ParametricPauliRotation were not compatible with QuantumStateGpu."

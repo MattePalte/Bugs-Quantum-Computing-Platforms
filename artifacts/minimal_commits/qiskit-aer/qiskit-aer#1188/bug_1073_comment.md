@@ -1,0 +1,1 @@
+Reporter: "The reason is that specs (or more precisely, tape.diagonalizing_gates) assumes that an observable has diagonalizing_gates defined. The new Hamiltonian observable does not, since we do not know its diagonalisation." The root cause is Api change becasuse of the new Hamiltonian observable, which triggered the problem.

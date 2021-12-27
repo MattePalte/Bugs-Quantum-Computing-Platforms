@@ -1,0 +1,3 @@
+Merge pull request #295 from QFer/fix/option_decompose_toffoli
+
+Toffoli Decomposition Option MA should be AM

@@ -1,0 +1,1 @@
+In the building script we need to pass some assembly constants. But sometimes they are not present, thus before assigning we have to check if they are available to us, otherwise pass an empty string.

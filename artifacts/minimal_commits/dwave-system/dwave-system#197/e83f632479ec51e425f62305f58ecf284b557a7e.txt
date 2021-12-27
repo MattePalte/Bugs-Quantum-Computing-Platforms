@@ -1,0 +1,3 @@
+Merge pull request #197 from arcondello/fix/dwave-sampler-mismatched-problem
+
+Raise BinaryQaudraticModelStructureError for mismatched QUBO

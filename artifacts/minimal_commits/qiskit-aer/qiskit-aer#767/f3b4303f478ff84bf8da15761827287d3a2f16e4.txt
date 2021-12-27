@@ -1,0 +1,5 @@
+Fix bugs in density matrix simulation method for diagonal gates and conditionals (#767)
+
+* Fix bug in density matrix diagonal gate
+
+* Fix density matrix conditional gates

@@ -1,0 +1,1 @@
+Fix ReduceBarriers to be applied before truncation (#693)

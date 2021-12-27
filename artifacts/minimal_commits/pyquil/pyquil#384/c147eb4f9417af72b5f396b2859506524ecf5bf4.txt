@@ -1,0 +1,1 @@
+Fixes #384: Allow gate angles to deviate up to some tolerance from k*pi/2 (#421)

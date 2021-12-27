@@ -1,0 +1,1 @@
+Fix bug in unitary simulator cu3 and add cu3 tests (#483)

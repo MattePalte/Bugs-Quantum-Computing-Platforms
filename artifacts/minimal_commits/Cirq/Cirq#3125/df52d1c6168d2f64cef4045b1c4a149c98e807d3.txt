@@ -1,0 +1,3 @@
+Add KakDecomposition._decompose_ by fixing factor of 2 error in exp(PauliString) (#3125)
+
+- I compared against results from WolframAlpha to make sure the modified tests are now correct

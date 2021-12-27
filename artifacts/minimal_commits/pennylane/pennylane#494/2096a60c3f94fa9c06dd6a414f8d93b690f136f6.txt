@@ -1,0 +1,9 @@
+Adds an introduction to QNode collections, and fixes a consistency bug (#494)
+
+* Added small mention of QNode collections to the circuits.rst introduction file
+
+* Change numpy vstack to stack in QNode collection return
+
+* fix tests
+
+* suggested changes

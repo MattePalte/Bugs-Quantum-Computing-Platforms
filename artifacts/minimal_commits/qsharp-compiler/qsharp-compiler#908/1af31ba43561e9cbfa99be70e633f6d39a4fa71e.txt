@@ -1,0 +1,1 @@
+Fixing short circuiting for logical operators (#908)

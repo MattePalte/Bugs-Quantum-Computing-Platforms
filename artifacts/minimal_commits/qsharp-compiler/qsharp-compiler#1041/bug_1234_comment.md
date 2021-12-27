@@ -1,0 +1,1 @@
+During the incremental build there is a xml like file which determines and output file with a wildecard extension (.*) and that ruined the entire build process.

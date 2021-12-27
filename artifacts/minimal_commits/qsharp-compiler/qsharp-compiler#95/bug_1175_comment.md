@@ -1,0 +1,1 @@
+The syntax extension of the Q# languages have problem with type inference. The bug is in the language definiton.

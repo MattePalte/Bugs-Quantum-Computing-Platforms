@@ -1,0 +1,9 @@
+Fix a json-issue in the cancel_job method of sf.api.connection.Connection (#336)
+
+* Fix a json-issue in the job cancel method
+
+* remove unused json import
+
+* fix test
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>

@@ -1,0 +1,1 @@
+Fix depth and ascii diagrams for circuits with overlapping multi-qubi… (#44)

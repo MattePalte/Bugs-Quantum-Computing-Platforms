@@ -1,0 +1,3 @@
+Merge pull request #373 from randomir/fix-version-filter-in-hybrid-samplers/issue-372
+
+Fix hybrid solvers selection (version sort)

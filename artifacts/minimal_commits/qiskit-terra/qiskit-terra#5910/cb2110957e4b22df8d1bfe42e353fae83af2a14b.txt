@@ -1,0 +1,12 @@
+Fix to carry over calibrations with __iadd__ and __add__ (#5910)
+
+* * Added fix to carry over calibrations with __iadd__ and __add__.
+* Added corresponding test.
+
+* * Added reno.
+
+* * Lint fix.
+
+* * Switched to add_calibration.
+
+* * Removed the redundent comments.

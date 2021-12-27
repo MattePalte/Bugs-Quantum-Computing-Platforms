@@ -1,0 +1,1 @@
+Reporter: AutoEmbeddingComposite(DWaveSampler()).sample(dimod.BQM({}, {(0, 1): 1}, 0, 'BINARY')) > app crash. According to the bug report (https://github.com/dwavesystems/dwave-system/issues/196), the bugs causes an exception.

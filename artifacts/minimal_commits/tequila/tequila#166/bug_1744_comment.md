@@ -1,0 +1,1 @@
+Reporter: "nvirt = self.n_orbitals // 2 - nocc   >> I think here self.n_orbital is the number of spatial orbitals, not spin orbitals. Therefore, //2 gives a false value for nvirt." The cration of ansatz is related to ML core

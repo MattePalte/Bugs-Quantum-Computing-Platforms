@@ -1,0 +1,3 @@
+Merge pull request #6 from arcondello/incomplete_solver_bugfix
+
+Incomplete solver bugfix

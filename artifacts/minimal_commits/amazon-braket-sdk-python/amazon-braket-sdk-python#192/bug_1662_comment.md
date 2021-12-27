@@ -1,0 +1,1 @@
+For a test which require a random circuit we need to select a random qubit to act on. To do that we use random.randint(a, b), but it gets a <= x <= b, extrema included. The bug was that the developer thought that b was excluded (similarly to range), and then it crashed.

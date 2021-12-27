@@ -1,0 +1,9 @@
+Fixes bug where negative probabilities can be calculated during Homodyne measurement in the Fock backend (#364)
+
+* Fixes bug where negative probabilities can be calculated by measure_homodyne in the Fock backend
+
+* typo
+
+* changelog
+
+* Update strawberryfields/backends/fockbackend/circuit.py

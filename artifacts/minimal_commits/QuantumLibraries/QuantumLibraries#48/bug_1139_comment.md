@@ -1,0 +1,1 @@
+The normalization of a sampling interval was wrong. It should be by 2 ^ bitsRandom instead of 2 ^ bitsRandom + 1.

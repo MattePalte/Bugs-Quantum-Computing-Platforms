@@ -1,0 +1,1 @@
+Fixer: "if the QPU (its device_arn) is unknown, search until it is found".

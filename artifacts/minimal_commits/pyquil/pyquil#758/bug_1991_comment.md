@@ -1,0 +1,1 @@
+This code affects the measure_observables function of the pauli gate, it is involved in tomographic experiment. Bug: in the code the ExperimentResult objects are initialized with a hardcoded value and the coeff defined in the parameter of measure_obeservables is not passed at the moment of creation. Bug: ExperimentResult(coeff=1) > Fix: ExperimentResult(coeff=coeff)

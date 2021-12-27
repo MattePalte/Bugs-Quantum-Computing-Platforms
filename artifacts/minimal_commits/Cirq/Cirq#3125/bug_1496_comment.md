@@ -1,0 +1,1 @@
+The KakDecomposition uses a wrong coefficent in a math formula when working wit Pauli Objects.

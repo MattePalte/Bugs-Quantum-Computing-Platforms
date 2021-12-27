@@ -1,0 +1,3 @@
+Merge pull request #423 from randomir/bugfix/qpu-tests-failing-when-2000q-missing
+
+Make QPU tests insensitive to QPU topology availability

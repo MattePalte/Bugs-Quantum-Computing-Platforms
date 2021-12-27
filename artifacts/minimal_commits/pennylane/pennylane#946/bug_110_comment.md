@@ -1,0 +1,1 @@
+In the qubit representation of tensorflow backend, the imaginary and conjugate functions have the same signature.

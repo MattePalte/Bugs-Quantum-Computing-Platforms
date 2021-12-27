@@ -1,0 +1,31 @@
+Fix bug in Dgate, Coherent, and DisplacedSqueezed (#507)
+
+* Support TF tensors in batch form
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Add test
+
+* Add to changelog
+
+* Update PR in changelog
+
+* New line
+
+* Extend to other gates
+
+* Update changelog
+
+* Update
+
+* Update test
+
+* Update .github/CHANGELOG.md
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Fix typo
+
+* Fix
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>

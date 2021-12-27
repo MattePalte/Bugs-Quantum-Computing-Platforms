@@ -1,0 +1,4 @@
+Fix dev_tools being installed with the cirq package (#608)
+
+- Caught this thanks to simple_check failing for @bryano in openfermion-cirq
+- The script was hitting cirq's dev_tools instead of openfermion-cirq's, and getting very confused

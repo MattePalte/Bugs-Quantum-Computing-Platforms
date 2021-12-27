@@ -1,0 +1,1 @@
+Fixer: "PauliOperator::get_expection_value() will broke when number of qubits in PauliOperator is larger than in QuantumState."
