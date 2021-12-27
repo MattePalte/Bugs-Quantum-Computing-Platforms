@@ -1,0 +1,1 @@
+Reporter: "STORE documentation says source can be constant value. But actually it type errors if source is not a MemoryReference." Fix: the check on the type now accepts also istance of int and float, not only MemoryReference

@@ -1,0 +1,1 @@
+Fixer: "The previous test tried to test multiple exceptional states, but once a QubitManager hits an exception, it is no longer usable and its internal state is unreliable, so these cases should not be in a single test."

@@ -1,0 +1,1 @@
+Fixer: fix adder primitive which works with quantum gates. Fixer: "The tests didn't catch the bug, because integer tests were not executed. The PR enables these tests."

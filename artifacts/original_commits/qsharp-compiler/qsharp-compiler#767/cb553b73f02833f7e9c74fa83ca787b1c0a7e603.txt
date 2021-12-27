@@ -1,0 +1,13 @@
+Fix ClassicallyControlled Rewrite bugs (#767)
+
+* Fix ClassicallyControlled Rewrite bugs
+
+This change includes 3 fixes/updates to the ClassicallyControlled rewrite step:
+1. It adds handling for ExpressionKind.NOT so that those conditions get properly restructured and processed for lifting (fixes #763)
+2. If a conditional statement has an empty scope, it gets replaced with a call to `NoOp` instead of being lifted into an empty callable.
+
+* Refactor use of QsNullable in ProcessNOT
+
+* Remove attempted fix for IsValidScope propagation
+
+* Adding test cases for NOT

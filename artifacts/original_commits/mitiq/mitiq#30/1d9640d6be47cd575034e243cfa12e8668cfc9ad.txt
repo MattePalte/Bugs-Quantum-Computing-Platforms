@@ -1,0 +1,8 @@
+Fixes bug with small stretches (#30)
+
+* Fixes bug with small stretches by adding a check of num_to_fold is zero + rounds num_to_fold up or
+down instead of always rounding down to nearest integer.
+
+* Defines _get_num_to_fold function and uses it in folding_cirq.py to get the number of gates to fold.
+
+* Uses _get_num_to_fold in folding_pyquil.py to get the number of gates to fold.

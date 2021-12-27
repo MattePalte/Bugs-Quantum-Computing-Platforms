@@ -1,0 +1,1 @@
+Problem in the parsing of quil code (low level code similar to QASM). Fixer: "When we passed string of hamiltonian whose coefficient is 0 or its real value is 0 to Observable::create_observable_from_openfermion_text, the kernel crashes."

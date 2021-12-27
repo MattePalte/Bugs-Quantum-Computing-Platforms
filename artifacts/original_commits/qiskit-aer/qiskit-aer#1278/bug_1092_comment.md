@@ -1,0 +1,1 @@
+Reporter: "QFT simulation ends unexpectedly with SIGSEGV (Segmentation fault) when using MPI, and the full statevector is larger than the memory available on one node." Fixer: 'MPI parallelization fix". Fixer: "I added memory available check for save statevector or matrix and raising exception."

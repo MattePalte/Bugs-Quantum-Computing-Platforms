@@ -1,0 +1,1 @@
+Bug in the binding of the Observable calss with pybind11.

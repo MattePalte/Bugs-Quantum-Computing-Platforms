@@ -1,0 +1,3 @@
+Merge pull request #8 from aspuru-guzik-group/hotfix-qubit-maps
+
+fix qubit mapping in hamiltonian

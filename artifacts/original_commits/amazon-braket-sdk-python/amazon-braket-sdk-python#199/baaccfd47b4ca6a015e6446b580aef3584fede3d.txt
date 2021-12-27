@@ -1,0 +1,1 @@
+fix: get correct event loop for task results after running a batch over multiple threads (#199)

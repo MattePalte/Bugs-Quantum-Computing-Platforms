@@ -1,0 +1,1 @@
+Reporter: "When passing a circuit through the basic scheduler (qiskit.scheduler.schedule), the resulting Schedule will always measure qubit results into the MemorySlot which matches the qubit index. qc.measure(q[0], c[3]) will measure qubit 0 into MemorySlot(0) rather than MemorySlot(3)"

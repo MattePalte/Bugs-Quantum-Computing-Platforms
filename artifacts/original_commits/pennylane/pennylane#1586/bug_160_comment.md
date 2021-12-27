@@ -1,0 +1,1 @@
+Fixer: "Fix bug when computing expectations of Hamiltonians using TensorFlow.". Fixer: "tensorflow differentiation tests were skipped due to a typo. It turns out that they were failing, which uncovered a subtle issue."

@@ -1,0 +1,1 @@
+Fixer: "Bugfix OpenMP flags in setup.py: change -openmp to -qopenmp if icc is used as -openmp is interpreted as -o penmp when using clang or gcc".

@@ -1,0 +1,1 @@
+Fixer: "[bugfix] Change return value policy for avoiding memory leak"

@@ -1,0 +1,1 @@
+Fixer: "Fix symbol resolution misbehaior for GCC and Clang on MacOS". Inconsistent behaviour on Macos with cmake file. Reporter: "this problem is similar to old report saying: gcc builds were failing on MacOS due to a problem with the dynamic symbol resolution."

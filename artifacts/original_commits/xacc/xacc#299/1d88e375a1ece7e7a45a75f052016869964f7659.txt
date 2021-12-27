@@ -1,0 +1,3 @@
+Merge pull request #299 from tnguyen-ornl/tnguyen/fix-qng-build
+
+Potential fix for #296

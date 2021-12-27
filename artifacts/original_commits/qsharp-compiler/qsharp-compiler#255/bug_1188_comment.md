@@ -1,0 +1,1 @@
+To build the library on linux and macos we need to run a bash comand which is specified in and xml like file. The bug consisted in a missing parameter passed to the command (there was no link to the qsc.dll file ) .

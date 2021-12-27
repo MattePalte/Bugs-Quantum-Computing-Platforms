@@ -1,0 +1,3 @@
+Fixing use of ASSEMBLY_CONSTANTS (#466)
+
+Fixes Scripts use of `DefineConstants` overrides all build constants, possibly hiding test failures #446

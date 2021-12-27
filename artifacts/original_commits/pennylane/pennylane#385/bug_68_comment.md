@@ -1,0 +1,1 @@
+Reporter: in the test suite "QNodes were being created at the module level. This was causing exceptions if PyTorch or TensorFlow was not installed, as they were not within scope of the 'skip_if_not_installed' fixtures."

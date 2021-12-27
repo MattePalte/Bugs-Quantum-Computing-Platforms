@@ -1,0 +1,1 @@
+fix factor of 2. fix test. fix docs gobal_fold (#125)

@@ -1,0 +1,3 @@
+Fix C# Generation for UDT Tuple Field (#270)
+
+Fixed an issue with the C# generation for UDT classes where tuple fields of the UDT where not being correctly parsed. Added some tests for this situation.

@@ -1,0 +1,1 @@
+Reporter: "When combining a regular QuantumCircuit with a calibrated circuit, the calibrated circuit information is lost and the default gate is used instead". Fixer: "Quantum circuit Calibrations are now carried over when the operators += and + are used."

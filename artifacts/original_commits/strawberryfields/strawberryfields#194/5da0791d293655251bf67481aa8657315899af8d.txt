@@ -1,0 +1,9 @@
+Apps Layer: Fix event_to_sample (#194)
+
+* index on fix_event_to_sample: 0b6b972 fix broken docs building
+
+* Fixed merge conflicts
+
+* Changes from black + pylint
+
+* Removed test_sample_max_count_deterministic

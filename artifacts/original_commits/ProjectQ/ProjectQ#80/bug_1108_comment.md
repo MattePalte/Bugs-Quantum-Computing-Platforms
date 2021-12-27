@@ -1,0 +1,1 @@
+bug: declare an exception without the keyword raise in front of it.

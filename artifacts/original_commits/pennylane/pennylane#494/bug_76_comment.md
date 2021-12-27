@@ -1,0 +1,1 @@
+Fixer: "Fixes a bug where the QNode collection was returning an inconsistent shape for the autograd interface."

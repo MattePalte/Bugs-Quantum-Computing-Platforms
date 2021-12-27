@@ -1,0 +1,1 @@
+Fixer: "The Clifford backend is currently searching for errors in the id (idle) gate using the string "idle". However, both in the Qubit backend and in the README it is referred to as "id". This is solved simply by changing "idle" to "id" in the relevant lines in the Clifford engine."

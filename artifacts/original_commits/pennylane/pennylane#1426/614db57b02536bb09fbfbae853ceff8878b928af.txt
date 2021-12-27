@@ -1,0 +1,8 @@
+Fix backward pass on GPU in PyTorch interface (#1426)
+
+* Add fix to push results back to GPU.
+
+* Update changelog.
+
+Co-authored-by: Olivia Di Matteo <dimatteo.olivia@gmail.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>

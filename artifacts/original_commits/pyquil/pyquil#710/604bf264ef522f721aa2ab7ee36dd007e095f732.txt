@@ -1,0 +1,15 @@
+Fix is zero and identity (#710)
+
+* Fixing is_identity(), is_zero() and adding some tests
+
+* Fixing exponentiation of a zero PauliTerm
+
+* Deleting comment
+
+* Shortening boolean logic, and removing print statements
+
+* Fix failing tests with placeholders, and flake8 complaints
+
+* Changing argument of is_identity() to older variable name for backwards compatibility
+
+* Apply no gate instead of applying identity to qubit zero in order to do nothing

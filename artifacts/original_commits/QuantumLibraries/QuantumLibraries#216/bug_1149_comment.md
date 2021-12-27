@@ -1,0 +1,1 @@
+To estimate the frequnecy of a certain measured output (e.g. value 0), we use EstimateFrequencyA method. Bug: sometimes that routine can have failures because of the circuit, but the exception raised was incorrect. Fix: use nested try catch to correctly handle the exceptions.

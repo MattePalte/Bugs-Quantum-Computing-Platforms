@@ -1,0 +1,1 @@
+Bug fix for MPS::apply_kraus (#1206)

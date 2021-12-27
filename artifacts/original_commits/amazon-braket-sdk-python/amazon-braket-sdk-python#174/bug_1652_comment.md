@@ -1,0 +1,1 @@
+Bug: The cache of the quantum task was not updated correctly, when the user requested the metadata asking for the non cache data, the data were not update in the cache.

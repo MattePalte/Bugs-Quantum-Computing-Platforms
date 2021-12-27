@@ -1,0 +1,2 @@
+Fixer: "The matrix to be applied by apply_matrix in cz gate was wrong, diagonal elements should be set to 1 but set to 0.
+Also the matrix set in y gate was wrong, I created separate kernel for y gate."

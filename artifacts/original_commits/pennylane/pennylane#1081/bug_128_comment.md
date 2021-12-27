@@ -1,0 +1,1 @@
+Bug: during autodifferentiation, if only a single argument is differentiated, the returned gradient does not match the cost function return type.

@@ -1,0 +1,1 @@
+From fixer: "Fixed some small errors in andomized benchmarking. Add the ability to load multiple results  into a measurement call."

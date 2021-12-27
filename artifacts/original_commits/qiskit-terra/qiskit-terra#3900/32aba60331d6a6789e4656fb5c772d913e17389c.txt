@@ -1,0 +1,11 @@
+Fix schedule assember bug (#3900)
+
+* fix pulse lib bug
+
+* optimize import
+
+* remove deepcopy
+
+* update documentation
+
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>

@@ -1,0 +1,26 @@
+Fixed issue 4697 by updating append method (#4887)
+
+* Fixed issue 4697 by updating append method
+
+* Fixed issue 4697 by updating append method
+
+* Fixed issue 4697 by updating append method
+
+* Update quantumcircuit.py conditional
+
+* Update conditional statement
+
+* Add unit test and releasenotes
+
+* Add unit test and releasenotes
+
+* Update logical check and comments
+
+* Update logical check and comments
+
+* Update logical check and comments
+
+* Update append method and releasenotes
+
+Co-authored-by: Kevin Krsulich <kevin.krsulich@ibm.com>
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>

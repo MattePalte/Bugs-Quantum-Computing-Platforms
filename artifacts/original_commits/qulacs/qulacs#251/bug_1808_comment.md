@@ -1,0 +1,1 @@
+Memory leak, allocated C++ variable not deallocated.

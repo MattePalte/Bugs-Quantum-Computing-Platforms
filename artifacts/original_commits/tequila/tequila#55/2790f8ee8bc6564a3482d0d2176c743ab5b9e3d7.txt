@@ -1,0 +1,3 @@
+Merge pull request #55 from aspuru-guzik-group/noise_tutorial_fix
+
+Tutorial revision, + all_z sampling hotfix.

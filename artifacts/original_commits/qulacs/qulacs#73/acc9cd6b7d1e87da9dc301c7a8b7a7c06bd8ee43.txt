@@ -1,0 +1,3 @@
+Merge pull request #73 from hal0taso/bugfix/create_observable_from_openfermion_text
+
+Bugfix and add some features for Observable and PauliOperator

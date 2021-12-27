@@ -1,0 +1,1 @@
+From fixer: "The set_config method of the Data accumulator for the base controller class wasn't being called, so any additional data such as memory=True was being discarded when accumulated."

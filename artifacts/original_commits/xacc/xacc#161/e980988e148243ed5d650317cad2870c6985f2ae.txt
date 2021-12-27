@@ -1,0 +1,3 @@
+fixing bug #161 to ensure plugins built off debug build of xacc can themselves build
+
+Signed-off-by: Alex McCaskey <mccaskeyaj@ornl.gov>

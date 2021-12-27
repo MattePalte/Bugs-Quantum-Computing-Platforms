@@ -1,0 +1,3 @@
+Merge pull request #10 from DiCarloLab-Delft/hotfix/for_loop
+
+Fix for register clash between delay calibration and FOR loop

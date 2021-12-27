@@ -1,0 +1,9 @@
+Fix mapper issue #342 (#347)
+
+* get_qubits return in order
+
+* added test to reproduce emoticon mapping issue
+
+* test mapping of already-conforming circuits
+
+* test gate after measure in quantumprogram

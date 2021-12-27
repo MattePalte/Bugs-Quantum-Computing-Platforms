@@ -1,0 +1,12 @@
+fix uccsd duplication (#139)
+
+* fix uccsd duplication
+
+* fix uccsd duplicates amplitudes
+
+* Update ci_optimizers.yml
+
+* Update ci_backends.yml
+
+Co-authored-by: AbhinavUofT <AbhinavUofT@github.com>
+Co-authored-by: J. S. Kottmann <jakob.kottmann@gmail.com>

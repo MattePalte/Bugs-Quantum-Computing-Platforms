@@ -1,0 +1,1 @@
+Bug: duplicated code, seems to come from copy paste anipattern. The bug is in the depth counter so it reasonably lead to a wrong result of the depth.

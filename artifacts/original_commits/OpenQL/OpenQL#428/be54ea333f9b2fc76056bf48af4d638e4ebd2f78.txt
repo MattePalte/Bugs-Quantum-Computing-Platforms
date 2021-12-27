@@ -1,0 +1,3 @@
+Merge pull request #428 from QE-Lab/fix-infinite-loop-ddg
+
+Fix statements like an infinite loop not causing any data dependency graph events

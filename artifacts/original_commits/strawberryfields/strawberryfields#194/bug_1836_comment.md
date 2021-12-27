@@ -1,0 +1,1 @@
+Fix: "The previous implementation of the event_to_sample function was creating correct samples belonging to the event, but these were not distributed uniformly at random. This PR fixes this issue so that samples are generated uniformly at random."

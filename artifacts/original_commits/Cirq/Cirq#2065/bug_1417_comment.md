@@ -1,0 +1,1 @@
+Fixer: "Before it failed 6/10000 times, now it failed 0/200000." They increase the tolerance, the error allowed now is much bigger between expected and obtained results
