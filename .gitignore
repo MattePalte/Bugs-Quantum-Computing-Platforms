@@ -1,0 +1,4 @@
+repos/*
+artifacts/minimal_commits/*
+artifacts/original_commits_backup/*
+*/.ipynb_checkpoints/*
