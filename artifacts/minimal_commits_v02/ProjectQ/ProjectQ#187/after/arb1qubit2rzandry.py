@@ -42,13 +42,7 @@ TOLERANCE = 1e-12
 
 
 def _recognize_arb1qubit(cmd):
-    """ 
-    Recognize an arbitrary one qubit gate which has a matrix property.
-
-    It does not allow gates which have control qubits as otherwise the
-    AutoReplacer might go into an infinite loop. Use
-    carb1qubit2cnotrzandry instead.
-    """
+    """ Recognize an arbitrary one qubit gate which has a matrix property."""
     try:
         m = cmd.gate.matrix
         if len(m) == 2 and get_control_count(cmd) == 0:

@@ -48,11 +48,6 @@ if __name__ == "__main__":
     # ibmq_16_melbourne (15 qubit)
     # ibmq_essex (5 qubit)
     # ibmq_qasm_simulator (32 qubits)
-    # and plenty of other 5 qubits devices!
-    #
-    # To get a token, create a profile at:
-    # https://quantum-computing.ibm.com/
-    #
     device = None # replace by the IBM device name you want to use
     token = None  # replace by the token given by IBMQ
     if token is None:

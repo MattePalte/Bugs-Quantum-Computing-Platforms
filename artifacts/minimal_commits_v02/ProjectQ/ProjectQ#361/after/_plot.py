@@ -222,7 +222,7 @@ def calculate_gate_grid(axes, qubit_lines, plot_params):
     ]
 
     gate_grid = np.array([0] * (depth + 1), dtype=float)
-    
+
     gate_grid[0] = plot_params['labels_margin']
     if depth > 0:
         gate_grid[0] += width_list[0] * 0.5

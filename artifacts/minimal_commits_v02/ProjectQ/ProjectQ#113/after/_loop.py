@@ -231,9 +231,6 @@ class Loop(object):
                 with Loop(eng, 4):
                     H | qb
                     Rz(M_PI/3.) | qb
-        Raises:
-            TypeError: If number of iterations (num) is not an integer
-            ValueError: If number of iterations (num) is not >= 0
         """
         self.engine = engine
         if not isinstance(num, int):

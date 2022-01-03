@@ -187,7 +187,6 @@ class ControlledGate(BasicGate):
                 the gate.
         """
         qubits = BasicGate.make_tuple_of_qureg(qubits)
-
         ctrl = []
         gate_quregs = []
         adding_to_controls = True
@@ -203,7 +202,6 @@ class ControlledGate(BasicGate):
             raise ControlQubitError("Wrong number of control qubits. "
                                     "First qureg(s) need to contain exactly "
                                     "the required number of control quregs.")
-
         import projectq.meta
         with projectq.meta.Control(gate_quregs[0][0].engine, ctrl):
             self._gate | tuple(gate_quregs)

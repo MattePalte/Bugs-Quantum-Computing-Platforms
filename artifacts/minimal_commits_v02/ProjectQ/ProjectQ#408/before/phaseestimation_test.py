@@ -26,9 +26,7 @@ from projectq.cengines import (
     DecompositionRuleSet,
     MainEngine,
 )
-
 from projectq.ops import X, H, All, Measure, Tensor, Ph, CNOT, StatePreparation, QPE
-
 from projectq.setups.decompositions import phaseestimation as pe
 from projectq.setups.decompositions import qft2crandhadamard as dqft
 import projectq.setups.decompositions.stateprep2cnot as stateprep2cnot
