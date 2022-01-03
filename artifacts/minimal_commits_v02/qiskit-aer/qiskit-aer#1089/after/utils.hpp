@@ -1029,7 +1029,6 @@ std::string hex2bin(std::string str, bool prefix) {
   // Start with remain
   if (remain != 0)
       bin += int2string(std::stoull(str.substr(0, remain), nullptr, 16), 2);
-
   for (size_t j=0; j < chunks; ++j) {
     std::string part = int2string(std::stoull(str.substr(remain + j * block, block), nullptr, 16), 2, 64);
     bin += part;

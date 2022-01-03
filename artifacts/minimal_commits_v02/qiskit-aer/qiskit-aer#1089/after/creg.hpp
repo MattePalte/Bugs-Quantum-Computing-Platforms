@@ -185,13 +185,11 @@ void ClassicalRegister::apply_bfunc(const Operations::Op &op) {
       masked_val[length - 1 - rev_pos] = (mask_bin[mask_bin.size() - 1 - rev_pos] 
                                           & creg_register_[creg_register_.size() - 1 - rev_pos]);
     }
-    // remove leading 0's
     size_t end_i = masked_val.find('1');
     if (end_i == std::string::npos)
         masked_val = "0";
     else
         masked_val.erase(0, end_i);
-
     masked_val = Utils::bin2hex(masked_val); // convert to hex string
     // Using string comparison to compare to target value
     compared = masked_val.compare(target_val);

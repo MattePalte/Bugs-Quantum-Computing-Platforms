@@ -412,6 +412,7 @@ void State<densmat_t>::apply_ops(const std::vector<Operations::Op> &ops,
       case Operations::OpType::diagonal_matrix:
         BaseState::qreg_.apply_diagonal_matrix(op.qubits, op.params);
         break;
+
       case Operations::OpType::superop:
         BaseState::qreg_.apply_superop_matrix(op.qubits, Utils::vectorize_matrix(op.mats[0]));
         break;

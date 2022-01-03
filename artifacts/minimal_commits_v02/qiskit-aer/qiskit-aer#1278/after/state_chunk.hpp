@@ -749,7 +749,6 @@ auto StateChunk<state_t>::apply_to_matrix(bool copy)
   if((size_required>>20) > Utils::get_system_memory_mb()){
     throw std::runtime_error(std::string("There is not enough memory to store states as matrix"));
   }
-
   auto matrix = qregs_[0].copy_to_matrix();
 
   if(distributed_rank_ == 0){
@@ -1486,7 +1485,6 @@ void StateChunk<state_t>::gather_state(std::vector<std::complex<data_t>>& state)
       if((global_size >> 21) > Utils::get_system_memory_mb()){
         throw std::runtime_error(std::string("There is not enough memory to gather state"));
       }
-
       state.resize(global_size);
 
       offset = 0;
@@ -1526,7 +1524,6 @@ void StateChunk<state_t>::gather_state(AER::Vector<std::complex<data_t>>& state)
       if((global_size >> 21) > Utils::get_system_memory_mb()){
         throw std::runtime_error(std::string("There is not enough memory to gather state"));
       }
-
       state.resize(global_size);
 
       offset = 0;

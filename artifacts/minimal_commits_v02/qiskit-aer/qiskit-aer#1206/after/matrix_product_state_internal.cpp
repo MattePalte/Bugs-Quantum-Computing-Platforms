@@ -866,8 +866,7 @@ void MPS::apply_kraus_internal(const reg_t &qubits,
     double renorm = 1 / std::sqrt(1. - accum);
     cmatrix_t temp_mat = kmats.back()* renorm;
     apply_matrix_internal(qubits, temp_mat);
-  }
-  
+  }  
   uint_t min_qubit = qubits[0];
   uint_t max_qubit = qubits[0];
   for (uint_t i=qubits[0]; i<qubits.size(); i++) {
