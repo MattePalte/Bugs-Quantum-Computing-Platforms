@@ -567,12 +567,8 @@ def f(x):
 def g(y):
     qml.RY(y, wires=0)
     return qml.expval(qml.PauliX(0))
-
-
-
 @pytest.mark.usefixtures("skip_if_no_tf_support")
 class TestTFGradients:
-    """Integration tests involving gradients of QNodes and hybrid computations using the tf interface"""
 
     @pytest.mark.parametrize("x, y", gradient_test_data)
     def test_addition_qnodes_gradient(self, x, y):

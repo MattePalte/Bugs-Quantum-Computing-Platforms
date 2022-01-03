@@ -537,7 +537,6 @@ gradient_test_data = [
 
 @pytest.mark.usefixtures("skip_if_no_torch_support")
 class TestTorchGradients:
-    """Integration tests involving gradients of QNodes and hybrid computations using the torch interface"""
 
     @pytest.fixture
     def qnodes(self):

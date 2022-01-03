@@ -273,7 +273,6 @@ class ParticleConservingU1(Operation):
                     u1_ex_gate(
                         self.parameters[0][l, i, 0], self.parameters[0][l, i, 1], wires=wires_
                     )
-
         return tape
 
     @staticmethod

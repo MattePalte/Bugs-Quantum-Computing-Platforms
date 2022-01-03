@@ -134,7 +134,6 @@ def hamiltonian_expand(tape, group=True):
         if hamiltonian.grouping_indices is None:
             hamiltonian.compute_grouping()
 
-        # use groups of observables if available or explicitly requested
         coeffs = [
             qml.math.squeeze(qml.math.take(hamiltonian.coeffs, indices, axis=0))
             for indices in hamiltonian.grouping_indices
@@ -168,8 +167,7 @@ def hamiltonian_expand(tape, group=True):
             tapes.append(new_tape)
 
     def processing_fn(res):
-        # note: res could have an extra dimension here if a shots_distribution
-        # is used for evaluation
+
         dot_products = [qml.math.dot(qml.math.squeeze(r), c) for c, r in zip(coeffs, res)]
         return qml.math.sum(qml.math.stack(dot_products), axis=0)
 

@@ -84,5 +84,4 @@ class NesterovMomentumOptimizer(MomentumOptimizer):
 
         if len(args) == 1:
             grad = (grad,)
-
         return grad, forward

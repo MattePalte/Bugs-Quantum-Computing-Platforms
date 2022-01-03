@@ -18,51 +18,8 @@ from pennylane.tape import QuantumTape, get_active_tape
 
 
 def adjoint(fn):
-    """Create a function that applies the adjoint (inverse) of the provided operation or template.
+    """Create a function that applies the adjoint of the provided operation or template.
 
-    This transform can be used to apply the adjoint of an arbitrary sequence of operations.
-
-    Args:
-        fn (function): A quantum function that applies quantum operations.
-
-    Returns:
-        function: A new function that will apply the same operations but adjointed and in reverse order.
-
-    **Example**
-
-    The adjoint transforms can be used within a QNode to apply the adjoint of
-    any quantum function. Consider the following quantum function, that applies two
-    operations:
-
-    .. code-block:: python3
-
-        def my_ops(a, b, wire):
-            qml.RX(a, wires=wire)
-            qml.RY(b, wires=wire)
-
-    We can create a QNode that applies this quantum function,
-    followed by the adjoint of this function:
-
-    .. code-block:: python3
-
-        dev = qml.device('default.qubit', wires=1)
-
-        @qml.qnode(dev)
-        def circuit(a, b):
-            my_ops(a, b, wire=0)
-            qml.adjoint(my_ops)(a, b, wire=0)
-            return qml.expval(qml.PauliZ(0))
-
-    Printing this out, we can see that the inverse quantum
-    function has indeed been applied:
-
-    >>> print(qml.draw(circuit)(0.2, 0.5))
-     0: ──RX(0.2)──RY(0.5)──RY(-0.5)──RX(-0.2)──┤ ⟨Z⟩
-
-    The adjoint function can also be applied directly to templates and operations:
-
-    >>> qml.adjoint(qml.RX)(0.123, wires=0)
-    >>> qml.adjoint(qml.templates.StronglyEntanglingLayers)(weights, wires=[0, 1])
 
     .. UsageDetails::
 
@@ -119,10 +76,6 @@ def adjoint(fn):
             try:
                 op.adjoint()
             except NotImplementedError:
-                # Expand the operation and adjoint the result.
-                # We do not do anything with the output since
-                # calling adjoint on the expansion will automatically
-                # queue the new operations.
                 adjoint(op.expand)()
 
     return wrapper

@@ -20,32 +20,6 @@ from pennylane.tape import QuantumTape, get_active_tape
 def adjoint(fn):
     """Create a function that applies the adjoint of the provided operation or template.
 
-    This transform can be used to apply the adjoint of an arbitrary sequence of operations.
-
-    Args:
-        fn (function): Any python function that applies pennylane operations.
-
-    Returns:
-        function: A new function that will apply the same operations but adjointed and in reverse order.
-
-    **Example**
-
-    .. code-block:: python3
-
-        def my_ops():
-            qml.RX(0.123, wires=0)
-            qml.RY(0.456, wires=0)
-
-        with qml.tape.QuantumTape() as tape:
-            my_ops()
-
-        with qml.tape.QuantumTape() as tape_adj:
-            qml.adjoint(my_ops)()
-
-    >>> print(tape.operations)
-    [RX(0.123, wires=[0]), RY(0.456, wires=[0])]
-    >>> print(tape_adj.operatioins)
-    [RY(-0.456, wires=[0]), RX(-0.123, wires=[0])]
 
     .. UsageDetails::
 
@@ -102,9 +76,6 @@ def adjoint(fn):
             try:
                 op.adjoint()
             except NotImplementedError:
-                # Decompose the operation and adjoint the result.
-                # We do not do anything with the output since
-                # decomposition will automatically queue the new operations.
                 adjoint(op.decomposition)(wires=op.wires)
 
     return wrapper

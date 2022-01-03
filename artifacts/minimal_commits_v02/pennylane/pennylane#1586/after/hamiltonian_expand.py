@@ -129,14 +129,9 @@ def hamiltonian_expand(tape, group=True):
             "Passed tape must end in `qml.expval(H)`, where H is of type `qml.Hamiltonian`"
         )
 
-    # note: for backward passes of some frameworks
-    # it is crucial to use the hamiltonian.data attribute,
-    # and not hamiltonian.coeffs when recombining the results
-
     if group or hamiltonian.grouping_indices is not None:
 
         if hamiltonian.grouping_indices is None:
-            # explicitly selected grouping, but indices not yet computed
             hamiltonian.compute_grouping()
 
         coeff_groupings = [
@@ -147,8 +142,6 @@ def hamiltonian_expand(tape, group=True):
             [hamiltonian.ops[i] for i in indices] for indices in hamiltonian.grouping_indices
         ]
 
-        # make one tape per grouping, measuring the
-        # observables in that grouping
         tapes = []
         for obs in obs_groupings:
 
@@ -172,18 +165,14 @@ def hamiltonian_expand(tape, group=True):
         return tapes, processing_fn
 
     coeffs = hamiltonian.data
-
-    # make one tape per observable
     tapes = []
     for o in hamiltonian.ops:
         with tape.__class__() as new_tape:
             for op in tape.operations:
                 op.queue()
             qml.expval(o)
-
         tapes.append(new_tape)
 
-    # pylint: disable=function-redefined
     def processing_fn(res):
         dot_products = [qml.math.dot(qml.math.squeeze(r), c) for c, r in zip(coeffs, res)]
         return qml.math.sum(qml.math.stack(dot_products), axis=0)

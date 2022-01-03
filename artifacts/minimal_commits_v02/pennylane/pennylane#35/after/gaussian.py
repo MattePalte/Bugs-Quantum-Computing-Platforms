@@ -46,7 +46,11 @@ operator_map = {
     'QuadraticPhase': Pgate,
     'Rotation': Rgate,
     'TwoModeSqueezing': S2gate,
-    'Squeeze': Sgate
+    'Squeeze': Sgate,
+    # 'XDisplacement': Xgate,
+    # 'PDisplacement': Zgate,
+    # 'MeasureHomodyne': MeasureHomodyne,
+    # 'MeasureHeterodyne': MeasureHeterodyne
 }
 
 

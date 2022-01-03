@@ -556,11 +556,9 @@ gradient_test_data = [
 
 @pytest.mark.usefixtures("skip_if_no_tf_support")
 class TestTFGradients:
-    """Integration tests involving gradients of QNodes and hybrid computations using the tf interface"""
 
     @pytest.fixture
     def qnodes(self):
-        """Two QNodes to be used for the gradient tests"""
         dev = qml.device("default.qubit", wires=2)
 
         @qml.qnode(dev, interface="tf")

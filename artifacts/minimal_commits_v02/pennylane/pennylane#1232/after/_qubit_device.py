@@ -188,7 +188,6 @@ class QubitDevice(Device):
             self._samples = self.generate_samples()
 
         multiple_sampled_jobs = circuit.is_sampled and self._has_partitioned_shots()
-
         # compute the required statistics
         if not self.analytic and self._shot_vector is not None:
 
@@ -210,7 +209,6 @@ class QubitDevice(Device):
                 s1 = s2
 
             if not multiple_sampled_jobs:
-                # Can only stack single element outputs
                 results = qml.math.stack(results)
 
         else:

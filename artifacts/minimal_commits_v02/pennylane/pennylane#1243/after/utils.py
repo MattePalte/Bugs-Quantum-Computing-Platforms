@@ -307,7 +307,6 @@ def inv(operation_list):
     elif isinstance(operation_list, qml.tape.QuantumTape):
         new_tape = operation_list.adjoint()
         return new_tape
-
     elif not isinstance(operation_list, Iterable):
         raise ValueError("The provided operation_list is not iterable.")
 
@@ -341,7 +340,6 @@ def inv(operation_list):
 
     with qml.tape.QuantumTape() as tape:
         qml.adjoint(qfunc)()
-
     return tape
 
 

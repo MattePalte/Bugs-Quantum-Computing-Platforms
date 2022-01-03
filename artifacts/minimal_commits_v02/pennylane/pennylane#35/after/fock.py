@@ -52,7 +52,11 @@ operator_map = {
     'Rotation': Rgate,
     'TwoModeSqueezing': S2gate,
     'Squeezing': Sgate,
-    'CubicPhase': Vgate
+    'CubicPhase': Vgate,
+    # 'XDisplacement': Xgate,
+    # 'PDisplacement': Zgate,
+    # 'MeasureFock': MeasureFock,
+    # 'MeasureHomodyne': MeasureHomodyne
 }
 
 

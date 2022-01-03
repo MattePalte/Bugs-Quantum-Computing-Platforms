@@ -265,7 +265,7 @@ class QubitDevice(Device):
         return np.random.choice(basis_states, self.shots, p=state_probability)
 
     @staticmethod
-    def states_to_binary(samples, num_wires):
+    def states_to_binary(samples, number_of_states):
         """Convert basis states from base 10 to binary representation.
 
         This is an auxiliary method to the generate_samples method.
@@ -277,9 +277,9 @@ class QubitDevice(Device):
         Returns:
             List[int]: basis states in binary representation
         """
-        powers_of_two = 1 << np.arange(num_wires)
+        powers_of_two = 1 << np.arange(number_of_states)
         states_sampled_base_ten = samples[:, None] & powers_of_two
-        return (states_sampled_base_ten > 0).astype(int)[:, ::-1]
+        return (states_sampled_base_ten > 0).astype(int)
 
     @property
     def state(self):
@@ -310,24 +310,11 @@ class QubitDevice(Device):
         """
 
     def marginal_prob(self, prob, wires=None):
-        r"""Return the marginal probability of the computational basis
+        """Return the marginal probability of the computational basis
         states by summing the probabiliites on the non-specified wires.
 
         If no wires are specified, then all the basis states representable by
         the device are considered and no marginalization takes place.
-
-        .. note::
-
-            If the provided wires are not strictly increasing, the returned marginal
-            probabilities take this permuation into account.
-
-            For example, if ``wires=[2, 0]``, then the returned marginal
-            probability vector will take this 'reversal' of the two wires
-            into account:
-
-            .. math::
-
-                \mathbb{P}^{(2, 0)} = \[ |00\rangle, |10\rangle, |01\rangle, |11\rangle\]
 
         Args:
             prob: The probabilities to return the marginal probabilities
@@ -339,27 +326,11 @@ class QubitDevice(Device):
         Returns:
             array[float]: array of the resulting marginal probabilities.
         """
-        if wires is None:
-            # no need to marginalize
-            return prob
-
+        wires = list(wires or range(self.num_wires))
         wires = np.hstack(wires)
-
-        # determine which wires are to be summed over
         inactive_wires = list(set(range(self.num_wires)) - set(wires))
-
-        # reshape the probability so that each axis corresponds to a wire
         prob = prob.reshape([2] * self.num_wires)
-
-        # sum over all inactive wires
-        prob = np.apply_over_axes(np.sum, prob, inactive_wires).flatten()
-
-        # The wires provided might not be in consecutive order (i.e., wires might be [2, 0]).
-        # If this is the case, we must permute the marginalized probability so that
-        # it corresponds to the orders of the wires passed.
-        basis_states = np.array(list(itertools.product([0, 1], repeat=len(wires))))
-        perm = np.ravel_multi_index(basis_states[:, np.argsort(np.argsort(wires))].T, [2] * len(wires))
-        return prob[perm]
+        return np.apply_over_axes(np.sum, prob, inactive_wires).flatten()
 
     def expval(self, observable):
         wires = observable.wires
