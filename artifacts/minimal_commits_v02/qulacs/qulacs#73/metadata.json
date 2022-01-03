@@ -1,0 +1,1 @@
+{"commit_hash": "acc9cd6b7d1e87da9dc301c7a8b7a7c06bd8ee43", "commit_msg": "Merge pull request #73 from hal0taso/bugfix/create_observable_from_openfermion_text\n\nBugfix and add some features for Observable and PauliOperator", "project_name": "qulacs", "id": "1763", "human_id": "qulacs#73", "author_comment": "Bug in the binding of the Observable calss with pybind11."}

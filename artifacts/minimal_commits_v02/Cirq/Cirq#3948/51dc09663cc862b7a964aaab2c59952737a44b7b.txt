@@ -1,0 +1,7 @@
+Fix load_module wrapping (#3948)
+
+For old type (g3) module loaders, the resolution wasn't working, breaking internal par tests. 
+
+This makes `DeprecatedModuleLoader.load_module` work similarly to `exec_module` that it ensures that when the old module is loaded, both the new and old names are pointing to the same module in the module cache.
+
+cc @cduck - this should be straightforward. The reason it didn't come up earlier, as I haven't tested on g3 since my change in https://github.com/quantumlib/Cirq/pull/3917#discussion_r597349479 - I think that more principled rewiring surfaced this bug :)

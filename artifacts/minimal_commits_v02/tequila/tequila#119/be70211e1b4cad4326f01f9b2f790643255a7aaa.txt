@@ -1,0 +1,3 @@
+Fix a bug with read_out qubits using Qiskit and Qibo simulators (#119)
+
+* fix a bug with read_out qubits using Qiskit and Qibo simulators

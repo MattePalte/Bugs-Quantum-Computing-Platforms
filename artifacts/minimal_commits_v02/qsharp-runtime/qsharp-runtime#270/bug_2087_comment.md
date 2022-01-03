@@ -1,0 +1,1 @@
+When defining a UDT (user defined type) with a named item whose type is a non-singleton tuple, the C# code generation step produces invalid properties that then fail to compile when running dotnet build.

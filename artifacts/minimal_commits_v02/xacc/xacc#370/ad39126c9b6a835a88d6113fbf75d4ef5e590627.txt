@@ -1,0 +1,3 @@
+Merge pull request #370 from tnguyen-ornl/tnguyen/pulse-fixes
+
+Minor fixes for pulse sim

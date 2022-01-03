@@ -1,0 +1,1 @@
+Reporter: "Fixing conflicts in qulacs simulator for comm-branch merge". In the interface with the Qualcs simulator, the initialization of the initial quantum state had problems.

@@ -1,0 +1,1 @@
+Fix #1295 by mapping Parameters to strings (#1296)

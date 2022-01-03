@@ -1,0 +1,6 @@
+fixed prepz duration variation with its type, closes #107
+
+implemented asap resource constraint scheduling
+tested with various long prepz, measure etc durations
+tested latency compensation and buffer-buffer delays
+all tests passing

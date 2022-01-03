@@ -1,0 +1,1 @@
+Fixer: "The new Diagonal terra gate was being applied incorrectly using the base statevector method due to a typo". They used "apply_diagonal_matrix" method instead of "apply_diagonal_unitary_matrix"

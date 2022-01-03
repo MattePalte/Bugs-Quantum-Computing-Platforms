@@ -1,0 +1,1 @@
+Reporter: "When I try to perform the inverse of the QFT operator, it does not include it in the circuit (and no error appears)." Fixer: "The method .adjoint() of the operation QFT was not implemented. The operation QFT has now an adjoint function that can be used to take the inverse of it"

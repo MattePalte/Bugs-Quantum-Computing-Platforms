@@ -1,0 +1,1 @@
+{"commit_hash": "42781886d9d3dd762423e45c69323c9a53c57c0f", "commit_msg": "v-yusudz/tracer-minor-fixes (#278)", "project_name": "qsharp-runtime", "id": "2102", "human_id": "qsharp-runtime#278", "author_comment": "Bug: duplicated code, seems to come from copy paste anipattern. The bug is in the depth counter so it reasonably lead to a wrong result of the depth."}

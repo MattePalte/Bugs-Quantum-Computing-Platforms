@@ -1,0 +1,5 @@
+Fix behavior of MergeInteractions for tagged partial CZ gates (#4288)
+
+* Add test for the failing case with a tagged operation
+
+* Fix merge interactions for tagged operation

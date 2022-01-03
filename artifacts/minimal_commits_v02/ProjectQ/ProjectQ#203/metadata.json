@@ -1,0 +1,1 @@
+{"commit_hash": "62d3fb11578a06131b0105b220651520b2a7338b", "commit_msg": "Add fix and test for emulation of controlled time evolution. (#203)", "project_name": "ProjectQ", "id": "1116", "human_id": "ProjectQ#203", "author_comment": "Bug: change code logic in the simulator to create a new output quantum state. The iteration over indice is changed."}

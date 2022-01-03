@@ -1,0 +1,3 @@
+Merge pull request #287 from QE-Lab/fix/swig-warning
+
+fixed swig deprecated module warning

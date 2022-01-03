@@ -1,0 +1,1 @@
+{"commit_hash": "796dc27a2ec0fb72773aa25ad9057284d9327384", "commit_msg": "Fixing build break for IonQ when using MReset* (#407)", "project_name": "qsharp-runtime", "id": "2105", "human_id": "qsharp-runtime#407", "author_comment": "Fix build procedure, because of IonQ device do not have certain operations"}

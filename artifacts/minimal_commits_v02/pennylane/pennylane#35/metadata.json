@@ -1,0 +1,1 @@
+{"commit_hash": "105bc044a0a35684ec961310aca212d49ba5c451", "commit_msg": "fixes #35", "project_name": "pennylane", "id": "35", "human_id": "pennylane#35", "author_comment": "The backend exposes that it can do operations that are not implemented."}

@@ -1,0 +1,1 @@
+fix mismatch in line break format between oracle and result in ToffoliDumpState test (#133)

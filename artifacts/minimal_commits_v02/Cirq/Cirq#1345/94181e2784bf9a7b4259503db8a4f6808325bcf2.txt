@@ -1,0 +1,3 @@
+fix controlled gate circuit diagram info passed to subgate (#1345)
+
+Fixes #1321.

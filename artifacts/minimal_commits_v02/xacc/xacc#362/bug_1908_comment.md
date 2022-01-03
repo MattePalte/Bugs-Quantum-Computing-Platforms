@@ -1,0 +1,1 @@
+The build procedure crashes on VirtualBox  because it uses a flag which is not present there. 

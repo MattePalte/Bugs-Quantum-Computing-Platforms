@@ -1,0 +1,5 @@
+Fix an issue with Failure simulations handling (#167)
+
+* Fix an issue with Failure simulations handling
+
+* Add tests for simple Success and Failure simulation events by mocking simulators

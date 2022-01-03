@@ -1,0 +1,1 @@
+This bug happens during the conversion from a Openfermion representation to the representation of the current platform.

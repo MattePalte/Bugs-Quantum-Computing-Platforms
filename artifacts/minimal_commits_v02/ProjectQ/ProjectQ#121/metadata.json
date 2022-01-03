@@ -1,0 +1,1 @@
+{"commit_hash": "88e2f1823748a82d1f3ad5e877b3a9b1f2aa43ad", "commit_msg": "Bugfix OpenMP flags in setup.py (#121)", "project_name": "ProjectQ", "id": "1112", "human_id": "ProjectQ#121", "author_comment": "Fixer: \"Bugfix OpenMP flags in setup.py: change -openmp to -qopenmp if icc is used as -openmp is interpreted as -o penmp when using clang or gcc\"."}

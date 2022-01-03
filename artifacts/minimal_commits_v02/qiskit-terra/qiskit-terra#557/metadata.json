@@ -1,0 +1,1 @@
+{"commit_hash": "00d37c780dba447551e1e544a12b3aef10a43d53", "commit_msg": "Fix incorrect unrolling of t to tdg in CircuitBackend (#557)", "project_name": "qiskit-terra", "id": "255", "human_id": "qiskit-terra#557", "author_comment": "Reporter: \"load_qasm_file and load_qasm_string converts t gate into tdg.\" A gate becomes another kind of gate via the conversion"}

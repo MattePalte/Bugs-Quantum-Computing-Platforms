@@ -1,0 +1,1 @@
+Fixer: "fixing bug occuring for precompiled samples objetives without measurement optimization"

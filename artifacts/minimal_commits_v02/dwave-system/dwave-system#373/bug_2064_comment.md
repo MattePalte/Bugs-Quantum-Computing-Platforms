@@ -1,0 +1,1 @@
+AutoEmbeddingComposite(DWaveSampler()).sample(dimod.BQM({}, {(0, 1): 1}, 0, 'BINARY')) > app_crash whereas with 'SPIN' instead of 'BINARY' it works. It is inconsistent since BINARY and SPIN is just a convention to represnet variable types. (-1, 1) instead of (0, 1)

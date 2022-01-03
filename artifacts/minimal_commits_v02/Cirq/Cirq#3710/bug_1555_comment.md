@@ -1,0 +1,1 @@
+Reporter: "cirq.Result is supposed to be supplied measurement results as a dict from string to a multidimensional numpy array. However it is possible to instead supply the value as a list of lists. In this case cirq.Result equality will still work, but it will fail to when converted to a string (since __str__ uses numpy slicing)." This happen in IonQ result object

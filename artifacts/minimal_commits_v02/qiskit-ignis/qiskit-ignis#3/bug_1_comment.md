@@ -1,0 +1,1 @@
+From fixer: "Currently, cvx_fit does not check the success of the prob.solve() call. When the solver fails, this results in a crash on the following line: rho_fit = rho_r.value + 1j * rho_i.value"

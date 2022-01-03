@@ -1,0 +1,1 @@
+{"commit_hash": "c0d269e5f1eba2f9d033bd9b6a79c10a11f4228a", "commit_msg": "Fixed imag in tf device (#946)", "project_name": "pennylane", "id": "110", "human_id": "pennylane#946", "author_comment": "In the qubit representation of tensorflow backend, the imaginary and conjugate functions have the same signature."}

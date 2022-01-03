@@ -1,0 +1,1 @@
+The test did not check the presence of the simulator before running the test. The fix uses the setup method to check and initialize a default option.

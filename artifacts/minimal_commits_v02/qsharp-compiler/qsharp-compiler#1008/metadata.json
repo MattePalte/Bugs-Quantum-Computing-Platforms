@@ -1,0 +1,1 @@
+{"commit_hash": "2dbaea713e9fe1925a4b14483d37c0decaea6ba8", "commit_msg": "Fixing an issue with partial applications that take unit (#1008)", "project_name": "qsharp-compiler", "id": "1233", "human_id": "qsharp-compiler#1008", "author_comment": "Reporter: \"The following code fails at runtime if executed via QIR\""}

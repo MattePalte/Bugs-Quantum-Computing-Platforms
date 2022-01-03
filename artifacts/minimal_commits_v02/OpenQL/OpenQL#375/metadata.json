@@ -1,0 +1,1 @@
+{"commit_hash": "0648b0e443d5645a27894f4a5ed7ec6cda0ffb85", "commit_msg": "Merge pull request #375 from QE-Lab/fix-visualizer\n\nFix problems with visualizer on Linux+GCC", "project_name": "OpenQL", "id": "1280", "human_id": "OpenQL#375", "author_comment": "Fixer: \"The code was not C++11 conformant, particularly due to this inane C++ standardese illogic.\""}

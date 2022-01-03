@@ -1,0 +1,1 @@
+The maxcut example is used for benchmarking. Bug: an idententy operator was created with a dimension: length**2 (wrong), instead of 2**length (correct).

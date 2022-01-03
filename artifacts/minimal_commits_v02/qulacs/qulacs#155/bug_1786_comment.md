@@ -1,0 +1,1 @@
+Fixer: "Fix a problem in CMake script which didn't work when path contains "./src/""

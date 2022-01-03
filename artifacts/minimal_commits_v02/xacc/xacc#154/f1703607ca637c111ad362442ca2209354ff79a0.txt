@@ -1,0 +1,3 @@
+Merge pull request #154 from kharazity/EM_kernel_fix
+
+quick fix for improper iteration through bitstrings causing error in …

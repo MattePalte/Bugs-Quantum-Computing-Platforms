@@ -1,0 +1,72 @@
+Fix weight calculation (#567)
+
+The weight_syndrome_graph method of Decoder objects previously
+did not have an explicit test. This allowed a problem with the retworkx
+migration to remain undetected (see #565 ).
+
+- A test has now been added (as well as refactoring to make testing easier).
+- A change to the weight calculation method was also made to improve accuracy.
+
+Fixes #565
+
+* Update circuits.py
+
+Testing commit
+
+* Revert "Update circuits.py"
+
+This reverts commit 32e66b67d8ee3a0c5b1bd45e6b760e8c51c82570.
+
+* Update circuits.py
+
+* Update circuits.py
+
+* Update circuits.py
+
+* Removing spaces, rename +,- to X-basis
+
+* Revert "Adding logical identity, change to +,- basis for repetition code"
+
+* improve error calculation
+
+* change edges to correct form
+
+* add test for weights
+
+* fix some linting errors
+
+* change to update_edge
+
+* fix more linting errors
+
+* fix final linting error
+
+* preventing exceptions for rare cases
+
+* retrigger checks
+
+* Update qiskit/ignis/verification/topological_codes/fitters.py
+
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>
+
+* Update qiskit/ignis/verification/topological_codes/fitters.py
+
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>
+
+* Update qiskit/ignis/verification/topological_codes/fitters.py
+
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>
+
+* Update qiskit/ignis/verification/topological_codes/fitters.py
+
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>
+
+* Update qiskit/ignis/verification/topological_codes/fitters.py
+
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>
+
+* delete blank line
+
+Co-authored-by: jagunther <58778456+jagunther@users.noreply.github.com>
+Co-authored-by: Christopher J. Wood <cjwood@us.ibm.com>
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>

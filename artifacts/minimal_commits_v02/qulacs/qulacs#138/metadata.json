@@ -1,0 +1,1 @@
+{"commit_hash": "ee001c1a63842fea1a14b5d954d88765faff0355", "commit_msg": "Merge pull request #138 from corryvrequan/bugfix/parametric_gate_gpu\n\nThanks!", "project_name": "qulacs", "id": "1780", "human_id": "qulacs#138", "author_comment": "Fixer: \"Parametric gate such as ParametricRX or ParametricPauliRotation were not compatible with QuantumStateGpu.\""}

@@ -1,0 +1,13 @@
+Fixes transform.ipynb and adds notebook testing (#3497)
+
+Fixes a missing import statement from transform.ipynb, also, adds notebook tests.
+
+The notebook tests run in parallel and each of them in their own virtual env, ensuring that the `pip install` statements work well. This mirrors how the tests are run on devsite pipelines as well. Hopefully we can catch errors faster this way!
+
+Follow-up potentials:
+- run the notebooks in non-isolated virtualenv _as well_ - so that we test the "running jupyter notebook from the repo" use case too.
+- parallelize on the Github Action job level the notebooks - it is already taking 11 mins :(
+
+I tested treebeard (https://github.com/quantumlib/Cirq/issues/3504) github action, and finally settled on rolling my own driver with an executor. For executor I chose papermill as it simply worked just fine with xdist. Though probably I could use treebeard (?) - not sure what the benefit would be for individual notebook execution. `jupyter nbconvert --execute` didn't seem to execute `pip installs`? But I haven't gone too deep in that direction.
+
+Fixes https://github.com/quantumlib/Cirq/issues/2711.

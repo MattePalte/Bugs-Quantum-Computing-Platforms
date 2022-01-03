@@ -1,0 +1,1 @@
+Fixer: "This fixes compilation of C++ programs when linked against OpenQL statically (as done by setup.py when the OPENQL_BUILD_TESTS env variable exists)."

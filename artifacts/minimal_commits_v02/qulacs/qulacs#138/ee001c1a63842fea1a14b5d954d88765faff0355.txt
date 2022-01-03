@@ -1,0 +1,3 @@
+Merge pull request #138 from corryvrequan/bugfix/parametric_gate_gpu
+
+Thanks!

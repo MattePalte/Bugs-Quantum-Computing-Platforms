@@ -1,0 +1,1 @@
+Bugfix for idle gate noise in Clifford simulator (#440)

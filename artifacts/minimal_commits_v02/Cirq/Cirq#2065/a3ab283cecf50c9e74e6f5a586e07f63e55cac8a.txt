@@ -1,0 +1,5 @@
+Fix flaky optimizer test (#2065)
+
+Closes #2034 
+
+Before it failed 6/10000 times, now it failed 0/200000.

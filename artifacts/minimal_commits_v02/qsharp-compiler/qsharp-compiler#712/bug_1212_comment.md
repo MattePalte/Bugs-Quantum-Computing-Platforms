@@ -1,0 +1,1 @@
+Fixer: "As I am validating the signing on e2e builds I noticed a couple of problems: Compiler dlls are distributed unsigned because during the pack step they are getting rebuilt. To fix this, I added the --no-build flag during packaging."

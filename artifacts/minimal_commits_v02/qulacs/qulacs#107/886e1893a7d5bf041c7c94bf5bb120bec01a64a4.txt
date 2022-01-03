@@ -1,0 +1,3 @@
+Merge pull request #107 from corryvrequan/bugfix/get_zero_probability
+
+[bugfix] fix bugs in get_zero_probability

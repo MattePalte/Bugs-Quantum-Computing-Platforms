@@ -1,0 +1,1 @@
+Fix possible infinite recursion loop and drop support for Python 3.3 (#187)

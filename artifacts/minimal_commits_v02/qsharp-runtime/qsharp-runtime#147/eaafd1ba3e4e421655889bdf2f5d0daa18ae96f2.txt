@@ -1,0 +1,3 @@
+Merge pull request #147 from microsoft/dmitryv/QSExceptionHandlingFix
+
+Updated exception handling code generation

@@ -1,0 +1,1 @@
+The initialization of GaussianTransform doesn't take the hbar parameter anymore, which was used in the test. Bug: the test were not working. Fixer: "fixes a number of tests that were skipped or marked as broken"

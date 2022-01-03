@@ -1,0 +1,1 @@
+{"commit_hash": "37f2dbec543357b574140f94760e162635de893a", "commit_msg": "Fix #744. (#745)", "project_name": "qsharp-runtime", "id": "2129", "human_id": "qsharp-runtime#744", "author_comment": "Reporter: \"These two imports are unused and cause an error when running bootstrap.ps1 on MacOS.\""}

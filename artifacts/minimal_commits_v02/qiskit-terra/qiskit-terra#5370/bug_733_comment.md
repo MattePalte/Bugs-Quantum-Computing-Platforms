@@ -1,0 +1,1 @@
+Using hasattr: hasattr(field, self._options) --> hasattr(self._options, field)

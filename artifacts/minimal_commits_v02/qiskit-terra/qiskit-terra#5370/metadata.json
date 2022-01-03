@@ -1,0 +1,1 @@
+{"commit_hash": "c00602aadf4062b65ab3862fb729a85b20bf004b", "commit_msg": "fix hasattr in get_options (#5370)\n\nCo-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>", "project_name": "qiskit-terra", "id": "733", "human_id": "qiskit-terra#5370", "author_comment": "Using hasattr: hasattr(field, self._options) --> hasattr(self._options, field)"}

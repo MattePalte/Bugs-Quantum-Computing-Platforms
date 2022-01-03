@@ -1,0 +1,1 @@
+Bug: where the loop variable is not checked to be an integer, now it raises error for non sensical values.

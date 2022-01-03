@@ -1,0 +1,1 @@
+Reporter: "load_qasm_file and load_qasm_string converts t gate into tdg." A gate becomes another kind of gate via the conversion

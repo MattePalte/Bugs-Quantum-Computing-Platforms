@@ -1,0 +1,1 @@
+{"commit_hash": "43580139161c5b96456ff984fa84a47c5fbcca9a", "commit_msg": "Fix bug in unitary simulator cu3 and add cu3 tests (#483)", "project_name": "qiskit-aer", "id": "980", "human_id": "qiskit-aer#483", "author_comment": "Fixer: \"Fixes bug where cu3 was being applied as cu1 for unitary_simulator\""}

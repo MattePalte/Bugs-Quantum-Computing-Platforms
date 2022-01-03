@@ -1,0 +1,35 @@
+Fix naming conflicts with generated C# members (#349)
+
+* Rename based on reserved word list
+
+* Update namespace encoding
+
+* Use underscores for Init and Factory
+
+* Use underscores for specialization names
+
+* Update underscores for Data{In,Out}
+
+* Update Body to __Body__ in property reflection
+
+* Use underscores for Deconstruct
+
+* Update tests
+
+* Add new tests
+
+* Update ItemN regex
+
+* Always append __ for referenced callable properties
+
+* Don't append __ when name already contains __
+
+* Update tests
+
+* Add tests for #247
+
+* Update remaining specialization names
+
+* Add Deconstruct to reserved words
+
+* Update tests

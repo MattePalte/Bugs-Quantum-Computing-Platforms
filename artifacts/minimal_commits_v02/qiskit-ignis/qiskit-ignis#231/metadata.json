@@ -1,0 +1,1 @@
+{"commit_hash": "3694ca68abf54a03e73318e81d8932e6a7159f12", "commit_msg": "fix bit access (#231)\n\n* fix bit access\r\n\r\n* One more change to get rid of the deprecation errors", "project_name": "qiskit-ignis", "id": "4", "human_id": "qiskit-ignis#231", "author_comment": "Fix DeprecationWarnings coming from Terra due to old-style bit access"}

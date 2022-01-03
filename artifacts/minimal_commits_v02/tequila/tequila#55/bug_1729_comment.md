@@ -1,0 +1,1 @@
+Fixer: "sample_all_z_hamiltonian sampling hotfix"

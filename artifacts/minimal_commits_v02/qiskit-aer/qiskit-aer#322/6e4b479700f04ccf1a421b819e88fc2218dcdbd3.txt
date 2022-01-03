@@ -1,0 +1,5 @@
+Fix data accumulator not loading config (#322)
+
+* Fix setting config on data accumulator
+
+* Update measure tests to test memory

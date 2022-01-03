@@ -1,0 +1,1 @@
+From fixer: "Fixes bug in NoiseModel.add_nonlocal_quantum_error where there was a key error if multiple nonlocal errors were added to the qubit and instruction." Key error > dictionary key access exception
