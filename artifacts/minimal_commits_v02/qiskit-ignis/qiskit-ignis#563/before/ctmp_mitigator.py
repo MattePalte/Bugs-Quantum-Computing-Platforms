@@ -114,7 +114,6 @@ class CTMPExpvalMeasMitigator(BaseExpvalMeasMitigator):
         """
         if qubits is None:
             qubits = list(range(self._num_qubits))
-
         # Convert counts to probs
         probs, shots = counts_probability_vector(
             counts, clbits=clbits, qubits=qubits,

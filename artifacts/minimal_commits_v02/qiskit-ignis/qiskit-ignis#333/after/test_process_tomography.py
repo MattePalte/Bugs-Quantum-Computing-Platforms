@@ -13,20 +13,21 @@
 # that they have been altered from the originals.
 
 # pylint: disable=missing-docstring
-# pylint: disable=unexpected-keyword-arg
 
 import unittest
 
 import qiskit
 from qiskit import QuantumRegister, QuantumCircuit, Aer
 from qiskit.quantum_info import state_fidelity
-from qiskit.quantum_info import Choi
+from qiskit.tools.qi.qi import outer
 
 import qiskit.ignis.verification.tomography as tomo
 
 
 def run_circuit_and_tomography(circuit, qubits):
-    choi_ideal = Choi(circuit).data
+    job = qiskit.execute(circuit, Aer.get_backend('unitary_simulator'))
+    U = job.result().get_unitary(circuit)
+    choi_ideal = outer(U.ravel(order='F'))
     qst = tomo.process_tomography_circuits(circuit, qubits)
     job = qiskit.execute(qst, Aer.get_backend('qasm_simulator'),
                          shots=5000)

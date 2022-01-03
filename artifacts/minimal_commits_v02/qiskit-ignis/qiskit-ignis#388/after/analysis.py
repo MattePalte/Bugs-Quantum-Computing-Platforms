@@ -1,5 +1,4 @@
-# for Mac python 3.5 compatibility
-# pylint: disable=import-outside-toplevel
+
 
 """
 This module provides several miscellaneous tools for
@@ -9,6 +8,7 @@ analysis of the GHZ State (most notably, Fourier Analysis)
 
 import numpy as np
 from qiskit import *
+import matplotlib.pyplot as plt
 
 
 def ordered_list_generator(counts_dictionary, qn):
@@ -70,8 +70,6 @@ class Plotter:
         '''
         Make sin plot of counts in both mqc and po exps.
         '''
-
-        from matplotlib import pyplot as plt
         title, title_ext = self.title_maker()
         if y_m is None:
             plt.plot(x, y)
@@ -90,7 +88,6 @@ class Plotter:
         '''
         Get fourier trans. data/plot of both mqc and po exps.
         '''
-        from matplotlib import pyplot as plt
         norm = len(x)
         n = qn
         if y_m is None:

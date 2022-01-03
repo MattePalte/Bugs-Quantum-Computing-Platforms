@@ -236,7 +236,6 @@ def cvx_fit(data, basis_matrix, weights=None, PSD=True, trace=None,
     prob = cvxpy.Problem(obj, cons)
     iters = 5000
     max_iters = kwargs.get('max_iters', 20000)
-
     problem_solved = False
     while not problem_solved:
         kwargs['max_iters'] = iters
@@ -252,7 +251,6 @@ def cvx_fit(data, basis_matrix, weights=None, PSD=True, trace=None,
             raise RuntimeError("CVX fit failed, problem status {} which should not happen".format(prob.status))
         else:
             raise RuntimeError("CVX fit failed, reason unknown")
-
     rho_fit = rho_r.value + 1j * rho_i.value
 
     return rho_fit

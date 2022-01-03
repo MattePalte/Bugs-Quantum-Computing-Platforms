@@ -160,17 +160,6 @@ class GraphDecoder():
         return S
 
     def weight_syndrome_graph(self, results):
-        """Generate weighted syndrome graph from result counts.
-
-        Args:
-            results (dict): A results dictionary, as produced by the
-            `process_results` method of the code.
-
-        Additional information:
-            Uses `results` to estimate the probability of the errors that
-            create the pairs of nodes in S. The edge weights are then
-            replaced with the corresponding -log(p/(1-p).
-        """
 
         results = results['0']
 

@@ -160,23 +160,6 @@ class GraphDecoder():
         return S
 
     def get_error_probs(self, results):
-        """
-        Generate probabilities of single error events from result counts.
-
-        Args:
-            results (dict): A results dictionary, as produced by the
-            `process_results` method of the code.
-
-        Returns:
-            dict: Keys are the edges for specific error
-            events, and values are the calculated probabilities
-
-        Additional information:
-            Uses `results` to estimate the probability of the errors that
-            create the pairs of nodes specified by the edge.
-            Calculation done using the method of Spitz, et al.
-            https://doi.org/10.1002/qute.201800012
-        """
 
         results = results['0']
         shots = sum(results.values())
@@ -184,52 +167,29 @@ class GraphDecoder():
         error_probs = {}
         for edge in self.S.edge_list():
 
-            # initialize averages
             av_vv = 0  # v_ij
             av_v = [0, 0]  # [v_,v_j]
             av_xor = 0  # v_{i xor j}
 
             for string in results:
 
-                # list of i for which v_i=1
                 error_nodes = self._string2nodes(string)
-
-                # get [v_i,v_j] for edge (i,j)
                 v = [int(self.S[edge[k]] in error_nodes) for k in range(2)]
-
-                # update averages
                 av_vv += v[0]*v[1]*results[string]
                 for k in range(2):
                     av_v[k] += v[k]*results[string]
                 av_xor += (v[0] != v[1])*results[string]
-
-            # normalize
             av_vv /= shots
             av_v[0] /= shots
             av_v[1] /= shots
             av_xor /= shots
-
             if (1 - 2*av_xor) != 0:
                 x = (av_vv - av_v[0]*av_v[1])/(1 - 2*av_xor)
             else:
                 x = np.nan
             error_probs[self.S[edge[0]], self.S[edge[1]]] = max(0, 0.5 - np.sqrt(0.25-x))
-
         return error_probs
-
     def weight_syndrome_graph(self, results):
-        """Generate weighted syndrome graph from result counts.
-
-        Args:
-            results (dict): A results dictionary, as produced by the
-            `process_results` method of the code.
-
-        Additional information:
-            Uses `results` to estimate the probability of the errors that
-            create the pairs of nodes in S. The edge weights are then
-            replaced with the corresponding -log(p/(1-p).
-        """
-
         error_probs = self.get_error_probs(results)
 
         for edge in self.S.edge_list():

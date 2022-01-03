@@ -654,7 +654,7 @@ class CNOTDihedral(BaseOperator):
         other.poly.weight_0 = 0  # set global phase
         return other
 
-    def _tensor(self, other, reverse=False):
+    def _tensor_product(self, other, reverse=False):
         """Returns the tensor product operator.
 
          Args:
@@ -718,7 +718,7 @@ class CNOTDihedral(BaseOperator):
              CNOTDihedral: the tensor product operator: self tensor other.
          """
 
-        return self._tensor(other, reverse=True)
+        return self._tensor_product(other, reverse=True)
 
     def expand(self, other):
         """Return the tensor product operator: other tensor self.
@@ -729,7 +729,7 @@ class CNOTDihedral(BaseOperator):
              CNOTDihedral: the tensor product operator: other tensor other.
          """
 
-        return self._tensor(other, reverse=False)
+        return self._tensor_product(other, reverse=False)
 
     def adjoint(self):
         """Return the conjugate transpose of the CNOTDihedral element"""
