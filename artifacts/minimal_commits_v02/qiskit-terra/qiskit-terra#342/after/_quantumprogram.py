@@ -1102,6 +1102,7 @@ class QuantumProgram(object):
         for name in name_of_circuits:
             if name not in self.__quantum_program:
                 raise QISKitError('circuit "{0}" not found in program'.format(name))
+            # TODO: The circuit object going into this is to have .qasm() method (be careful)
             circuit = self.__quantum_program[name]
             num_qubits = sum((len(qreg) for qreg in circuit.get_qregs().values()))
             # TODO: A better solution is to have options to enable/disable optimizations
@@ -1109,7 +1110,6 @@ class QuantumProgram(object):
                 coupling_map = None
             if coupling_map == 'all-to-all':
                 coupling_map = None
-            # if the backend is a real chip, insert barrier before measurements
             if not backend_conf['simulator']:
                 measured_qubits = []
                 qasm_idx = []

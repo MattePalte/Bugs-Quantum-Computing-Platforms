@@ -38,7 +38,6 @@ class QuasiDistribution(dict):
                 The keys can be one of several formats:
 
                     * A hexadecimal string of the form ``"0x4a"``
-                    * A bit string e.g. ``'0b1011'`` or ``"01011"``
                     * An integer
 
             shots (int): Number of shots the distribution was derived from.
@@ -106,25 +105,9 @@ class QuasiDistribution(dict):
         return ProbDistribution(new_probs, self.shots)
 
     def binary_probabilities(self, num_bits=None):
-        """Build a quasi-probabilities dictionary with binary string keys
 
-        Parameters:
-            num_bits (int): number of bits in the binary bitstrings (leading
-                zeros will be padded). If None, the length will be derived
-                from the largest key present.
-
-        Returns:
-            dict: A dictionary where the keys are binary strings in the format
-                ``"0110"``
-        """
         n = len(bin(max(self.keys(), default=0))) - 2 if num_bits is None else num_bits
         return {format(key, "b").zfill(n): value for key, value in self.items()}
 
     def hex_probabilities(self):
-        """Build a quasi-probabilities dictionary with hexadecimal string keys
-
-        Returns:
-            dict: A dictionary where the keys are hexadecimal strings in the
-                format ``"0x1a"``
-        """
         return {hex(key): value for key, value in self.items()}

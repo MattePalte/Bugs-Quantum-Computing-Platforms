@@ -151,7 +151,6 @@ def translate_gates_to_pulse_defs(circuit: QuantumCircuit,
             measures.add(tuple(schedule_config.meas_map[q]))
         for qubits in measures:
             all_qubits.update(qubits)
-            # TODO (Issue #2704): Respect MemorySlots from the input circuit
             sched |= cmd_def.get('measure', qubits)
         measured_qubits.clear()
         return CircuitPulseDef(schedule=sched, qubits=list(all_qubits))

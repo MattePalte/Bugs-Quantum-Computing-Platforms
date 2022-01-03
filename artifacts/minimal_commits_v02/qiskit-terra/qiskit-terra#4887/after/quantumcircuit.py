@@ -823,8 +823,6 @@ class QuantumCircuit:
                                'have a to_instruction() method.')
         if not isinstance(instruction, Instruction) and hasattr(instruction, "to_instruction"):
             instruction = instruction.to_instruction()
-
-        # Make copy of parameterized gate instances
         if hasattr(instruction, 'params'):
             is_parameter = any([isinstance(param, Parameter) for param in instruction.params])
             if is_parameter:

@@ -13,8 +13,8 @@
 # that they have been altered from the originals.
 
 """Assemble function for converting a list of circuits into a qobj."""
-from collections import defaultdict
 from typing import Any, Dict, List, Tuple
+from collections import defaultdict
 
 from qiskit.exceptions import QiskitError
 from qiskit.pulse import Schedule
@@ -148,10 +148,7 @@ def _assemble_instructions(
         user_pulselib: Dict[str, Command]
 ) -> Tuple[List[PulseQobjInstruction], int]:
     """Assembles the instructions in a schedule into a list of PulseQobjInstructions and returns
-    related metadata that will be assembled into the Qobj configuration. Lookup table for
-    pulses defined in all experiments are registered in ``user_pulselib``. This object should be
-    mutable python dictionary so that items are properly updated after each instruction assemble.
-    The dictionary is not returned to avoid redundancy.
+    related metadata that will be assembled into the Qobj configuration.
 
     Args:
         schedule: Schedule to assemble.

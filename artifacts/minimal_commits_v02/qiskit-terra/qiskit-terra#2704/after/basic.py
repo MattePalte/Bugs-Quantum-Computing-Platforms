@@ -167,7 +167,6 @@ def translate_gates_to_pulse_defs(circuit: QuantumCircuit,
                                                      acquires=inst.acquires,
                                                      mem_slots=mem_slots)
                     sched._union((time, new_acquire))
-                # Measurement pulses should only be added if its qubit was measured by the user
                 elif inst.channels[0].index in qubit_mem_slots.keys():
                     sched._union((time, inst))
         qubit_mem_slots.clear()

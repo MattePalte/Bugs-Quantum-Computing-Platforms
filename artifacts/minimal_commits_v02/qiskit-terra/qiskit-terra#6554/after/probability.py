@@ -34,7 +34,6 @@ class ProbDistribution(dict):
                 The keys can be one of several formats:
 
                     * A hexadecimal string of the form ``"0x4a"``
-                    * A bit string e.g. ``'0b1011'`` or ``"01011"``
                     * An integer
 
             shots (int): Number of shots the distribution was derived from.
@@ -70,11 +69,6 @@ class ProbDistribution(dict):
 
     def binary_probabilities(self, num_bits=None):
         """Build a probabilities dictionary with binary string keys
-
-        Parameters:
-            num_bits (int): number of bits in the binary bitstrings (leading
-                zeros will be padded). If None, the length will be derived
-                from the largest key present.
 
         Returns:
             dict: A dictionary where the keys are binary strings in the format
