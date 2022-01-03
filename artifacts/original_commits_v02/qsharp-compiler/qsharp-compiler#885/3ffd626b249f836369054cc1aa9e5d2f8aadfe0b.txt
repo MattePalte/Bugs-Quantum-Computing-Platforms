@@ -1,0 +1,15 @@
+Fix #885 (#886)
+
+* [WIP] Started updating VS LSP client.
+* A few more nullability fixes.
+* Use explicit 0:0 range instead of relying on constructor.
+* Propagate nullability metadata to F# callers.
+* Avoid calling unsafe constructors.
+* Avoid deprecated Assert.Equals.
+* Set DocumentRangeFormattingProvider to false.
+* Fix to AssertCapability.
+* Assertions should work more reliabily when capabilities are null.
+* Disable nullable reference checking when copying unsound types.
+* Check if Range is null, since nullability metadata can be violated.
+
+Co-authored-by: Ricardo Espinoza <ricardoe@microsoft.com>

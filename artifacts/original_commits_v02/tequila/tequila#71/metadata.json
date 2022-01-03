@@ -1,0 +1,1 @@
+{"commit_hash": "27ac6d02a4f7020a1fb2a2c5fa8562d77d1662fd", "commit_msg": "Merge pull request #71 from aspuru-guzik-group/qiskit-fix\n\nQiskit fix", "project_name": "tequila", "id": "1733", "human_id": "tequila#71", "author_comment": "Fixer: \"fixed mappings for reduced systems on qiskit backend\""}

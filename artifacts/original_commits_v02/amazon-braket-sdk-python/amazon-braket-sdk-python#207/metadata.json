@@ -1,0 +1,1 @@
+{"commit_hash": "ba4cea0217ea96ea825533c6af01f24647bbda90", "commit_msg": "fix: Search for unknown QPUs (#207)", "project_name": "amazon-braket-sdk-python", "id": "1667", "human_id": "amazon-braket-sdk-python#207", "author_comment": "Fixer: \"if the QPU (its device_arn) is unknown, search until it is found\"."}

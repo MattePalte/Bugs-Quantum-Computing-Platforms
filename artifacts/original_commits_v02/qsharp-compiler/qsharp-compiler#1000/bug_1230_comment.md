@@ -1,0 +1,1 @@
+Fixer: "The issue was that certain branching in llvm (specifically for conditional expressions and for the correction in copy-and-update) were not properly registered with the caching mechanism in the QIR generation, such that the generated QIR tried to access values that were created only in certain branches."

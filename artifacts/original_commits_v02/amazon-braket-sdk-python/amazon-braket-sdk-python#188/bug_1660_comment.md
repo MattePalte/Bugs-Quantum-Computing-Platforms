@@ -1,0 +1,1 @@
+Fixer: 'If the region is not the same as the current session's region and only simulators are requested, then search_devices will not be called at all because simulators are only retrieved for the current region".

@@ -1,0 +1,3 @@
+Merge pull request #332 from jvanstraten/fix-unitary-compile-time-develop
+
+Move unitary logic into separate compile unit

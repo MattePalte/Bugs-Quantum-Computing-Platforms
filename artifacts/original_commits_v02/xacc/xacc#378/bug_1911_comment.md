@@ -1,0 +1,1 @@
+Fixer: "Fixed a bug in the QLM (Quantum Learning Machine by ATOS) Accelerator plugin when doing noisy sim"

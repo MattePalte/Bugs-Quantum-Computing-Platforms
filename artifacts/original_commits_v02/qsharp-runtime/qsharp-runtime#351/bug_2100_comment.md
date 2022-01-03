@@ -1,0 +1,1 @@
+Fixer: "This PR updates a unit case than contained a statement that shouldn't be supported" (refering to the call of GenRecursionPartial without syntax <> )

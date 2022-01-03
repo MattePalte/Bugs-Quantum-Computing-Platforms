@@ -1,0 +1,1 @@
+Fixer: "Fixes a bug that resulted in `c_if` not working when the width of the conditional register was greater than 64." Reporter: "Added fix for bug where executing conditional instruction with c_if on the BasicAer backend either resulted in a crash or incorrect result for registers larger than or equal to 64-bits."

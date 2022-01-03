@@ -1,0 +1,3 @@
+Merge pull request #403 from tnguyen-ornl/tnguyen/fix-gate-merge-opt-qcor
+
+Fixed a bug when the gate merge optimizer didn't persist the buffer name

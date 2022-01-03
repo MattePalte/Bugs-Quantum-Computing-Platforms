@@ -1,0 +1,3 @@
+fix hasattr in get_options (#5370)
+
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>

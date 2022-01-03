@@ -1,0 +1,3 @@
+Merge pull request #276 from arcondello/fix/chain-strength-warning-with-len1-chains
+
+Don't raise a chain strength warning when chains have length <= 1

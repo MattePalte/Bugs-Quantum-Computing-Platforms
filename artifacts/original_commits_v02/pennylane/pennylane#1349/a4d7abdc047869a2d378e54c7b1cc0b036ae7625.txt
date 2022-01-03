@@ -1,0 +1,21 @@
+Fixing JAX interface for adjoint diff (#1349)
+
+* reset of tape_copy branch
+
+* black
+
+* changelog
+
+* remove finite-diff, re-add adjoint test
+
+* changelog
+
+* oops
+
+* another oops
+
+* restoring accidentally deleted file
+
+* black
+
+Co-authored-by: antalszava <antalszava@gmail.com>

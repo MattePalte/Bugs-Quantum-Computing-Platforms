@@ -1,0 +1,1 @@
+fix: steup.py was looking for the wrong folder to install cirq, when cirq was a dependency, such as in Open fermion

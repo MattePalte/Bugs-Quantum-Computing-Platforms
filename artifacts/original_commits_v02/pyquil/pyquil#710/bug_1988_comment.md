@@ -1,0 +1,1 @@
+Fixer: "The functions is_zero() and is_identity() weren't always checking correctly for their respective checks. "

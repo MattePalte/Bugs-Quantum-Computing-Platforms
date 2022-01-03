@@ -1,0 +1,7 @@
+Fixing duplicate intrinsics (#880)
+
+* Fixing duplicate intrinsics
+
+This fixes an issue where `body intrinsic` callables would appear twice in monomorphized results by pruning the list of concretized callables based on intrinsic settings.
+
+* Adding test case

@@ -1,0 +1,3 @@
+Merge pull request #91 from XanaduAI/new_modes_bugfix
+
+New_modes bugfix. CodeFactor not working, but other checks pass

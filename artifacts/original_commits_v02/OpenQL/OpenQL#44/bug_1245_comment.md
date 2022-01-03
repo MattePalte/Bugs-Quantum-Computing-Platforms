@@ -1,0 +1,1 @@
+In the scheduling of the compiler instruction, each instruction should have a specific moment/timestamp. Bug: there was a clash on the timestamp 0, thus they change an internal curr_cycle setting to avoid this clash.

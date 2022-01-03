@@ -1,0 +1,1 @@
+{"commit_hash": "93d44536cc8e58bc956cc64eccf27d0b61d68b9b", "commit_msg": "Merge pull request #35 from yurisan/installation_small_bugfix\n\nFix bug in Installation", "project_name": "qulacs", "id": "1752", "human_id": "qulacs#35", "author_comment": "Fixer: \"Use VERSION_LESS, instead of VERSION_GREATER_EQUAL(It doesn't work on cmake==3.5.1)\""}

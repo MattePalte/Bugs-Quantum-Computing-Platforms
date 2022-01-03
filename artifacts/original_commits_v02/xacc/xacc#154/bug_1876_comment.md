@@ -1,0 +1,1 @@
+Fixer: "quick fix for improper iteration through bitstrings causing error in final EM matrix"

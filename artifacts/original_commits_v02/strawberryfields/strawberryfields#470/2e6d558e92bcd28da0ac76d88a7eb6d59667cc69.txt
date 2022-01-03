@@ -1,0 +1,53 @@
+Fix for reduced_density_matrix bug  (#470)
+
+* fixing #467 plus test that would have caught it
+
+* new integ test
+
+* Apply suggestions from code review
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update CHANGELOG.md
+
+* Update CHANGELOG.md
+
+* Fix reduced dm (#471)
+
+* Fix reduced_dm
+
+* Add test
+
+* Update strawberryfields/backends/tfbackend/ops.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update changelog
+
+* Update test
+
+* Fix tf
+
+* Update changelog
+
+* Update tests/backend/test_tf_ops.py
+
+Co-authored-by: Nathan Killoran <co9olguy@users.noreply.github.com>
+
+* Remove fock testing
+
+* Update tests/backend/test_tf_ops.py
+
+Co-authored-by: Nathan Killoran <co9olguy@users.noreply.github.com>
+
+* Simplify test
+
+* Revert line
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Nathan Killoran <co9olguy@users.noreply.github.com>
+
+* linting
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Theodor <theodor@xanadu.ai>

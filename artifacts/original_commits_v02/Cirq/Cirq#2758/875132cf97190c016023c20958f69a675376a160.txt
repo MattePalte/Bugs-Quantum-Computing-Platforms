@@ -1,0 +1,6 @@
+Attempt to fix flaky test by fixing random seed in n_qubit_tomography_test.py (#2758)
+
+It seems the test can be a bit flaky
+https://travis-ci.com/quantumlib/Cirq/jobs/285096296
+
+Happy to modify or outright withdraw if this is misguided.

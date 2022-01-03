@@ -1,0 +1,4 @@
+fix: Flatten Tensor Products (#263)
+
+Co-authored-by: Abe Coull <accoull@amazon.com>
+Co-authored-by: ℂ𝓞𝔇𝚈 <speller26@gmail.com>

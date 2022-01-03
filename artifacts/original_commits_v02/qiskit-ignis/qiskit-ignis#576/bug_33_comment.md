@@ -1,0 +1,1 @@
+In a tox.ini python3.8 was too specific, working only for people who had it. Bug-fix: moved to python 3 which is general

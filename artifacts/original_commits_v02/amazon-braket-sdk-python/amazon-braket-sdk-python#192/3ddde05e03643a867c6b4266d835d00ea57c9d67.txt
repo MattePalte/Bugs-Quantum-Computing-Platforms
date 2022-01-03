@@ -1,0 +1,1 @@
+fix: Update range of random qubit in test_qft_iqft_h (#192)

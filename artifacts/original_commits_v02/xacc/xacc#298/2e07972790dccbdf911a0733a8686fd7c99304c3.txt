@@ -1,0 +1,3 @@
+Merge pull request #298 from tnguyen-ornl/tnguyen/fix-aer-py-linux
+
+Fixed py-aer wrapper for Linux.

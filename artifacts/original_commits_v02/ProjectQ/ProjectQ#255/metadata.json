@@ -1,0 +1,1 @@
+{"commit_hash": "11f45873e20c2fa78fab2b59b5b460ac5f595fc6", "commit_msg": "Fix StatePreparation division by 0 and update docs (#255)", "project_name": "ProjectQ", "id": "1118", "human_id": "ProjectQ#255", "author_comment": "fix division by 0"}

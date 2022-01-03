@@ -1,0 +1,3 @@
+Fix BasicQubit.__hash__ not satisfying a==b implies hash(a)==hash(b) (#44)
+
+* Fix BasicQubit.__hash__ not satisfying a==b implies hash(a)==hash(b)

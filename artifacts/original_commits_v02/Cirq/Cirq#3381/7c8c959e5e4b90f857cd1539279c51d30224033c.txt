@@ -1,0 +1,7 @@
+Fix TrialResult deprecation (#3381)
+
+Fix TrialResult deprecation to cater for JSON parsing of old JSON formats.
+
+It adds back the TrialResult json and repr files for the json repr testing, adds extra tests for the old, TrialResult based JSON parsing. It also adds the ability to deprecate classes properly via `@deprecate_class`.
+
+Fixes #3380.

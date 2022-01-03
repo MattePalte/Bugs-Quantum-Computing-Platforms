@@ -1,0 +1,1 @@
+Reporter: "in the slicing method, the line "long rangeCount = 1 + (range.End - range.Start) / range.Step;" is not correct; it mistakenly computes that e.g. the range 1 .. 2 .. 0 has one element, which subsequently causes an ArgumentOutOfRangeException exception."

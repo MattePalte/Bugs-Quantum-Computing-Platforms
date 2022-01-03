@@ -1,0 +1,3 @@
+Merge pull request #238 from tnguyen-ornl/tnguyen/fix-gate-merge-bug
+
+Fixed gate merge bug during circuit rewrite

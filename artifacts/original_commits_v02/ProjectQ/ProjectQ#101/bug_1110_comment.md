@@ -1,0 +1,1 @@
+Reporter: "Can't convert complex to float", thus the fixer extracts the real part to convert to float (since previous conditions assure us the imag part is 0)

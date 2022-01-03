@@ -1,0 +1,3 @@
+Merge pull request #32 from TenninYan/fix/gcc-8-error
+
+error in exact 8.0.0

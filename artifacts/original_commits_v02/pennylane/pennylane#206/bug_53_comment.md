@@ -1,0 +1,2 @@
+When QNode keyword arguments are used to specify wires of operations/expvals, complicated casting rules can cause them to be of type np.int64 rather than the standard Python type int. This can cause issues with external plugin devices, for example, if the targeted framework performs validation to ensure that isinstance(qubit, int).
+To fix this, we explicitly cast the operation wires directly to integers in Operation.wires.

@@ -1,0 +1,1 @@
+Fixer: "Inconsistent event-node pair commutation rule application during DDG construction was causing assertion failures in some cases, specifically when a statement causes multiple events that would not commute with each other if they weren't due to the same statement."

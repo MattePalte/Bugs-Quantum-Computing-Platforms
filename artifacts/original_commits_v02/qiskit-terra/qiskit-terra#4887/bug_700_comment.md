@@ -1,0 +1,1 @@
+Fixer: "The ``append`` method can be used to insert one parameterized gate instance into multiple circuits. This fix makes a copy of parameterized gate instances when appended to a circuit to ensure that changing a parameter in one circuit will not affect other circuits. "

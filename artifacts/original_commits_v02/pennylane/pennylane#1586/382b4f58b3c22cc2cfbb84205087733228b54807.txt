@@ -1,0 +1,19 @@
+Fix VQE issue with tensorflow (#1586)
+
+* rewrite function to be clearer
+
+* add changelog entry
+
+* fix codefactor
+
+* fix another test
+
+* Update .github/CHANGELOG.md
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update pennylane/transforms/hamiltonian_expand.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>

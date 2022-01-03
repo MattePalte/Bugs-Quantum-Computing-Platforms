@@ -1,0 +1,1 @@
+Fixer: "Add postProcess impl to Python observable plugins"

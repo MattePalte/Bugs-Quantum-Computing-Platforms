@@ -1,0 +1,63 @@
+Fix for using `TDMProgram` with `timebins % concurrent_modes != 0` (#611)
+
+* add td3 support
+
+* run black
+
+* fix space-unrolling
+
+* fix apply_ops
+
+* fix fix
+
+* Adds first test
+
+* One test failing
+
+* greatly improve space-unrolling
+
+* remove validate measurements
+
+* remove tests
+
+* unroll only if rolled
+
+* Adds new test: test_cov() currently failing
+
+* fix
+
+* fix so that test passes
+
+* tidy up tdmprogram
+
+* change range(len) to enumerate due to codefactor
+
+* run black
+
+* disallow looping back when space-unrolling
+
+* Adds space unrolling tests
+
+* set default shots in unrolling
+
+* setting local seed by hand
+
+* Adds explicit value of hbar so that when it takes the Nathan convention (hbar=1.7) the tests still work
+
+* Apply suggestions from code review
+
+* add roll test
+
+* add final test
+
+* fix shots bug
+
+* fix test
+
+* make test pass
+
+* fix codefactor issues
+
+* more codefactor fixes
+
+Co-authored-by: Nicolas Quesada <zeitus@gmail.com>

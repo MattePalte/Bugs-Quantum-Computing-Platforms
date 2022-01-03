@@ -1,0 +1,1 @@
+Fixer: " initialization process in parsing Pauli Strings is broken. To prevent this, I've added appropriate initialization process." usually paul operators are initializad iwth a string "gate index_qubit gate index_qubit ..." such as "X 1 Y 3 ...". The bug consists in accepting a string like this "X 2 Y Z 6 ..." where Y doesn't have the index.
