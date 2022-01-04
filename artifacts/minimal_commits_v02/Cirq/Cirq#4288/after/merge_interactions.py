@@ -81,10 +81,7 @@ class MergeInteractions(circuits.PointOptimizer):
             clear_qubits=op.qubits,
             new_operations=new_operations,
         )
-
     def _may_keep_old_op(self, old_op: 'cirq.Operation') -> bool:
-        """Returns True if the old two-qubit operation may be left unchanged
-        without decomposition."""
         if self.allow_partial_czs:
             return isinstance(old_op.gate, ops.CZPowGate)
         return isinstance(old_op.gate, ops.CZPowGate) and old_op.gate.exponent == 1

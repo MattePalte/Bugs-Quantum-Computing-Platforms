@@ -331,7 +331,6 @@ class DeprecatedModuleLoader(importlib.abc.Loader):
 
     def create_module(self, spec: ModuleSpec) -> ModuleType:
         return self.loader.create_module(spec)
-
     def module_repr(self, module: ModuleType) -> str:
         return self.loader.module_repr(module)
 

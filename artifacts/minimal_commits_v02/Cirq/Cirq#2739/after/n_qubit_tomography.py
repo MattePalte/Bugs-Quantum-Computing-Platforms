@@ -88,9 +88,6 @@ class StateTomographyExperiment:
     ) -> np.ndarray:
         """Gets the matrix used for solving the linear system of the tomography.
 
-        Args:
-            qubits: Qubits to do the tomography on.
-
         Returns:
             A matrix of dimension ((number of rotations)**n * 2**n, 4**n)
             where each column corresponds to the coefficient of a term in the

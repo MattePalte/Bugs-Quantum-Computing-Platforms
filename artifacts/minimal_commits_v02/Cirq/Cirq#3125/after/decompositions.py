@@ -514,7 +514,6 @@ class KakDecomposition:
             ops.MatrixGate(self.single_qubit_operations_after[1]).on(b),
         ]
 
-
 def scatter_plot_normalized_kak_interaction_coefficients(
         interactions: Iterable[
             Union[np.ndarray, 'cirq.SupportsUnitary', 'KakDecomposition']],

@@ -201,14 +201,6 @@ def _potential_cross_partial_w(moment_index: int,
                                op: ops.Operation,
                                state: _OptimizerState) -> None:
     """Cross the held W over a partial W gate.
-
-    Uses the following identity:
-        ───W(a)───W(b)^t───
-        ≡ ───Z^-a───X───Z^a───W(b)^t────── (expand W(a))
-        ≡ ───Z^-a───X───W(b-a)^t───Z^a──── (move Z^a across, phasing axis)
-        ≡ ───Z^-a───W(a-b)^t───X───Z^a──── (move X across, negating axis angle)
-        ≡ ───W(2a-b)^t───Z^-a───X───Z^a─── (move Z^-a across, phasing axis)
-        ≡ ───W(2a-b)^t───W(a)───
     """
     a = state.held_w_phases.get(op.qubits[0])
     if a is None:

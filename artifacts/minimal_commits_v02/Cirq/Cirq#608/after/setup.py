@@ -27,7 +27,6 @@ requirements = open('runtime-requirements.txt').readlines()
 requirements = [r.strip() for r in requirements]
 
 cirq_packages = ['cirq.' + package for package in find_packages(where='cirq')]
-
 setup(
     name='cirq',
     version=__version__,

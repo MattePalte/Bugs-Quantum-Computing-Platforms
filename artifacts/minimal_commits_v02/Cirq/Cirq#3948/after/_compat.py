@@ -326,14 +326,12 @@ class DeprecatedModuleLoader(importlib.abc.Loader):
             # mypy#2427
             self.load_module = self._wrap_load_module(loader.load_module)  # type: ignore
         if hasattr(loader, 'create_module'):
-            # mypy#2427
             self.create_module = loader.create_module  # type: ignore
         self.old_module_name = old_module_name
         self.new_module_name = new_module_name
 
     def module_repr(self, module: ModuleType) -> str:
         return self.loader.module_repr(module)
-
     def _wrap_load_module(self, method: Any) -> Any:
         def load_module(fullname: str) -> ModuleType:
             assert fullname == self.old_module_name, (
@@ -344,7 +342,6 @@ class DeprecatedModuleLoader(importlib.abc.Loader):
                 sys.modules[self.old_module_name] = sys.modules[self.new_module_name]
                 return sys.modules[self.old_module_name]
             method(self.new_module_name)
-            # https://docs.python.org/3.5/library/importlib.html#importlib.abc.Loader.load_module
             assert self.new_module_name in sys.modules, (
                 f"Wrapped loader {self.loader} was "
                 f"expected to insert "
@@ -353,7 +350,6 @@ class DeprecatedModuleLoader(importlib.abc.Loader):
             )
             sys.modules[self.old_module_name] = sys.modules[self.new_module_name]
             return sys.modules[self.old_module_name]
-
         return load_module
 
     def _wrap_exec_module(self, method: Any) -> Any:
