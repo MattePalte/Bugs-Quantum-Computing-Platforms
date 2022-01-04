@@ -237,15 +237,15 @@ We can then use this backend for our mitigation.
     from mitiq import execute_with_zne
 
     circ = QuantumCircuit(1, 1)
-    for _ in range(100):
+    for __ in range(120):
          _ = circ.x(0)
     _ = circ.measure(0, 0)
 
-    exact = 1
     unmitigated = qs_noisy_simulation(circ)
     mitigated = execute_with_zne(circ, qs_noisy_simulation)
+    exact = 1
+    print(abs(exact - mitigated) < abs(exact - unmitigated))
 
-    # The mitigation should improve the result.
     assert abs(exact - mitigated) < abs(exact - unmitigated)
 
 Note that we don't need to even redefine factories for different stacks. Once

@@ -220,7 +220,7 @@ but you could also use a QPU.
             # so we skip any circuit optimization
             optimization_level=0,
             noise_model=noise_model,
-            shots=shots
+            shots=shots,
         )
         results = job.result()
         counts = results.get_counts()
@@ -242,11 +242,9 @@ We can then use this backend for our mitigation.
     unmitigated = qs_noisy_simulation(circ)
     mitigated = execute_with_zne(circ, qs_noisy_simulation)
     exact = 1
-    # The mitigation should improve the result.
     print(abs(exact - mitigated) < abs(exact - unmitigated))
 
 .. testoutput::
-
     True
 
 Note that we don't need to even redefine factories for different stacks. Once

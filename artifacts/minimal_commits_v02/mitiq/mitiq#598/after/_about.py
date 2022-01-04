@@ -42,7 +42,6 @@ def about() -> None:
         pyquil_version = "Not installed"
     try:
         from qiskit import __qiskit_version__
-
         qiskit_version = __qiskit_version__["qiskit"]
     except ImportError:
         qiskit_version = "Not installed"
