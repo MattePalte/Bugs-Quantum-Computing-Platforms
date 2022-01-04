@@ -232,12 +232,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             internal bool TryRemoveValue(IValue value) =>
                 TryRemoveValue(this.requiredUnreferences, tracked => ValueEquals(tracked, value));
 
-            /// <summary>
-            /// Generates the necessary calls to unreference the tracked values, decreases the alias count for registered variables,
-            /// and invokes the specified release functions for values if necessary.
-            /// Applies all pending calls to increase reference counts for the current scope, as well as for any given parent scopes.
-            /// The pending reference increases will be cleared for this scope only but not for the given parent scopes.
-            /// </summary>
             internal void ExecutePendingCalls(params Scope[] parentScopes)
             {
                 // Not the most efficient way to go about this, but it will do for now.
@@ -459,7 +453,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             }
             current.ExecutePendingCalls();
         }
-
         // public and internal methods
 
         /// <summary>
@@ -533,10 +526,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
         /// <exception cref="InvalidOperationException">The scope has pending calls to increase the reference count for values</exception>
         public void ExitScope() =>
             this.ExecutePendingCalls(keepCurrentScope: true);
-
-        /// <summary>
-        /// Executes all pending calls to increase reference counts in the current scope.
-        /// </summary>
         internal void ApplyPendingReferences() =>
             this.scopes.Peek().ApplyPendingReferences();
 

@@ -853,7 +853,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 ex.Expression.IsIdentifier || ex.Expression.IsBoolLiteral || ex.Expression.IsDoubleLiteral
                     || ex.Expression.IsIntLiteral || ex.Expression.IsPauliLiteral || ex.Expression.IsRangeLiteral
                     || ex.Expression.IsResultLiteral || ex.Expression.IsUnitValue;
-
             var cond = this.SharedState.EvaluateSubexpression(condEx);
             var exType = this.SharedState.CurrentExpressionType();
             IValue value;
@@ -872,15 +871,7 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 var contBlock = this.SharedState.AddBlockAfterCurrent("condContinue");
                 var falseBlock = this.SharedState.AddBlockAfterCurrent("condFalse");
                 var trueBlock = this.SharedState.AddBlockAfterCurrent("condTrue");
-
-                // In order to ensure the correct reference counts, it is important that we create a new scope
-                // for each branch of the conditional. When we close the scope, we list the computed value as
-                // to be returned from that scope, meaning it either won't be dereferenced or its reference
-                // count will increase by 1. The result of the expression is a phi node that we then properly
-                // register with the scope manager, such that it will be unreferenced when going out of scope.
-
                 this.SharedState.CurrentBuilder.Branch(cond.Value, trueBlock, falseBlock);
-
                 this.SharedState.ScopeMgr.OpenScope();
                 this.SharedState.SetCurrentBlock(trueBlock);
                 this.Transformation.Expressions.OnTypedExpression(ifTrueEx);
@@ -888,7 +879,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 this.SharedState.ScopeMgr.CloseScope(ifTrue, false); // force that the ref count is increased within the branch
                 BasicBlock afterTrue = this.SharedState.CurrentBlock!;
                 this.SharedState.CurrentBuilder.Branch(contBlock);
-
                 this.SharedState.ScopeMgr.OpenScope();
                 this.SharedState.SetCurrentBlock(falseBlock);
                 this.Transformation.Expressions.OnTypedExpression(ifFalseEx);
@@ -896,7 +886,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 this.SharedState.ScopeMgr.CloseScope(ifFalse, false); // force that the ref count is increased within the branch
                 BasicBlock afterFalse = this.SharedState.CurrentBlock!;
                 this.SharedState.CurrentBuilder.Branch(contBlock);
-
                 this.SharedState.SetCurrentBlock(contBlock);
                 var phi = this.SharedState.CurrentBuilder.PhiNode(this.SharedState.CurrentLlvmExpressionType());
                 phi.AddIncoming(ifTrue.Value, afterTrue);

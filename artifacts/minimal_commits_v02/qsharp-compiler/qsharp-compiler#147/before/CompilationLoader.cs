@@ -224,7 +224,6 @@ namespace Microsoft.Quantum.QsCompiler
                 var functorSpecGenerated = this.GeneratedSyntaxTree != null && FunctorGeneration.GenerateFunctorSpecializations(this.GeneratedSyntaxTree, out this.GeneratedSyntaxTree);
                 if (!functorSpecGenerated) this.LogAndUpdate(ref this.CompilationStatus.FunctorSupport, ErrorCode.FunctorGenerationFailed, Enumerable.Empty<string>());
             }
-
             if (!this.Config.SkipSyntaxTreeTrimming)
             {
                 this.CompilationStatus.TreeTrimming = 0;

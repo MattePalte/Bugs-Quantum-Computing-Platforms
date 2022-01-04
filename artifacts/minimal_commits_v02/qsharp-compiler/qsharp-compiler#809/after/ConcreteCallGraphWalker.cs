@@ -255,12 +255,9 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.CallGraphWalker
                         throw new ArgumentException("AddEdge requires CurrentNode to be non-null.");
                     }
 
-                    // Add an edge to the specific specialization kind referenced
                     var called = new ConcreteCallGraphNode(identifier, kind, typeRes);
                     var edge = new ConcreteCallGraphEdge(referenceRange);
                     this.Graph.AddDependency(this.CurrentNode, called, edge);
-
-                    // Add all the specializations of the referenced callable to the graph
                     var newNodes = this.GetSpecializationKinds(identifier)
                         .Select(specKind => new ConcreteCallGraphNode(identifier, specKind, typeRes));
                     foreach (var node in newNodes)

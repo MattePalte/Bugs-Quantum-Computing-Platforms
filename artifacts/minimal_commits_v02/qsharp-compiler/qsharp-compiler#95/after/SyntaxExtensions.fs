@@ -299,7 +299,6 @@ type QsTuple<'I> with
 // active pattern for tuple matching
 
  // not the nicest solution, but unfortunatly type extensions cannot be used to satisfy member constraints...
- // the box >> unbox below is used to cast the value to the inferred type of 'T
 let private TupleItems<'T when 'T :> ITuple> (arg: 'T): 'T list option =
     let cast a = box >> unbox |> List.map |> Option.map <| a
     match box arg with

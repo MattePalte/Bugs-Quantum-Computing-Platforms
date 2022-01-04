@@ -25,16 +25,14 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.Monomorphization
     /// are found from uses of the callables.
     /// This transformation also removes all callables that are not used directly or
     /// indirectly from any of the marked entry point.
-    /// Intrinsic callables are, by default, not monomorphized or removed from the compilation, but
-    /// may optionally be removed if unused if the keepAllIntrinsics parameter is set to false.
+    /// Intrinsic callables are not monomorphized or removed from the compilation.
     /// There are also some built-in callables that are also exempt from
     /// being removed from non-use, as they are needed for later rewrite steps.
     /// </summary>
     public static class Monomorphize
     {
         /// <summary>
-        /// Performs Monomorphization on the given compilation. If the keepAllIntrinsics parameter
-        /// is set to true, then unused intrinsics will not be removed from the resulting compilation.
+        /// Performs Monomorphization on the given compilation.
         /// </summary>
         public static QsCompilation Apply(QsCompilation compilation, bool keepAllIntrinsics = true)
         {

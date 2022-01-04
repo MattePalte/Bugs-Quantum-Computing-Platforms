@@ -195,11 +195,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 this.pendingReferences.Clear();
                 this.parent.ModifyCounts(this.parent.ReferenceCountUpdateFunctionForType, this.parent.plusOne, pending);
             }
-
-            /// <summary>
-            /// Migrates all pending calls to increase reference counts from the current scope to the given scope,
-            /// clearing them from the current scope.
-            /// </summary>
             internal void MigratePendingReferences(Scope scope)
             {
                 scope.pendingReferences.AddRange(this.pendingReferences);
@@ -235,24 +230,15 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             /// </summary>
             internal bool TryRemoveValue(IValue value) =>
                 TryRemoveValue(this.requiredUnreferences, tracked => ValueEquals(tracked, value));
-
-            /// <inheritdoc cref="ExecutePendingCalls(ScopeManager, bool, Scope[])" />
             internal void ExecutePendingCalls(bool applyReferences = true) =>
                 ExecutePendingCalls(this.parent, applyReferences, this);
 
-            /// <summary>
-            /// Generates the necessary calls to unreference the tracked values, decrease the alias count for registered variables,
-            /// and invokes the specified release functions for values if necessary.
-            /// If no calls to decrease reference counts are needed in any of the given scopes,
-            /// does *not* apply pending calls to increase reference counts unless <paramref name="forceApplyReferences"/> is set to true.
-            /// </summary>
             internal static void ExecutePendingCalls(ScopeManager parent, bool forceApplyReferences, params Scope[] scopes)
             {
                 if (!scopes.Any())
                 {
                     return;
                 }
-
                 // Not the most efficient way to go about this, but it will do for now.
 
                 var pendingAliasCounts = scopes.SelectMany(s => s.variables).Select(kv => (kv.Value, true)).ToArray();
@@ -497,7 +483,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             {
                 scope.ExecutePendingCalls();
             }
-
             if (scope.HasPendingReferences)
             {
                 throw new InvalidOperationException("cannot close scope that has pending calls to increase reference counts");
@@ -520,7 +505,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
         {
             var scope = this.scopes.Peek();
             this.IncreaseReferenceCount(returned);
-
             scope.ExecutePendingCalls(applyReferences: !allowDelayReferencing);
             scope = this.scopes.Pop();
 
@@ -529,10 +513,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 scope.MigratePendingReferences(this.scopes.Peek());
             }
         }
-
-        /// <summary>
-        /// Executes all pending calls to increase reference counts in the current scope.
-        /// </summary>
         internal void ApplyPendingReferences() =>
             this.scopes.Peek().ApplyPendingReferences();
 
@@ -733,8 +713,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             // d) We can't modify the pending calls; they may be used by other execution paths that
             //    don't return the same value.
 
-            // We need to extract the scopes to iterate over since for loops to release array items
-            // will create new scopes and hence modify the collection.
             var currentScopes = this.scopes.ToArray();
             this.IncreaseReferenceCount(returned);
             Scope.ExecutePendingCalls(this, true, currentScopes);

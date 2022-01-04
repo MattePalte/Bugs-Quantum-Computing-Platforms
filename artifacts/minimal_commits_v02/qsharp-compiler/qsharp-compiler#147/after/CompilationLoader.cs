@@ -225,7 +225,6 @@ namespace Microsoft.Quantum.QsCompiler
                 this.GeneratedSyntaxTree = this.GeneratedSyntaxTree?.Select(ns => rewrite.Transform(ns))?.ToImmutableArray();
                 if (this.GeneratedSyntaxTree == null || !rewrite.Success) this.LogAndUpdate(ref this.CompilationStatus.TreeTrimming, ErrorCode.TreeTrimmingFailed, Enumerable.Empty<string>());
             }
-
             if (this.Config.GenerateFunctorSupport)
             {
                 this.CompilationStatus.FunctorSupport = 0;

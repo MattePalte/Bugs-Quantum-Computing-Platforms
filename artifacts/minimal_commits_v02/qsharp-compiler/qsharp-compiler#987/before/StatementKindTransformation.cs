@@ -289,7 +289,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 this.SharedState.EndBranch();
             }
 
-            // Finally, set the continuation block as current or prune it if it is unused.
             if (contBlockUsed)
             {
                 this.SharedState.SetCurrentBlock(contBlock);

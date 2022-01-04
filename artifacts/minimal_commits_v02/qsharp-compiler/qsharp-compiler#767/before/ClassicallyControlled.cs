@@ -314,24 +314,17 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
 
                     return null;
                 }
-
-                /// <summary>
-                /// Gets an identifier and argument tuple for the built-in operation NoOp.
-                /// </summary>
                 private (TypedExpression Id, TypedExpression Args) GetNoOp()
                 {
                     var opInfo = BuiltIn.NoOp;
-
                     var properties = new[] { OpProperty.Adjointable, OpProperty.Controllable };
                     var characteristics = new CallableInformation(
                         ResolvedCharacteristics.FromProperties(properties),
                         new InferredCallableInformation(((BuiltInKind.Operation)opInfo.Kind).IsSelfAdjoint, false));
-
                     var unitType = ResolvedType.New(ResolvedTypeKind.UnitType);
                     var operationType = ResolvedType.New(ResolvedTypeKind.NewOperation(
                             Tuple.Create(unitType, unitType),
                             characteristics));
-
                     var args = new TypedExpression(
                         ExpressionKind.UnitValue,
                         TypeArgsResolution.Empty,
@@ -339,7 +332,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                         new InferredExpressionInformation(false, false),
                         QsNullable<Range>.Null);
                     var typeArgs = ImmutableArray.Create(unitType);
-
                     var identifier = new TypedExpression(
                         ExpressionKind.NewIdentifier(
                             Identifier.NewGlobalCallable(opInfo.FullName),
@@ -350,7 +342,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                         operationType,
                         new InferredExpressionInformation(false, false),
                         QsNullable<Range>.Null);
-
                     return (identifier, args);
                 }
 

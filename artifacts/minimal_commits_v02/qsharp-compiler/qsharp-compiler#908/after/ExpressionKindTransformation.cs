@@ -127,15 +127,10 @@ namespace Microsoft.Quantum.QsCompiler.QIR
 
         // static methods
 
-        /// <returns>
-        /// True if the expression is self-evaluating and
-        /// doesn't require encapsulating into its own block if it should only be evaluated conditionally.
-        /// </returns>
         private static bool ExpressionIsSelfEvaluating(TypedExpression ex) =>
             ex.Expression.IsIdentifier || ex.Expression.IsBoolLiteral || ex.Expression.IsDoubleLiteral
                 || ex.Expression.IsIntLiteral || ex.Expression.IsPauliLiteral || ex.Expression.IsRangeLiteral
                 || ex.Expression.IsResultLiteral || ex.Expression.IsUnitValue;
-
         /// <summary>
         /// Determines the location of the item with the given name within the tuple of type items.
         /// The returned list contains the index of the item starting from the outermost tuple
@@ -387,14 +382,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
         }
 
         // private helpers
-
-        /// <summary>
-        /// Depending on the value of the given condition, evaluates the expression given for the corresponding branch.
-        /// </summary>
-        /// <returns>
-        /// A phi node that evaluates to either the value of the expression depending on the branch that was taken,
-        /// or the value of the condition if no expression has been specified for that branch.
-        /// </returns>
         private Value ConditionalEvaluation(Value condition, TypedExpression? onCondTrue = null, TypedExpression? onCondFalse = null)
         {
             var contBlock = this.SharedState.AddBlockAfterCurrent("condContinue");
@@ -404,16 +391,8 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             var trueBlock = onCondTrue != null
                 ? this.SharedState.AddBlockAfterCurrent("condTrue")
                 : contBlock;
-
-            // In order to ensure the correct reference counts, it is important that we create a new scope
-            // for each branch of the conditional. When we close the scope, we list the computed value as
-            // to be returned from that scope, meaning it either won't be dereferenced or its reference
-            // count will increase by 1. The result of the expression is a phi node that we then properly
-            // register with the scope manager, such that it will be unreferenced when going out of scope.
-
             this.SharedState.CurrentBuilder.Branch(condition, trueBlock, falseBlock);
             var entryBlock = this.SharedState.CurrentBlock!;
-
             var (evaluatedOnTrue, afterTrue) = (condition, entryBlock);
             if (onCondTrue != null)
             {
@@ -424,7 +403,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 this.SharedState.CurrentBuilder.Branch(contBlock);
                 (evaluatedOnTrue, afterTrue) = (onTrue.Value, this.SharedState.CurrentBlock!);
             }
-
             var (evaluatedOnFalse, afterFalse) = (condition, entryBlock);
             if (onCondFalse != null)
             {
@@ -435,7 +413,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 this.SharedState.CurrentBuilder.Branch(contBlock);
                 (evaluatedOnFalse, afterFalse) = (onFalse.Value, this.SharedState.CurrentBlock!);
             }
-
             this.SharedState.SetCurrentBlock(contBlock);
             var phi = this.SharedState.CurrentBuilder.PhiNode(this.SharedState.CurrentLlvmExpressionType());
             phi.AddIncoming(evaluatedOnTrue, afterTrue);
@@ -1354,9 +1331,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
         {
             Value evaluated;
             var exType = this.SharedState.CurrentExpressionType();
-
-            // Special case: if the right hand side is self-evaluating (literal or simple identifier),
-            // we can safely evaluate both expression without introducing a branching.
             if (ExpressionIsSelfEvaluating(rhsEx))
             {
                 var lhs = this.SharedState.EvaluateSubexpression(lhsEx);
@@ -1368,7 +1342,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 var cond = this.SharedState.EvaluateSubexpression(lhsEx).Value;
                 evaluated = this.ConditionalEvaluation(cond, onCondTrue: rhsEx);
             }
-
             var value = this.SharedState.Values.FromSimpleValue(evaluated, exType);
             this.SharedState.ValueStack.Push(value);
             return ResolvedExpressionKind.InvalidExpr;
@@ -1389,9 +1362,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
         {
             Value evaluated;
             var exType = this.SharedState.CurrentExpressionType();
-
-            // Special case: if the right hand side is self-evaluating (literal or simple identifier),
-            // we can safely evaluate both expression without introducing a branching.
             if (ExpressionIsSelfEvaluating(rhsEx))
             {
                 var lhs = this.SharedState.EvaluateSubexpression(lhsEx);
@@ -1403,7 +1373,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 var cond = this.SharedState.EvaluateSubexpression(lhsEx).Value;
                 evaluated = this.ConditionalEvaluation(cond, onCondFalse: rhsEx);
             }
-
             var value = this.SharedState.Values.FromSimpleValue(evaluated, exType);
             this.SharedState.ValueStack.Push(value);
             return ResolvedExpressionKind.InvalidExpr;

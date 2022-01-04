@@ -281,7 +281,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                     sharedState.ScopeMgr.DecreaseReferenceCount(pointer, shallow);
                     sharedState.ScopeMgr.CloseScope(false);
                     sharedState.EndBranch();
-
                     sharedState.CurrentBuilder.Branch(contBlock);
                     sharedState.SetCurrentBlock(contBlock);
                 }

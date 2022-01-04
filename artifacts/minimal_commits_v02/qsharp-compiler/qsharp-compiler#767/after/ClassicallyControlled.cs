@@ -162,14 +162,11 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
 
                 private (bool, QsConditionalStatement) ProcessNOT(QsConditionalStatement conditionStatement)
                 {
-                    // This method expects elif blocks to have been abstracted out
                     if (conditionStatement.ConditionalBlocks.Length != 1)
                     {
                         return (false, conditionStatement);
                     }
-
                     var (condition, block) = conditionStatement.ConditionalBlocks[0];
-
                     if (condition.Expression is ExpressionKind.NOT notCondition)
                     {
                         if (conditionStatement.Default.IsValue)
@@ -197,7 +194,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                         return (false, conditionStatement);
                     }
                 }
-
                 /// <summary>
                 /// Converts conditional statements to nested structures so they do not
                 /// have elif blocks or top-most OR or AND conditions.
@@ -223,7 +219,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                             statement.Location,
                             statement.Comments);
                     }
-
                     return statement;
                 }
 
@@ -792,24 +787,17 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
     {
         public static QsCompilation Apply(QsCompilation compilation) =>
             new LiftContent().OnCompilation(compilation);
-
-        /// <summary>
-        /// Gets an identifier and argument tuple for the built-in operation NoOp.
-        /// </summary>
         internal static (TypedExpression Id, TypedExpression Args) GetNoOp()
         {
             var opInfo = BuiltIn.NoOp;
-
             var properties = new[] { OpProperty.Adjointable, OpProperty.Controllable };
             var characteristics = new CallableInformation(
                 ResolvedCharacteristics.FromProperties(properties),
                 new InferredCallableInformation(((BuiltInKind.Operation)opInfo.Kind).IsSelfAdjoint, false));
-
             var unitType = ResolvedType.New(ResolvedTypeKind.UnitType);
             var operationType = ResolvedType.New(ResolvedTypeKind.NewOperation(
                     Tuple.Create(unitType, unitType),
                     characteristics));
-
             var args = new TypedExpression(
                 ExpressionKind.UnitValue,
                 TypeArgsResolution.Empty,
@@ -817,7 +805,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                 new InferredExpressionInformation(false, false),
                 QsNullable<Range>.Null);
             var typeArgs = ImmutableArray.Create(unitType);
-
             var identifier = new TypedExpression(
                 ExpressionKind.NewIdentifier(
                     Identifier.NewGlobalCallable(opInfo.FullName),
@@ -828,7 +815,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                 operationType,
                 new InferredExpressionInformation(false, false),
                 QsNullable<Range>.Null);
-
             return (identifier, args);
         }
 
@@ -887,7 +873,6 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
 
                         if (block.Body.Statements.Length == 0)
                         {
-                            // This is an empty scope, so it can just be treated as a call to NoOp.
                             var (id, args) = GetNoOp();
                             var callExpression = new TypedExpression(
                                 ExpressionKind.NewCallLikeExpression(id, args),
@@ -913,6 +898,8 @@ namespace Microsoft.Quantum.QsCompiler.Transformations.ClassicallyControlled
                         {
                             newConditionBlocks.Add(Tuple.Create(expr.Item, block));
                         }
+                        // ToDo: We may want to prevent empty blocks from getting lifted
+                        // else if (block.Body.Statements.Length > 0)
                         else
                         {
                             // Lift the scope to its own operation

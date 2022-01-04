@@ -1346,8 +1346,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
         /// <param name="loop">The loop to execute</param>
         internal void ExecuteLoop(BasicBlock continuation, Action loop)
         {
-            // We need to mark the loop and also mark the branching
-            // to ensure that pointers are properly loaded when needed.
             bool withinOuterLoop = this.IsWithinLoop;
             this.IsWithinLoop = true;
             this.StartBranch();

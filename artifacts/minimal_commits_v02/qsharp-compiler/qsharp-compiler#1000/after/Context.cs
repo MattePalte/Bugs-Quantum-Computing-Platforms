@@ -120,10 +120,8 @@ namespace Microsoft.Quantum.QsCompiler.QIR
 
         #region Control flow context tracking
 
-        // This value is used to assigne a unique id to each branch/loop in the program.
         private int uniqueControlFlowId = 0;
 
-        // Contains the ids of all currently open branches.
         private readonly Stack<int> branchIds = new Stack<int>(new[] { 0 });
         internal int CurrentBranch => this.branchIds.Peek();
         internal bool IsOpenBranch(int id) => this.branchIds.Contains(id);
@@ -136,8 +134,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
 
         internal void EndBranch() =>
             this.branchIds.Pop();
-
-        // Contains the ids of all currently executing loops.
         private readonly Stack<int> loopIds = new Stack<int>();
         internal bool IsWithinLoop => this.loopIds.Any();
         internal bool IsWithinCurrentLoop(int branchId)
@@ -149,7 +145,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             var branchesWithinCurrentLoop = this.branchIds.TakeWhile(id => id >= currentLoopId);
             return branchesWithinCurrentLoop.Contains(branchId);
         }
-
         internal void StartLoop()
         {
             // We need to mark the loop and also mark the branching
@@ -157,7 +152,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             this.StartBranch();
             this.loopIds.Push(this.CurrentBranch);
         }
-
         internal void EndLoop()
         {
             this.loopIds.Pop();
@@ -1184,7 +1178,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
             {
                 this.SetCurrentBlock(block);
                 this.StartBranch();
-
                 IValue evaluated;
                 if (increaseReferenceCount)
                 {
@@ -1196,9 +1189,6 @@ namespace Microsoft.Quantum.QsCompiler.QIR
                 {
                     evaluated = evaluate?.Invoke() ?? defaultValue!;
                 }
-
-                // We need to make sure to access the value *before* we end the branch -
-                // otherwise the caching may complain that the value is no longer accessible.
                 var res = evaluated.Value;
                 this.EndBranch();
                 this.CurrentBuilder.Branch(contBlock);

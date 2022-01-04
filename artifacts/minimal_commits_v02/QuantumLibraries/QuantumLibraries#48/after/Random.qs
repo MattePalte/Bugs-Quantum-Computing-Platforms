@@ -25,7 +25,7 @@ namespace Microsoft.Quantum.Canon
     /// that could be returned by this operation.
     ///
     /// # Output
-    /// An integer $x$ uniformly at random from $[0,2^{\texttt{maxBits}}-1]$;
+    /// An integer $x$ uniformly at random from the given interval;
     /// that is, with $\Pr(x) = \frac{1}{2^{\texttt{maxBits}}}$.
     ///
     /// # Remarks
