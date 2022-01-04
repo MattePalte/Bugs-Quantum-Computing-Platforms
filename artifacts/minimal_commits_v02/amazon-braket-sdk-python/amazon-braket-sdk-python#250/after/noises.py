@@ -88,7 +88,6 @@ class BitFlip(SingleProbabilisticNoise):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def bit_flip(target: QubitSetInput, probability: float) -> Iterable[Instruction]:
@@ -157,7 +156,6 @@ class PhaseFlip(SingleProbabilisticNoise):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def phase_flip(target: QubitSetInput, probability: float) -> Iterable[Instruction]:
@@ -248,7 +246,6 @@ class PauliChannel(PauliNoise):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def pauli_channel(
@@ -340,7 +337,6 @@ class Depolarizing(SingleProbabilisticNoise_34):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def depolarizing(target: QubitSetInput, probability: float) -> Iterable[Instruction]:
@@ -443,7 +439,6 @@ class TwoQubitDepolarizing(SingleProbabilisticNoise_1516):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def two_qubit_depolarizing(
@@ -526,7 +521,6 @@ class TwoQubitDephasing(SingleProbabilisticNoise_34):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def two_qubit_dephasing(
@@ -594,7 +588,6 @@ class AmplitudeDamping(DampingNoise):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def amplitude_damping(target: QubitSetInput, gamma: float) -> Iterable[Instruction]:
@@ -684,7 +677,6 @@ class GeneralizedAmplitudeDamping(GeneralizedAmplitudeDampingNoise):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def generalized_amplitude_damping(
@@ -755,7 +747,6 @@ class PhaseDamping(DampingNoise):
         K0 = np.array([[1.0, 0.0], [0.0, np.sqrt(1 - self.gamma)]], dtype=complex)
         K1 = np.array([[0.0, 0.0], [0.0, np.sqrt(self.gamma)]], dtype=complex)
         return [K0, K1]
-
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1

@@ -26,7 +26,7 @@ class AngledGate(Gate):
         """
         Args:
             angle (float): The angle of the gate in radians.
-            qubit_count (int, optional): The number of qubits that this gate interacts with.
+            qubit_count (int): The number of qubits that this gate interacts with.
             ascii_symbols (Sequence[str]): ASCII string symbols for the gate. These are used when
                 printing a diagram of a circuit. The length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with the target ordering on the instruction.

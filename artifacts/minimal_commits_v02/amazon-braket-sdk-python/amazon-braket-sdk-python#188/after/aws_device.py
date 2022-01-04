@@ -380,8 +380,6 @@ class AwsDevice(Device):
             arns (List[str], optional): device ARN list, default is `None`
             names (List[str], optional): device name list, default is `None`
             types (List[AwsDeviceType], optional): device type list, default is `None`
-                QPUs will be searched for all regions and simulators will only be
-                searched for the region of the current session.
             statuses (List[str], optional): device status list, default is `None`
             provider_names (List[str], optional): provider name list, default is `None`
             order_by (str, optional): field to order result by, default is `name`.
@@ -402,13 +400,8 @@ class AwsDevice(Device):
         device_regions_set = AwsDevice._get_devices_regions_set(arns, provider_names)
         for region in device_regions_set:
             session_region = aws_session.boto_session.region_name
-            # If the region is not the same as the current session's region
-            # and only simulators are requested, then search_devices will not
-            # be called at all because simulators are only retrieved for the
-            # current region
             if region == session_region or types != {AwsDeviceType.SIMULATOR}:
                 session_for_region = AwsDevice._copy_aws_session(aws_session, [region])
-                # Simulators are only instantiated in the same region as the AWS session
                 region_device_types = sorted(
                     types if region == session_region else types - {AwsDeviceType.SIMULATOR}
                 )

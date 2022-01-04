@@ -27,7 +27,7 @@ class Gate(QuantumOperator):
     def __init__(self, qubit_count: Optional[int], ascii_symbols: Sequence[str]):
         """
         Args:
-            qubit_count (int, optional): Number of qubits this gate interacts with.
+            qubit_count (int): Number of qubits this gate interacts with.
             ascii_symbols (Sequence[str]): ASCII string symbols for the gate. These are used when
                 printing a diagram of circuits. Length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with target ordering on the instruction.

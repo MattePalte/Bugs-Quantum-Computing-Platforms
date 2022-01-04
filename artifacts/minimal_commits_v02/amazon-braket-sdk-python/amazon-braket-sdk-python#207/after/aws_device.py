@@ -331,7 +331,6 @@ class AwsDevice(Device):
             return AwsDevice._copy_aws_session(
                 aws_session, AwsDevice.QPU_REGIONS.get(device_arn), None
             )
-        # If the QPU is unknown, search until it is found.
         device_sessions = AwsDevice._get_arn_sessions(
             [device_arn], None, {AwsDeviceType.QPU}, None, None, aws_session
         )
@@ -407,7 +406,6 @@ class AwsDevice(Device):
         Returns:
             List[AwsDevice]: list of AWS devices
         """
-
         if order_by not in AwsDevice._GET_DEVICES_ORDER_BY_KEYS:
             raise ValueError(
                 f"order_by '{order_by}' must be in {AwsDevice._GET_DEVICES_ORDER_BY_KEYS}"
@@ -421,7 +419,6 @@ class AwsDevice(Device):
         devices = [AwsDevice(arn, arn_sessions[arn]) for arn in arn_sessions]
         devices.sort(key=lambda x: getattr(x, order_by))
         return devices
-
     @staticmethod
     def _get_arn_sessions(arns, names, types, statuses, provider_names, aws_session):
         aws_session = aws_session if aws_session else AwsSession()

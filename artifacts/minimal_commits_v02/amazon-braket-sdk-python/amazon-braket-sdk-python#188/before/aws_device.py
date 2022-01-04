@@ -400,8 +400,6 @@ class AwsDevice(Device):
         device_regions_set = AwsDevice._get_devices_regions_set(arns, provider_names)
         for region in device_regions_set:
             session_for_region = AwsDevice._copy_aws_session(aws_session, [region])
-            # Require simulators to be instantiated
-            # in the same region as the AWS session
             region_device_types = sorted(
                 types
                 if region == aws_session.boto_session.region_name

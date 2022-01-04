@@ -219,14 +219,13 @@ class AwsQuantumTask(QuantumTask):
 
         Args:
             use_cached_value (bool, optional): If `True`, uses the value most recently retrieved
-                from the Amazon Braket `GetQuantumTask` operation, if it exists; if not,
-                `GetQuantumTask` will be called to retrieve the metadata. If `False`, always calls
-                `GetQuantumTask`, which also updates the cached value. Default: `False`.
+                from the Amazon Braket `GetQuantumTask` operation. If `False`, calls the
+                `GetQuantumTask` operation  to retrieve metadata, which also updates the cached
+                value. Default = `False`.
         Returns:
             Dict[str, Any]: The response from the Amazon Braket `GetQuantumTask` operation.
             If `use_cached_value` is `True`, Amazon Braket is not called and the most recently
-            retrieved value is used, unless `GetQuantumTask` was never called, in which case
-            it wil still be called to populate the metadata for the first time.
+            retrieved value is used.
         """
         if not use_cached_value or not self._metadata:
             self._metadata = self._aws_session.get_quantum_task(self._arn)
@@ -255,10 +254,7 @@ class AwsQuantumTask(QuantumTask):
         if not use_cached_value and status in self.NO_RESULT_TERMINAL_STATES:
             self._logger.warning(f"Task is in terminal state {status} and no result is available")
         return status
-
     def _update_status_if_nonterminal(self):
-        # If metadata has not been populated, the first call to _status will fetch it,
-        # so the second _status call will no longer need to
         metadata_absent = self._metadata is None
         cached = self._status(True)
         return cached if cached in self.TERMINAL_STATES else self._status(metadata_absent)
@@ -301,7 +297,6 @@ class AwsQuantumTask(QuantumTask):
             self._future.done()
             and not self._future.cancelled()
             and self._result is None
-            # timed out and no result
             and self._update_status_if_nonterminal() not in self.NO_RESULT_TERMINAL_STATES
         ):
             self._future = asyncio.get_event_loop().run_until_complete(self._create_future())

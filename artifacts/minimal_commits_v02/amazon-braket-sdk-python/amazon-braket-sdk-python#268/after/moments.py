@@ -81,7 +81,7 @@ class Moments(Mapping[MomentsKey, Instruction]):
 
     Args:
         instructions (Iterable[Instruction], optional): Instructions to initialize self.
-            Default = None.
+            Default = [].
 
     Examples:
         >>> moments = Moments()

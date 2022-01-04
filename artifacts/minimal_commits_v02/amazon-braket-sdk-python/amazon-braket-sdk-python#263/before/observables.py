@@ -237,20 +237,15 @@ class TensorProduct(Observable):
             product *= self._factors[-i - 1].eigenvalue(remainder)
         self._eigenvalue_indices[index] = product
         return self._eigenvalue_indices[index]
-
     def __matmul__(self, other):
         if isinstance(other, TensorProduct):
             return TensorProduct(list(self.factors) + list(other.factors))
-
         if isinstance(other, Observable):
             return TensorProduct(list(self.factors) + [other])
-
         raise ValueError("Can only perform tensor products between observables.")
-
     def __rmatmul__(self, other):
         if isinstance(other, Observable):
             return TensorProduct([other] + list(self.factors))
-
         raise ValueError("Can only perform tensor products between observables.")
 
     def __repr__(self):

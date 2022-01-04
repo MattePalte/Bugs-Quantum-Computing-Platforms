@@ -99,7 +99,7 @@ class SingleProbabilisticNoise(Noise):
         """
         Args:
             probability (float): The probability that the noise occurs.
-            qubit_count (int, optional): The number of qubits to apply noise.
+            qubit_count (int): The number of qubits to apply noise.
             ascii_symbols (Sequence[str]): ASCII string symbols for the noise. These are used when
                 printing a diagram of a circuit. The length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with the target ordering on the instruction.
@@ -141,7 +141,7 @@ class SingleProbabilisticNoise_34(Noise):
         """
         Args:
             probability (float): The probability that the noise occurs.
-            qubit_count (int, optional): The number of qubits to apply noise.
+            qubit_count (int): The number of qubits to apply noise.
             ascii_symbols (Sequence[str]): ASCII string symbols for the noise. These are used when
                 printing a diagram of a circuit. The length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with the target ordering on the instruction.
@@ -183,7 +183,7 @@ class SingleProbabilisticNoise_1516(Noise):
         """
         Args:
             probability (float): The probability that the noise occurs.
-            qubit_count (int, optional): The number of qubits to apply noise.
+            qubit_count (int): The number of qubits to apply noise.
             ascii_symbols (Sequence[str]): ASCII string symbols for the noise. These are used when
                 printing a diagram of a circuit. The length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with the target ordering on the instruction.
@@ -231,7 +231,7 @@ class PauliNoise(Noise):
         Args:
             probX [float], probY [float], probZ [float]: The coefficients of the Kraus operators
                 in the channel.
-            qubit_count (int, optional): The number of qubits to apply noise.
+            qubit_count (int): The number of qubits to apply noise.
             ascii_symbols (Sequence[str]): ASCII string symbols for the noise. These are used when
                 printing a diagram of a circuit. The length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with the target ordering on the instruction.
@@ -302,7 +302,7 @@ class DampingNoise(Noise):
         """
         Args:
             gamma (float): Probability of damping.
-            qubit_count (int, optional): The number of qubits to apply noise.
+            qubit_count (int): The number of qubits to apply noise.
             ascii_symbols (Sequence[str]): ASCII string symbols for the noise. These are used when
                 printing a diagram of a circuit. The length must be the same as `qubit_count`, and
                 index ordering is expected to correlate with the target ordering on the instruction.

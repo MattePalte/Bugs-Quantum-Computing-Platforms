@@ -82,7 +82,6 @@ class AsciiCircuitDiagram(CircuitDiagram):
         margins = {qubit: " " for qubit in circuit_qubits}
 
         for instr in instructions:
-            # Can only print Gate operators at the moment
             if not isinstance(instr.operator, Gate):
                 continue
 

@@ -60,7 +60,6 @@ class AwsDevice(Device):
     DEFAULT_MAX_PARALLEL = 10
 
     _GET_DEVICES_ORDER_BY_KEYS = frozenset({"arn", "name", "type", "provider_name", "status"})
-
     def __init__(self, arn: str, aws_session: Optional[AwsSession] = None):
         """
         Args:
@@ -305,7 +304,7 @@ class AwsDevice(Device):
 
     @staticmethod
     def _aws_session_for_device(device_arn: str, aws_session: Optional[AwsSession]) -> AwsSession:
-        """AwsSession: Returns an AwsSession for the device ARN."""
+        """AwsSession: Returns an AwsSession for the device ARN. """
         if "qpu" in device_arn:
             return AwsDevice._aws_session_for_qpu(device_arn, aws_session)
         else:
@@ -400,8 +399,6 @@ class AwsDevice(Device):
         device_regions_set = AwsDevice._get_devices_regions_set(arns, provider_names)
         for region in device_regions_set:
             session_for_region = AwsDevice._copy_aws_session(aws_session, [region])
-            # Require simulators to be instantiated
-            # in the same region as the AWS session
             region_device_types = sorted(
                 types
                 if region == aws_session.boto_session.region_name

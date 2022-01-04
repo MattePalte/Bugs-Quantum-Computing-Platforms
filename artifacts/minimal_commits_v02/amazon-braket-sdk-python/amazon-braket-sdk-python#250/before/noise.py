@@ -46,10 +46,8 @@ class Noise(QuantumOperator):
         if qubit_count < 1:
             raise ValueError(f"qubit_count, {qubit_count}, must be greater than zero")
         self._qubit_count = qubit_count
-
         if ascii_symbols is None:
             raise ValueError("ascii_symbols must not be None")
-
         if len(ascii_symbols) != qubit_count:
             msg = f"ascii_symbols, {ascii_symbols}, length must equal qubit_count, {qubit_count}"
             raise ValueError(msg)

@@ -57,7 +57,6 @@ class AwsDevice(Device):
 
     DEFAULT_SHOTS_QPU = 1000
     DEFAULT_SHOTS_SIMULATOR = 0
-
     DEFAULT_MAX_PARALLEL = 10
 
     def __init__(self, arn: str, aws_session: Optional[AwsSession] = None):

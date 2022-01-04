@@ -184,7 +184,6 @@ class Circuit:
 
     @property
     def qubit_count(self) -> int:
-        """Get the qubit count for this circuit."""
         return self._moments.qubit_count
 
     @property

@@ -180,12 +180,11 @@ class Circuit:
 
     @property
     def moments(self) -> Moments:
-        """Moments: Get the `moments` for this circuit. Note that this includes observables."""
+        """Moments: Get the `moments` for this circuit."""
         return self._moments
 
     @property
     def qubit_count(self) -> int:
-        """Get the qubit count for this circuit. Note that this includes observables."""
         all_qubits = self._moments.qubits.union(self._qubit_observable_set)
         return len(all_qubits)
 

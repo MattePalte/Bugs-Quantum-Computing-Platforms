@@ -73,7 +73,6 @@ class Observable(QuantumOperator):
     def __matmul__(self, other) -> Observable.TensorProduct:
         if isinstance(other, Observable.TensorProduct):
             return other.__rmatmul__(self)
-
         if isinstance(other, Observable):
             return Observable.TensorProduct([self, other])
 

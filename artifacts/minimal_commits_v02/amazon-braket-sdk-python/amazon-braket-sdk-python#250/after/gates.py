@@ -54,7 +54,6 @@ class H(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def h(target: QubitSetInput) -> Iterable[Instruction]:
@@ -91,7 +90,6 @@ class I(Gate):  # noqa: E742, E261
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def i(target: QubitSetInput) -> Iterable[Instruction]:
@@ -128,7 +126,6 @@ class X(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def x(target: QubitSetInput) -> Iterable[Instruction]:
@@ -165,7 +162,6 @@ class Y(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def y(target: QubitSetInput) -> Iterable[Instruction]:
@@ -202,7 +198,6 @@ class Z(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def z(target: QubitSetInput) -> Iterable[Instruction]:
@@ -240,7 +235,6 @@ class S(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def s(target: QubitSetInput) -> Iterable[Instruction]:
@@ -277,7 +271,6 @@ class Si(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def si(target: QubitSetInput) -> Iterable[Instruction]:
@@ -314,7 +307,6 @@ class T(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def t(target: QubitSetInput) -> Iterable[Instruction]:
@@ -351,7 +343,6 @@ class Ti(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def ti(target: QubitSetInput) -> Iterable[Instruction]:
@@ -388,7 +379,6 @@ class V(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def v(target: QubitSetInput) -> Iterable[Instruction]:
@@ -425,7 +415,6 @@ class Vi(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def vi(target: QubitSetInput) -> Iterable[Instruction]:
@@ -471,7 +460,6 @@ class Rx(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def rx(target: QubitInput, angle: float) -> Iterable[Instruction]:
@@ -514,7 +502,6 @@ class Ry(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def ry(target: QubitInput, angle: float) -> Iterable[Instruction]:
@@ -557,7 +544,6 @@ class Rz(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def rz(target: QubitInput, angle: float) -> Iterable[Instruction]:
@@ -600,7 +586,6 @@ class PhaseShift(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 1
-
     @staticmethod
     @circuit.subroutine(register=True)
     def phaseshift(target: QubitInput, angle: float) -> Iterable[Instruction]:
@@ -648,7 +633,6 @@ class CNot(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cnot(control: QubitInput, target: QubitInput) -> Instruction:
@@ -693,7 +677,6 @@ class Swap(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def swap(target1: QubitInput, target2: QubitInput) -> Instruction:
@@ -738,7 +721,6 @@ class ISwap(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def iswap(target1: QubitInput, target2: QubitInput) -> Instruction:
@@ -791,7 +773,6 @@ class PSwap(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def pswap(target1: QubitInput, target2: QubitInput, angle: float) -> Instruction:
@@ -848,7 +829,6 @@ class XY(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def xy(target1: QubitInput, target2: QubitInput, angle: float) -> Instruction:
@@ -891,7 +871,6 @@ class CPhaseShift(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cphaseshift(control: QubitInput, target: QubitInput, angle: float) -> Instruction:
@@ -935,7 +914,6 @@ class CPhaseShift00(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cphaseshift00(control: QubitInput, target: QubitInput, angle: float) -> Instruction:
@@ -979,7 +957,6 @@ class CPhaseShift01(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cphaseshift01(control: QubitInput, target: QubitInput, angle: float) -> Instruction:
@@ -1023,7 +1000,6 @@ class CPhaseShift10(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cphaseshift10(control: QubitInput, target: QubitInput, angle: float) -> Instruction:
@@ -1069,7 +1045,6 @@ class CY(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cy(control: QubitInput, target: QubitInput) -> Instruction:
@@ -1106,7 +1081,6 @@ class CZ(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cz(control: QubitInput, target: QubitInput) -> Instruction:
@@ -1163,7 +1137,6 @@ class XX(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def xx(target1: QubitInput, target2: QubitInput, angle: float) -> Instruction:
@@ -1221,7 +1194,6 @@ class YY(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def yy(target1: QubitInput, target2: QubitInput, angle: float) -> Instruction:
@@ -1277,7 +1249,6 @@ class ZZ(AngledGate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 2
-
     @staticmethod
     @circuit.subroutine(register=True)
     def zz(target1: QubitInput, target2: QubitInput, angle: float) -> Instruction:
@@ -1330,7 +1301,6 @@ class CCNot(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 3
-
     @staticmethod
     @circuit.subroutine(register=True)
     def ccnot(control1: QubitInput, control2: QubitInput, target: QubitInput) -> Instruction:
@@ -1380,7 +1350,6 @@ class CSwap(Gate):
     @staticmethod
     def fixed_qubit_count() -> int:
         return 3
-
     @staticmethod
     @circuit.subroutine(register=True)
     def cswap(control: QubitInput, target1: QubitInput, target2: QubitInput) -> Instruction:

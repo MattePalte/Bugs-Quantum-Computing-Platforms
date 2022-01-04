@@ -141,7 +141,9 @@ class Moments(Mapping[MomentsKey, Instruction]):
         qubit_range = instruction.target
         time = max([self._max_time_for_qubit(qubit) for qubit in qubit_range]) + 1
 
-        # Mark all qubits in qubit_range with max_time
+        # Mark all qubits in the range to avoid another gate being placed in the overlap.
+        # For example CNOT(0, 5) would draw a line from 0 to 5 and therefore should prevent
+        # another instruction using those qubits in that time moment.
         for qubit in qubit_range:
             self._max_times[qubit] = max(time, self._max_time_for_qubit(qubit))
 
