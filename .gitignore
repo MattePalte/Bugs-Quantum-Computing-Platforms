@@ -1,3 +1,4 @@
 repos/*
 artifacts/original_commits_backup/*
 */.ipynb_checkpoints/*
+*.pyc
