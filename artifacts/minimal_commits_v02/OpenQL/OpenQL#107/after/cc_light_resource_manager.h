@@ -355,6 +355,7 @@ public:
             // COUT(it.key() << " : " << it.value() << "\n";
             std::string n = it.key();
 
+
             if( n == "qubits")
             {
                 resource_t * ares = new qubit_resource_t(platform);
@@ -380,9 +381,9 @@ public:
                 COUT("Error : Un-modelled resource: " << n );
                 throw ql::exception("[x] Error : Un-modelled resource: "+n+" !",false);
             }
+
         }
     }
-
     bool available(size_t op_start_cycle, ql::gate * ins, std::string & operation_name,
         std::string & operation_type, std::string & instruction_type, size_t operation_duration)
     {
@@ -394,7 +395,6 @@ public:
         }
         return true;
     }
-
     void reserve(size_t op_start_cycle, ql::gate * ins, std::string & operation_name,
         std::string & operation_type, std::string & instruction_type, size_t operation_duration)
     {

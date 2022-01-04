@@ -756,11 +756,11 @@ public:
             ++currNode;
         }
 
-        // DOUT("Printing ASAP Schedule before latency compensation");
-        // DOUT("Cycle    Instruction");
-        // for ( auto it = order.rbegin(); it != order.rend(); ++it)
+        // DOUT("Printing ALAP Schedule before latency compensation");
+        // DOUT("Cycle   Cycle-simplified    Instruction");
+        // for ( auto it = order.begin(); it != order.end(); ++it)
         // {
-        //     DOUT( cycle[*it] << "  <- " << name[*it] );
+        //     DOUT( cycle[*it] << " :: " << MAX_CYCLE-cycle[*it] << "  <- " << name[*it] );
         // }
 
         // latency compensation
@@ -776,7 +776,7 @@ public:
                                         ql::utils::sign_of(latency_ns);
             }
             cycle[*it] = cycle[*it] + latency_cycles;
-            // DOUT( cycle[*it] << " <- " << name[*it] << latency_cycles );
+            // DOUT( MAX_CYCLE-cycle[*it] << " <- " << name[*it] << latency_cycles );
         }
 
         // re-order
@@ -787,11 +787,11 @@ public:
                 [&](ListDigraph::Node & n1, ListDigraph::Node & n2) { return cycle[n1] > cycle[n2]; }
             );
 
-        // DOUT("Printing ASAP Schedule after latency compensation");
-        // DOUT("Cycle    Instruction");
-        // for ( auto it = order.rbegin(); it != order.rend(); ++it)
+        // DOUT("Printing ALAP Schedule after latency compensation");
+        // DOUT("Cycle   Cycle-simplified    Instruction");
+        // for ( auto it = order.begin(); it != order.end(); ++it)
         // {
-        //     DOUT( cycle[*it] << "        " << name[*it] );
+        //     DOUT( cycle[*it] << "     =     " << MAX_CYCLE-cycle[*it] << "        " << name[*it] );
         // }
 
         if(verbose) COUT("Performing RC ASAP Scheduling [Done].");
