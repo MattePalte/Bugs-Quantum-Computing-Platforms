@@ -292,16 +292,6 @@ class TFBackend(BaseFock):
             self.circuit.squeeze(z, remapped_mode)
 
     def beamsplitter(self, t, r, mode1, mode2):
-        """
-        Perform a beamsplitter operation on the specified modes.
-
-        Args:
-            t (complex): transmittivity parameter
-            r (complex): reflectivity parameter
-            mode1 (int): index of first mode where operation is carried out
-            mode2 (int): index of second mode where operation is carried out
-
-        """
         with tf.name_scope('Beamsplitter'):
             remapped_modes = self._remap_modes([mode1, mode2])
             self.circuit.beamsplitter(t, r, remapped_modes[0], remapped_modes[1])

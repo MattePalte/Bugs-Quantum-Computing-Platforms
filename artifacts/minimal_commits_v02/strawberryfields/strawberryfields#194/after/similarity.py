@@ -45,6 +45,7 @@ from typing import Generator, Union
 import numpy as np
 import networkx as nx
 from scipy.special import factorial
+
 import strawberryfields as sf
 
 
@@ -210,9 +211,7 @@ def event_to_sample(photon_number: int, max_count_per_mode: int, modes: int) -> 
 
     norm = sum(cards)
     prob = [c / norm for c in cards]
-
     orbit = orbs[np.random.choice(len(prob), p=prob)]
-
     return orbit_to_sample(orbit, modes)
 
 

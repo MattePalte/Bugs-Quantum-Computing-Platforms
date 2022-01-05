@@ -161,10 +161,8 @@ def sample(
             sf.ops.MeasureFock() | q
 
     s = eng.run(p, run_options={"shots": n_samples}).samples
-
     if n_samples == 1:
         return [s]
-
     return s.tolist()
 
 

@@ -181,17 +181,6 @@ class GaussianBackend(BaseGaussian):
         self.circuit.displace(alpha, mode)
 
     def beamsplitter(self, t, r, mode1, mode2):
-        """
-        Perform a beamsplitter operation on the specified modes.
-
-        It is assumed that :math:`|r|^2+|t|^2 = t^2+|r|^2=1`, i.e that t is real.
-
-        Args:
-            t (complex): transmittivity parameter
-            r (complex): reflectivity parameter
-            mode1 (int): index of first mode where operation is carried out
-            mode2 (int): index of second mode where operation is carried out
-        """
         theta = arctan2(abs(r), t)
         phi = angle(r)
         self.circuit.beamsplitter(-theta, -phi, mode1, mode2)

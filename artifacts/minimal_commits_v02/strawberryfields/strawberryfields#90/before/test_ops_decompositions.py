@@ -294,30 +294,21 @@ class TestGaussianTransform:
 
         # two merged symplectics are the same as their product
         assert np.allclose(G1.merge(G2).p[0].x, S2 @ S1, atol=tol, rtol=0)
-
     def test_setting_hbar(self, hbar):
-        """Test that an exception is raised if hbar not provided"""
         prog = sf.Program(3, hbar=hbar)
         S1 = random_symplectic(3, passive=False)
-
         with pytest.raises(ValueError, match="specify the hbar keyword argument"):
             ops.GaussianTransform(S1)
-
-        # hbar can be passed as a keyword arg
         G = ops.GaussianTransform(S1, hbar=hbar)
         assert G.hbar == hbar
-
-        # or determined via the engine context
         with eng:
             G = ops.GaussianTransform(S1)
-
         assert G.hbar == hbar
 
     def test_passive(self, tol):
         """Test that a passive decomposition is correctly flagged as requiring
         only a single interferometer"""
         prog = sf.Program(3)
-
         with eng:
             G = ops.GaussianTransform(np.identity(6))
 
@@ -331,7 +322,6 @@ class TestGaussianTransform:
         two interferometers and squeezing"""
         prog = sf.Program(3)
         S1 = random_symplectic(3, passive=False)
-
         with eng:
             G = ops.GaussianTransform(S1)
 
@@ -355,7 +345,6 @@ class TestGaussianTransform:
         U2 = X2 + 1j * P2
 
         prog = sf.Program(n, hbar=hbar)
-
         with eng:
             G = ops.GaussianTransform(S)
             cmds = G.decompose(q)
@@ -371,7 +360,6 @@ class TestGaussianTransform:
 
         # calculating the resulting decomposed symplectic
         for cmd in cmds:
-            # all operations should be BSgates, Rgates, or Sgates
             assert isinstance(cmd.op, (ops.Interferometer, ops.Sgate))
 
             # build up the symplectic transform
@@ -389,7 +377,6 @@ class TestGaussianTransform:
 
         # the resulting covariance state
         cov = S @ S.T
-
         assert np.allclose(cov, S @ S.T * hbar / 2, atol=tol, rtol=0)
 
     def test_decomposition_passive(self, hbar, tol):
@@ -401,7 +388,6 @@ class TestGaussianTransform:
         U1 = X1 + 1j * P1
 
         prog = sf.Program(n, hbar=hbar)
-
         with eng:
             G = ops.GaussianTransform(S)
             cmds = G.decompose(q)
@@ -413,7 +399,6 @@ class TestGaussianTransform:
 
         # calculating the resulting decomposed symplectic
         for cmd in cmds:
-            # all operations should be BSgates, Rgates
             assert isinstance(cmd.op, ops.Interferometer)
 
             # build up the symplectic transform
@@ -428,7 +413,6 @@ class TestGaussianTransform:
 
         # the resulting covariance state
         cov = S @ S.T
-
         assert np.allclose(cov, S @ S.T * hbar / 2, atol=tol, rtol=0)
 
     def test_active_on_vacuum(self, hbar, tol):
@@ -447,7 +431,6 @@ class TestGaussianTransform:
         U2 = X2 + 1j * P2
 
         prog = sf.Program(n, hbar=hbar)
-
         with eng:
             G = ops.GaussianTransform(S, vacuum=True)
             cmds = G.decompose(q)
@@ -459,7 +442,6 @@ class TestGaussianTransform:
 
         # calculating the resulting decomposed symplectic
         for cmd in cmds:
-            # all operations should be BSgates, Rgates, Sgates
             assert isinstance(cmd.op, (ops.Interferometer, ops.Sgate))
 
             # build up the symplectic transform
@@ -494,28 +476,19 @@ class TestGaussian:
         cov1 = ops.Gaussian(V1, hbar=hbar)
         cov2 = ops.Gaussian(V2, hbar=hbar)
 
-        # applying a second covariance matrix replaces the first
         assert cov1.merge(cov2) == cov2
 
-        # the same is true of state preparations
         assert ops.Squeezed(2).merge(cov2) == cov2
 
     def test_setting_hbar(self, hbar):
-        """Test that an exception is raised if hbar not provided"""
         prog = sf.Program(3, hbar=hbar)
         cov = random_covariance(3, hbar=hbar)
-
         with pytest.raises(ValueError, match="specify the hbar keyword argument"):
             ops.Gaussian(cov)
-
-        # hbar can be passed as a keyword arg
         G = ops.Gaussian(cov, hbar=hbar)
         assert G.hbar == hbar
-
-        # or determined via the engine context
         with eng:
             G = ops.Gaussian(cov)
-
         assert G.hbar == hbar
 
     def test_incorrect_means_length(self, hbar):
@@ -524,15 +497,11 @@ class TestGaussian:
 
         with pytest.raises(ValueError, match="must have the same length"):
             ops.Gaussian(cov, r=np.array([0]), hbar=hbar)
-
     def test_apply_decomp(self, hbar):
-        """Test that the apply method, when decomp = True, raises a NotImplemented error."""
         prog = sf.Program(3, hbar=hbar)
         cov = random_covariance(3, hbar=hbar)
-
         with eng:
             G = ops.Gaussian(cov, decomp=True)
-
         with pytest.raises(NotImplementedError):
             G._apply(q, None)
 
@@ -550,7 +519,6 @@ class TestGaussian:
 
         with eng:
             G = ops.Gaussian(cov, decomp=False)
-
         with pytest.raises(SyntaxError):
             G._apply(q, DummyBackend())
 
@@ -558,7 +526,6 @@ class TestGaussian:
         """Test that an arbitrary decomposition provides the right covariance matrix"""
         n = 3
         prog = sf.Program(n, hbar=hbar)
-
         cov = random_covariance(n)
 
         with eng:
@@ -593,7 +560,6 @@ class TestGaussian:
         assert np.allclose(cov, cov_res, atol=tol, rtol=0)
 
     def test_thermal_decomposition(self, hbar, tol):
-        """Test that an thermal state decomposition provides correct covariance matrix"""
         n = 3
         prog = sf.Program(n, hbar=hbar)
         nbar = np.array([0.453, 0.23, 0.543])
@@ -607,12 +573,10 @@ class TestGaussian:
 
         # calculating the resulting decomposed symplectic
         for i, cmd in enumerate(cmds):
-            # all operations should be Thermal states
             assert isinstance(cmd.op, ops.Thermal)
             assert np.allclose(cmd.op.p[0].x, nbar[i], atol=tol, rtol=0)
 
     def test_squeezed_decomposition(self, hbar, tol):
-        """Test that an squeeze state decomposition provides correct the covariance matrix"""
         n = 3
         prog = sf.Program(n, hbar=hbar)
 
@@ -628,13 +592,11 @@ class TestGaussian:
 
         # calculating the resulting decomposed symplectic
         for i, cmd in enumerate(cmds):
-            # all operations should be Sgates
             assert isinstance(cmd.op, ops.Sgate)
             assert np.allclose(cmd.op.p[0].x, sq_r[i], atol=tol, rtol=0)
             assert cmd.op.p[1].x == 0
 
     def test_rotated_squeezed_decomposition(self, hbar, tol):
-        """Test that a rotated squeeze state decomposition provides the correct covariance matrix"""
         n = 3
         prog = sf.Program(n, hbar=hbar)
 
@@ -647,7 +609,6 @@ class TestGaussian:
             S = _rotation(phi / 2, i, n) @ S
 
         cov = S @ S.T
-
         with eng:
             G = ops.Gaussian(cov)
             cmds = G.decompose(q)
@@ -656,7 +617,6 @@ class TestGaussian:
 
         # calculating the resulting decomposed symplectic
         for i, cmd in enumerate(cmds):
-            # all operations should be Sgates
             assert isinstance(cmd.op, ops.Sgate)
             assert np.allclose(cmd.op.p[0].x, sq_r[i], atol=tol, rtol=0)
             assert np.allclose(cmd.op.p[1].x, sq_phi[i], atol=tol, rtol=0)

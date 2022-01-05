@@ -99,11 +99,8 @@ def _get_mode_order(num_of_values, modes, N, timebins):
         extended_modes = timebin_modes * ceil(1 + timebins // len(timebin_modes))
         all_modes.append(extended_modes[:timebins])
 
-    # alternate measurements in the bands and extend/duplicate the resulting
-    # list so that it is at least as long as `num_of_values`
     mode_order = [i for j in zip(*all_modes) for i in j]
     mode_order *= ceil(1 + num_of_values / len(mode_order))
-
     return mode_order[:num_of_values]
 
 
@@ -394,7 +391,6 @@ class TDMProgram(Program):
         # `space_unrolled_circuit` contains the space-unrolled single-shot circuit, instead adding
         # new modes for each new measurement (works with Fock measurements)
         self.space_unrolled_circuit = None
-        # `num_added_subsystems` corresponds to the number of subsystems added when space-unrolling
         self.num_added_subsystems = 0
         self.run_options = {}
         """dict[str, Any]: dictionary of default run options, to be passed to the engine upon
@@ -653,15 +649,12 @@ class TDMProgram(Program):
         # q[sm[2]] as concurrent modes of spatial mode C
         # q[sm[3]] as concurrent modes of spatial mode D.
 
-        # save previous mode index of a command to be able to check when modes
-        # are looped back to the start (not allowed when space-unrolling)
         previous_mode_index = dict()
 
         for cmd in self.rolled_circuit:
             previous_mode_index[cmd] = 0
             if isinstance(cmd.op, ops.Measurement):
                 self.measured_modes.append(cmd.reg[0].ind)
-
         for i in range(self.timebins):
             for cmd in self.rolled_circuit:
                 modes = get_modes(cmd, q)
@@ -674,7 +667,6 @@ class TDMProgram(Program):
             if self._is_space_unrolled:
                 q = shift_by(q, 1)
             elif self.shift == "default":
-                # shift each spatial mode SEPARATELY by one step
                 q_aux = list(q)
                 for j, _ in enumerate(self.N):
                     q_aux[sm[j]] = shift_by(q_aux[sm[j]], 1)

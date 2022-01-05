@@ -92,10 +92,7 @@ def to_blackbird(prog, version="1.0"):
                         a = str(a)
                 op["args"].append(a)
 
-        # If program type is "tdm" then add the looped-over arrays to the
-        # blackbird program. `prog.loop_vars` are symbolic parameters (e.g.
-        # `{p0}`), which should be replaced with `p.name` (e.g. `p0`) inside the
-        # Blackbird operation (keyword) arguments.
+
         if prog.type == "tdm":
             for p in prog.loop_vars:
                 for i, ar in enumerate(op["args"]):
@@ -186,9 +183,7 @@ def to_program(bb):
 
 # pylint:disable=too-many-branches
 def _to_tdm_program(bb):
-    # pylint: disable=import-outside-toplevel
     from strawberryfields.tdm.tdmprogram import TDMProgram
-
     prog = TDMProgram(max(bb.modes) + 1, name=bb.name)
 
     def is_free_param(param):
@@ -320,7 +315,6 @@ def generate_code(prog, eng=None):
             else:
                 code_seq.append(f'eng = sf.Engine("{eng.backend_name}")')
 
-    # check if program is of TDM type and format the context as appropriate
     if prog.type == "tdm":
         # if the context arrays contain pi-values, factor out multiples of np.pi
         tdm_params = [f"[{_factor_out_pi(par)}]" for par in prog.tdm_params]

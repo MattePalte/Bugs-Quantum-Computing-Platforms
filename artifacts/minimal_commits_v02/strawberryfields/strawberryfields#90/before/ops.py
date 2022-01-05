@@ -347,7 +347,6 @@ class Operation:
         self._extra_deps = set()
         #: list[Parameter]
         self.p = []
-        #: bool
         self.decomp = True
 
         if par:
@@ -1600,17 +1599,6 @@ class All(MetaOperation):
 
 
 class Interferometer(Decomposition):
-    r"""Apply a linear interferometer to the specified qumodes.
-
-    This operation uses the Clements decomposition to decompose
-    a linear interferometer into a sequence of beamsplitters and
-    rotation gates.
-
-    Args:
-        U (array): an :math:`N\times N` complex unitary matrix.
-        tol (float): the tolerance used when checking if the matrix is unitary:
-            :math:`|UU^\dagger-I| \leq` tol
-    """
     ns = None
 
     def __init__(self, U, tol=1e-11):
@@ -1691,44 +1679,10 @@ class GraphEmbed(Decomposition):
 
 
 class GaussianTransform(Decomposition):
-    r"""Apply a Gaussian symplectic transformation to the specified qumodes.
-
-    This operation uses the Bloch-Messiah decomposition to decompose a symplectic
-    matrix :math:`S`:
-
-    .. math:: S = O_1 R O_2
-
-    where :math:`O_1` and :math:`O_2` are two orthogonal symplectic matrices (and thus passive
-    Gaussian transformations), and :math:`R`
-    is a squeezing transformation in the phase space (:math:`R=\text{diag}(e^{-z},e^z)`).
-
-    The symplectic matrix describing the Gaussian transformation on :math:`N` modes must satisfy
-
-    .. math:: S\Omega S^T = \Omega, ~~\Omega = \begin{bmatrix}0&I\\-I&0\end{bmatrix}
-
-    where :math:`I` is the :math:`N\times N` identity matrix, and :math:`0` is the zero matrix.
-
-    The two orthogonal symplectic unitaries describing the interferometers are then further
-    decomposed via the :class:`~.Interferometer` operator and the Clements decomposition:
-
-    .. math:: U_i = X_i + iY_i
-
-    where
-
-    .. math:: O_i = \begin{bmatrix}X&-Y\\Y&X\end{bmatrix}
-
-    Args:
-        S (array): a :math:`2N\times 2N` symplectic matrix describing the Gaussian transformation.
-        vacuum (bool): set to True if acting on a vacuum state. In this case, :math:`O_2 V O_2^T = I`,
-            and the unitary associated with orthogonal symplectic :math:`O_2` will be ignored.
-        tol (float): the tolerance used when checking if the matrix is symplectic:
-            :math:`|S^T\Omega S-\Omega| \leq` tol
-    """
     ns = None
 
     def __init__(self, S, vacuum=False, tol=1e-10):
         super().__init__([S])
-
         N = S.shape[0]//2
 
         # check if input symplectic is passive (orthogonal)
@@ -1745,7 +1699,6 @@ class GaussianTransform(Decomposition):
             self.active = True
             O1, smat, O2 = bloch_messiah(S, tol=tol)
             N = S.shape[0]//2
-
             X1 = O1[:N, :N]
             P1 = O1[N:, :N]
             X2 = O2[:N, :N]
@@ -1754,7 +1707,6 @@ class GaussianTransform(Decomposition):
             self.U1 = X1+1j*P1
             self.U2 = X2+1j*P2
             self.Sq = np.diagonal(smat)[:N]
-
         self.ns = N
         self.vacuum = vacuum
 
@@ -1780,44 +1732,14 @@ class GaussianTransform(Decomposition):
 
 
 class Gaussian(Preparation, Decomposition):
-    r"""Prepare the specified modes in a Gaussian state.
-
-    This operation uses the Williamson decomposition to prepare
-    quantum modes into a given Gaussian state, specified by a
-    vector of means and a covariance matrix.
-
-    The Williamson decomposition decomposes the Gaussian state into a Gaussian
-    transformation (represented by a symplectic matrix) acting on :class:`~.Thermal`
-    states. The Gaussian transformation is then further decomposed into an array
-    of beamsplitters and local squeezing and rotation gates, by way of the
-    :class:`~.GaussianTransform` and :class:`~.Interferometer` decompositions.
-
-    Alternatively, the decomposition can be explicitly turned off, and the
-    backend can be explicitly prepared in the Gaussian state provided. This is
-    **only** supported by backends using the Gaussian representation.
-
-    Args:
-        V (array): the :math:`2N\times 2N` (real and positive definite) covariance matrix.
-        r (array): a length :math:`2N` vector of means, of the
-            form :math:`(\x_0,\dots,\x_{N-1},\p_0,\dots,\p_{N-1})`.
-            If None, it is assumed that :math:`r=0`.
-        decomp (bool): Should the operation be decomposed into a sequence of elementary gates?
-            If False, the state preparation is performed directly via the backend API.
-        tol (float): the tolerance used when checking if the matrix is symmetric: :math:`|V-V^T| \leq` tol
-    """
     # pylint: disable=too-many-instance-attributes
     ns = None
 
     def __init__(self, V, r=None, decomp=True, tol=1e-6):
-        # TODO NOTE: there is no contextual hbar value anymore, is the hbar actually necessary here?
-
-        #: float: value of :math:`\hbar` used in the definition of the :math:`\x` and :math:`\p` quadrature operators
-        # TODO can we just divide V by hbar/2 here and remove hbar from further expressions?
         self.hbar = sf.hbar
         self.ns = V.shape[0]//2
 
         if r is None:
-            # all zeroes
             r = [0] * (2*self.ns)
         r = np.asarray(r)
 
@@ -1833,10 +1755,7 @@ class Gaussian(Preparation, Decomposition):
             self.nbar = np.diag(th)[:self.ns]/self.hbar - 0.5
 
         super().__init__([V, r])
-
         self.decomp = decomp
-
-        # FIXME merge() probably does not work for Gaussians if r is not zero?
 
     def _apply(self, reg, backend, **kwargs):
         p = _unwrap(self.p)

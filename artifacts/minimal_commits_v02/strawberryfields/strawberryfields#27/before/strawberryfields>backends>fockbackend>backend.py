@@ -214,15 +214,6 @@ class FockBackend(BaseFock):
         self.circuit.squeeze(abs(z), phase(z), self._remap_modes(mode))
 
     def beamsplitter(self, t, r, mode1, mode2):
-        """Perform a beamsplitter operation on the specified modes.
-
-        Args:
-            t (complex): transmittivity parameter
-            r (complex): reflectivity parameter
-            mode1 (int): index of first mode where operation is carried out
-            mode2 (int): index of second mode where operation is carried out
-
-        """
         self.circuit.beamsplitter(t, abs(r), phase(r), self._remap_modes(mode1), self._remap_modes(mode2))
 
     def kerr_interaction(self, kappa, mode):

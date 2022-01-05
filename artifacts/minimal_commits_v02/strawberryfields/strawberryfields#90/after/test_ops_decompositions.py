@@ -344,7 +344,6 @@ class TestGaussianTransform:
 
         # calculating the resulting decomposed symplectic
         for cmd in cmds:
-            # all operations should be Interferometers or Sgates
             assert isinstance(cmd.op, (ops.Interferometer, ops.Sgate))
 
             # build up the symplectic transform
@@ -383,7 +382,6 @@ class TestGaussianTransform:
 
         # calculating the resulting decomposed symplectic
         for cmd in cmds:
-            # all operations should be Interferometers
             assert isinstance(cmd.op, ops.Interferometer)
 
             # build up the symplectic transform
@@ -426,7 +424,6 @@ class TestGaussianTransform:
 
         # calculating the resulting decomposed symplectic
         for cmd in cmds:
-            # all operations should be Interferometers or Sgates
             assert isinstance(cmd.op, (ops.Interferometer, ops.Sgate))
 
             # build up the symplectic transform
@@ -462,10 +459,8 @@ class TestGaussian:
         G1 = ops.Gaussian(V1, r1)
         G2 = ops.Gaussian(V2, r2)
 
-        # applying a second state preparation replaces the first
         assert G1.merge(G2) is G2
 
-        # the same is true of all state preparations
         S = ops.Squeezed(2)
         assert S.merge(G2) is G2
         assert G2.merge(S) is S
@@ -484,6 +479,7 @@ class TestGaussian:
 
         class DummyBackend:
             """Dummy backend class"""
+
             def prepare_gaussian_state(*args):
                 """Raises a syntax error when called"""
                 raise SyntaxError
@@ -529,7 +525,6 @@ class TestGaussian:
         assert np.allclose(cov, cov_res, atol=tol, rtol=0)
 
     def test_thermal_decomposition(self, hbar, tol):
-        """Test that a thermal covariance matrix decomposes into Thermal preparations."""
         n = 3
         prog = sf.Program(n)
         nbar = np.array([0.453, 0.23, 0.543])
@@ -546,7 +541,6 @@ class TestGaussian:
             assert np.allclose(cmd.op.p[0].x, nbar[i], atol=tol, rtol=0)
 
     def test_squeezed_decomposition(self, hbar, tol):
-        """Test that an axially squeezed covariance matrix decomposes into Squeezed preparations."""
         n = 3
         prog = sf.Program(n)
 
@@ -566,7 +560,6 @@ class TestGaussian:
             assert cmd.op.p[1].x == 0
 
     def test_rotated_squeezed_decomposition(self, hbar, tol):
-        """Test that a rotated squeezed covariance matrix decomposes into Squeezed preparations"""
         n = 3
         prog = sf.Program(n)
 

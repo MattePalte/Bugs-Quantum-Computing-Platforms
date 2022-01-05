@@ -93,10 +93,7 @@ def to_blackbird(prog, version="1.0"):
                         a = str(a)
                 op["args"].append(a)
 
-        # If program is a TDMProgram then add the looped-over arrays to the
-        # blackbird program. `prog.loop_vars` are symbolic parameters (e.g.
-        # `{p0}`), which should be replaced with `p.name` (e.g. `p0`) inside the
-        # Blackbird operation (keyword) arguments.
+
         if isinstance(prog, TDMProgram):
             for p in prog.loop_vars:
                 for i, ar in enumerate(op["args"]):
@@ -318,7 +315,6 @@ def generate_code(prog, eng=None):
             else:
                 code_seq.append(f'eng = sf.Engine("{eng.backend_name}")')
 
-    # check if program is a TDMProgram and format the context as appropriate
     if isinstance(prog, TDMProgram):
         # if the context arrays contain pi-values, factor out multiples of np.pi
         tdm_params = [f"[{_factor_out_pi(par)}]" for par in prog.tdm_params]
