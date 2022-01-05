@@ -2,31 +2,19 @@ from dataclasses import dataclass
 from tequila import TequilaException, BitString, TequilaWarning
 from tequila.hamiltonian import QubitHamiltonian
 
-from tequila.circuit import QCircuit, gates, _gates_impl
+from tequila.circuit import QCircuit, gates
 from tequila.objective.objective import Variable, Variables, ExpectationValue
 
 from tequila.simulators.simulator_api import simulate
 from tequila.utils import to_float
 
-from tequila.objective import assign_variable
-
 import typing, numpy, numbers
 from itertools import product
 
-# if you are experiencing import errors you need to update openfermion
-# required is version >= 1.0
-# otherwise replace with from openfermion.hamiltonians import MolecularData
 import openfermion
-from openfermion.chem import MolecularData
+from openfermion.hamiltonians import MolecularData
 
 import warnings
-
-
-class FermionicGateImpl(_gates_impl.QubitExcitationImpl):
-    # keep the overview in circuits
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._name = "FermionicExcitation"
 
 
 def prepare_product_state(state: BitString) -> QCircuit:
@@ -319,59 +307,8 @@ class Amplitudes:
 class NBodyTensor:
     """ Convenience class for handling N-body tensors """
 
-    class Ordering:
-        def __init__(self, scheme):
-            if hasattr(scheme, "_scheme"):
-                scheme = scheme._scheme
-            elif hasattr(scheme, "scheme"):
-                scheme = scheme.scheme
-            self._scheme = self.assign_scheme(scheme)
-
-        def assign_scheme(self, scheme):
-            if scheme is None:
-                return "chem"
-            else:
-                scheme = str(scheme)
-
-            if scheme.lower() in ["mulliken", "chem", "c", "1122"]:
-                return "chem"
-            elif scheme.lower() in ["dirac", "phys", "p", "1212"]:
-                return "phys"
-            elif scheme.lower() in ["openfermion", "of", "o", "1221"]:
-                return "of"
-            else:
-                raise TequilaException(
-                    "Unknown two-body tensor scheme {}. Supported are dirac, mulliken, and openfermion".format(scheme))
-
-        def is_phys(self):
-            return self._scheme == "phys"
-
-        def is_chem(self):
-            return self._scheme == "chem"
-
-        def is_of(self):
-            return self._scheme == "of"
-
-    def __init__(self, elems: numpy.ndarray = None, active_indices: list = None, ordering: str = None,
+    def __init__(self, elems: numpy.ndarray = None, active_indices: list = None, scheme: str = None,
                  size_full: int = None):
-        """
-        Parameters
-        ----------
-        elems: Tensor data as numpy array
-        active_indices: List of active indices in total ordering
-        ordering: Ordering scheme for two body tensors
-        "dirac" or "phys": <12|g|12>
-            .. math::
-                g_{pqrs} = \\int d1 d2 p(1)q(2) g(1,2) r(1)s(2)
-        "mulliken" or "chem": (11|g|22)
-            .. math::
-                g_{pqrs} = \\int d1 d2 p(1)r(2) g(1,2) q(1)s(2)
-        "openfermion":
-            .. math:: [12|g|21]
-                g_{gqprs} = \\int d1 d2 p(1)q(2) g(1,2) s(1)r(2)
-
-        size_full
-        """
 
         # Set elements
         self.elems = elems
@@ -393,11 +330,14 @@ class NBodyTensor:
             self._size_full = size_full
         # 2-body tensors (<=> order 4) currently allow reordering
         if self.order == 4:
-            self.ordering = self.Ordering(ordering)
+            if scheme is None:
+                self.scheme = 'chem'
+            else:
+                self.scheme = scheme.lower()
         else:
-            if ordering is not None:
+            if scheme is not None:
                 raise Exception("Ordering only implemented for tensors of order 4 / 2-body tensors.")
-            self.ordering = None
+            self.scheme = None
 
     def sub_lists(self, idx_lists: list = None) -> numpy.ndarray:
         """
@@ -492,6 +432,33 @@ class NBodyTensor:
 
         return out
 
+    def is_openfermion(self) -> bool:
+        """
+        Checks whether current ordering scheme is 'openfermion'
+        """
+        if self.scheme == 'openfermion' or self.scheme == 'of':
+            return True
+        else:
+            return False
+
+    def is_chem(self) -> bool:
+        """
+        Checks whether current ordering scheme is 'chem'
+        """
+        if self.scheme == 'chem' or self.scheme == 'c':
+            return True
+        else:
+            return False
+
+    def is_phys(self) -> bool:
+        """
+        Checks whether current ordering scheme is 'phys'
+        """
+        if self.scheme == 'phys' or self.scheme == 'p':
+            return True
+        else:
+            return False
+
     def reorder(self, to: str = 'of'):
         """
         Function to reorder tensors according to some convention.
@@ -520,28 +487,35 @@ class NBodyTensor:
         """
         if self.order != 4:
             raise Exception('Reordering currently only implemented for two-body tensors.')
+        to = to.lower()
 
-        to = self.Ordering(to)
-
-        if self.ordering == to:
-            return self
-        elif self.ordering.is_chem():
-            if to.is_of():
+        if self.is_chem():
+            if to == 'chem' or to == 'c':
+                pass
+            elif to == 'openfermion' or to == 'of':
                 self.elems = numpy.einsum("psqr -> pqrs", self.elems, optimize='greedy')
-            elif to.is_phys():
+                self.scheme = 'openfermion'
+            elif to == 'phys' or to == 'p':
                 self.elems = numpy.einsum("prqs -> pqrs", self.elems, optimize='greedy')
-        elif self.ordering.is_of():
-            if to.is_chem():
+                self.scheme = 'phys'
+        elif self.is_openfermion():
+            if to == 'chem' or to == 'c':
                 self.elems = numpy.einsum("pqrs -> psqr", self.elems, optimize='greedy')
-            elif to.is_phys():
+                self.scheme = 'chem'
+            elif to == 'openfermion' or to == 'of':
+                pass
+            elif to == 'phys' or to == 'p':
                 self.elems = numpy.einsum("pqrs -> pqsr", self.elems, optimize='greedy')
-        elif self.ordering.is_phys():
-            if to.is_chem():
+                self.scheme = 'phys'
+        elif self.is_phys():
+            if to == 'chem' or to == 'c':
                 self.elems = numpy.einsum("pqrs -> prqs", self.elems, optimize='greedy')
-            elif to.is_of():
+                self.scheme = 'chem'
+            elif to == 'openfermion' or to == 'of':
                 self.elems = numpy.einsum("pqsr -> pqrs", self.elems, optimize='greedy')
-
-        return self
+                self.scheme = 'openfermion'
+            elif to == 'phys' or to == 'p':
+                pass
 
 
 class QuantumChemistryBase:
@@ -561,7 +535,6 @@ class QuantumChemistryBase:
             errlog = ""
             try:
                 try:
-                    # return self._trafo(op, **self._kwargs)
                     return self._trafo(op, **self._kwargs)
                 except TypeError as E:
                     print("converting to interaction operator")
@@ -607,12 +580,6 @@ class QuantumChemistryBase:
         else:
             self.reference = reference
 
-        self.transformation = self._initialize_transformation(transformation=transformation, *args, **kwargs)
-
-        self._rdm1 = None
-        self._rdm2 = None
-
-    def _initialize_transformation(self, transformation, *args, **kwargs):
         # filter out arguments to the transformation
         trafo_args = {k.split("__")[1]: v for k, v in kwargs.items() if
                       (hasattr(k, "lower") and "transformation__" in k.lower())}
@@ -635,13 +602,16 @@ class QuantumChemistryBase:
             if "active_fermions" not in trafo_args:
                 trafo_args["active_fermions"] = self.n_electrons
             trafo = openfermion.symmetry_conserving_bravyi_kitaev
+
         elif hasattr(transformation, "lower"):
             trafo = getattr(openfermion, transformation.lower())
         else:
             assert (callable(transformation))
             trafo = transformation
 
-        return self._QubitEncoding(transformation=trafo, **trafo_args)
+        self.transformation = self._QubitEncoding(transformation=trafo, **trafo_args)
+        self._rdm1 = None
+        self._rdm2 = None
 
     def _make_active_space_data(self, active_orbitals, reference=None):
         """
@@ -718,10 +688,7 @@ class QuantumChemistryBase:
                                   charge=molecule.charge)
         return cls(parameters=parameters, transformation=transformation, molecule=molecule, *args, **kwargs)
 
-    def make_excitation_generator(self,
-                                  indices: typing.Iterable[typing.Tuple[int, int]],
-                                  form: str = None,
-                                  remove_constant_term: bool = True) -> QubitHamiltonian:
+    def make_excitation_generator(self, indices: typing.Iterable[typing.Tuple[int, int]]) -> QubitHamiltonian:
         """
         Notes
         ----------
@@ -734,13 +701,6 @@ class QuantumChemistryBase:
         indices : typing.Iterable[typing.Tuple[int, int]] :
             List of tuples [(a_0, i_0), (a_1, i_1), ... ] - recommended format, in spin-orbital notation (alpha odd numbers, beta even numbers)
             can also be given as one big list: [a_0, i_0, a_1, i_1 ...]
-        form : str : (Default value None):
-            Manipulate the generator to involution or projector
-            set form='involution' or 'projector'
-            the default is no manipulation which gives the standard fermionic excitation operator back
-        remove_constant_term: bool: (Default value True):
-            by default the constant term in the qubit operator is removed since it has no effect on the unitary it generates
-            if the unitary is controlled this might not be true!
         Returns
         -------
         type
@@ -764,10 +724,6 @@ class QuantumChemistryBase:
         else:
             converted = indices
 
-        # convert everything to native python int
-        # otherwise openfermion will complain
-        converted = [(int(pair[0]), int(pair[1])) for pair in converted]
-
         # convert to openfermion input format
         ofi = []
         dag = []
@@ -779,50 +735,7 @@ class QuantumChemistryBase:
 
         op = openfermion.FermionOperator(tuple(ofi), 1.j)  # 1j makes it hermitian
         op += openfermion.FermionOperator(tuple(reversed(dag)), -1.j)
-
-        if isinstance(form, str) and form.lower() != 'fermionic':
-            # indices for all the Na operators
-            Na = [x for pair in converted for x in [(pair[0], 1), (pair[0], 0)]]
-            # indices for all the Ma operators (Ma = 1 - Na)
-            Ma = [x for pair in converted for x in [(pair[0], 0), (pair[0], 1)]]
-            # indices for all the Ni operators
-            Ni = [x for pair in converted for x in [(pair[1], 1), (pair[1], 0)]]
-            # indices for all the Mi operators
-            Mi = [x for pair in converted for x in [(pair[1], 0), (pair[1], 1)]]
-
-            # can gaussianize as projector or as involution (last is default)
-            if form.lower() == "p+":
-                op *= 0.5
-                op += openfermion.FermionOperator(Na + Mi, 0.5)
-                op += openfermion.FermionOperator(Ni + Ma, 0.5)
-            elif form.lower() == "p-":
-                op *= 0.5
-                op += openfermion.FermionOperator(Na + Mi, -0.5)
-                op += openfermion.FermionOperator(Ni + Ma, -0.5)
-
-            elif form.lower() == "g+":
-                op += openfermion.FermionOperator([], 1.0)  # Just for clarity will be subtracted anyway
-                op += openfermion.FermionOperator(Na + Mi, -1.0)
-                op += openfermion.FermionOperator(Ni + Ma, -1.0)
-            elif form.lower() == "g-":
-                op += openfermion.FermionOperator([], -1.0)  # Just for clarity will be subtracted anyway
-                op += openfermion.FermionOperator(Na + Mi, 1.0)
-                op += openfermion.FermionOperator(Ni + Ma, 1.0)
-            elif form.lower() == "p0":
-                # P0: we only construct P0 and don't keep the original generator
-                op = openfermion.FermionOperator([], 1.0)  # Just for clarity will be subtracted anyway
-                op += openfermion.FermionOperator(Na + Mi, -1.0)
-                op += openfermion.FermionOperator(Ni + Ma, -1.0)
-            else:
-                raise TequilaException(
-                    "Unknown generator form {}, supported are G, P+, P-, G+, G- and P0".format(form))
-
-        qop = QubitHamiltonian(qubit_operator=self.transformation(op))
-
-        # remove constant terms
-        # they have no effect in the unitary (if not controlled)
-        if remove_constant_term:
-            qop.qubit_operator.terms[tuple()] = 0.0
+        qop = QubitHamiltonian(qubit_hamiltonian=self.transformation(op))
 
         # check if the operator is hermitian and cast coefficients to floats
         # in order to avoid trouble with the simulation backends
@@ -837,33 +750,6 @@ class QuantumChemistryBase:
                           "Non-standard transformations might not work with general fermionic operators\n"
                           "indices = " + str(indices), category=TequilaWarning)
         return qop
-
-    def make_excitation_gate(self, indices, angle, control=None, assume_real=True):
-        """
-        Initialize a fermionic excitation gate defined as
-
-        .. math::
-            e^{-i\\frac{a}{2} G}
-        with generator defines by the indices [(p0,q0),(p1,q1),...]
-        .. math::
-            G = i(\\prod_{k} a_{p_k}^\\dagger a_{q_k} - h.c.)
-
-        Parameters
-        ----------
-            indices:
-                List of tuples that define the generator
-            angle:
-                Numeric or hashable type or tequila objective
-            control:
-                List of possible control qubits
-            assume_real:
-                Assume that the wavefunction will always stay real.
-                Will reduce potential gradient costs by a factor of 2
-        """
-        generator = self.make_excitation_generator(indices=indices, remove_constant_term=control is None)
-        p0 = self.make_excitation_generator(indices=indices, form="P0", remove_constant_term=control is None)
-        return QCircuit.wrap_gate(
-            FermionicGateImpl(angle=angle, generator=generator, p0=p0, assume_real=assume_real, control=control))
 
     def reference_state(self, reference_orbitals: list = None, n_qubits: int = None) -> BitString:
         """Does a really lazy workaround ... but it works
@@ -886,17 +772,13 @@ class QuantumChemistryBase:
 
         if self.transformation._trafo == openfermion.symmetry_conserving_bravyi_kitaev:
             def tapering(fop):
-                fermion_hamiltonian_reorder = openfermion.reorder(fop, openfermion.utils.up_then_down,
-                                                                  num_modes=n_qubits)
-                qubit_operator = openfermion.bravyi_kitaev_tree(fermion_hamiltonian_reorder, n_qubits=n_qubits)
-                qubit_operator.compress()
-                return qubit_operator
+                fermion_hamiltonian_reorder = openfermion.utils.reorder(fop, openfermion.utils.up_then_down,
+                                                                        num_modes=n_qubits)
+                qubit_hamiltonian = openfermion.bravyi_kitaev_tree(fermion_hamiltonian_reorder, n_qubits=n_qubits)
+                qubit_hamiltonian.compress()
+                return qubit_hamiltonian
 
             transformation = tapering
-        elif self.transformation._trafo == openfermion.bravyi_kitaev_fast:
-            raise TequilaException(
-                "The Bravyi-Kitaev-Superfast transformation does not support general FermionOperators yet")
-
         else:
             transformation = self.transformation
 
@@ -911,7 +793,7 @@ class QuantumChemistryBase:
         string += "]"
 
         fop = openfermion.FermionOperator(string, 1.0)
-        op = QubitHamiltonian(qubit_operator=transformation(fop))
+        op = QubitHamiltonian(qubit_hamiltonian=transformation(fop))
         from tequila.wavefunction.qubit_wavefunction import QubitWaveFunction
         wfn = QubitWaveFunction.from_int(0, n_qubits=n_qubits)
         wfn = wfn.apply_qubitoperator(operator=op)
@@ -973,27 +855,15 @@ class QuantumChemistryBase:
         # integrals need to be passed in base class
         assert ("one_body_integrals" in kwargs)
         assert ("two_body_integrals" in kwargs)
-        one_body_integrals = kwargs["one_body_integrals"]
-        two_body_integrals = kwargs["two_body_integrals"]
-        if "nuclear_repulsion" in kwargs:
-            nuclear_repulsion = kwargs["nuclear_repulsion"]
-        else:
-            nuclear_repulsion = 0.0
-            warnings.warn("No nuclear_repulsion given for custom molecule, setting to zero", category=TequilaWarning)
-
-        if ("n_orbitals" in kwargs):
-            n_orbitals = kwargs["n_orbitals"]
-        else:
-            n_orbitals = one_body_integrals.shape[0]
-            for i in [0, 1, 2, 3]:
-                assert n_orbitals == two_body_integrals.shape[i]
+        assert ("nuclear_repulsion" in kwargs)
+        assert ("n_orbitals" in kwargs)
 
         molecule = MolecularData(**self.parameters.molecular_data_param)
 
-        molecule.one_body_integrals = one_body_integrals
-        molecule.two_body_integrals = two_body_integrals
-        molecule.nuclear_repulsion = nuclear_repulsion
-        molecule.n_orbitals = n_orbitals
+        molecule.one_body_integrals = kwargs["one_body_integrals"]
+        molecule.two_body_integrals = kwargs["two_body_integrals"]
+        molecule.nuclear_repulsion = kwargs["nuclear_repulsion"]
+        molecule.n_orbitals = kwargs["n_orbitals"]
         molecule.save()
         return molecule
 
@@ -1013,7 +883,7 @@ class QuantumChemistryBase:
         else:
             return 2 * len(self.active_space.active_reference_orbitals)
 
-    def make_hamiltonian(self, occupied_indices=None, active_indices=None, threshold=1.e-8) -> QubitHamiltonian:
+    def make_hamiltonian(self, occupied_indices=None, active_indices=None) -> QubitHamiltonian:
         """ """
         if occupied_indices is None and self.active_space is not None:
             occupied_indices = self.active_space.frozen_reference_orbitals
@@ -1026,54 +896,17 @@ class QuantumChemistryBase:
             qop = self.transformation(fop)
         except TypeError:
             qop = self.transformation(openfermion.transforms.get_interaction_operator(fop))
-
-        result = QubitHamiltonian(qubit_operator=qop).simplify(threshold)
-        result.is_hermitian()
-        return result
-
-    def make_molecular_hamiltonian(self):
-        if self.active_space:
-            return self.molecule.get_molecular_hamiltonian(occupied_indices=self.active_space.frozen_reference_orbitals,
-                                                           active_indices=self.active_space.active_orbitals)
-        else:
-            return self.molecule.get_molecular_hamiltonian()
-
-    def get_integrals(self, two_body_ordering="openfermion"):
-        """
-        Returns
-        -------
-        Tuple with:
-        constant part (nuclear_repulsion + possible integrated parts from active-spaces)
-        one_body_integrals
-        two_body_integrals
-
-        """
-        if self.active_space is not None and len(self.active_space.frozen_reference_orbitals) > 0:
-            c, h1, h2 = self.molecule.get_active_space_integrals(active_indices=self.active_space.active_orbitals,
-                                                                occupied_indices=self.active_space.frozen_reference_orbitals)
-        else:
-            c = 0.0
-            h1 = self.molecule.one_body_integrals
-            h2 = self.molecule.two_body_integrals
-        c += self.molecule.nuclear_repulsion
-        h2 = NBodyTensor(h2, ordering="openfermion")
-        h2 = h2.reorder(to=two_body_ordering).elems
-
-        return c, h1, h2
+        return QubitHamiltonian(qubit_hamiltonian=qop)
 
     def compute_one_body_integrals(self):
-        """ convenience function """
-        c, h1, h2 = self.get_integrals()
-        return h1
-
-    def compute_two_body_integrals(self, two_body_ordering="openfermion"):
         """ """
-        c, h1, h2 = self.get_integrals(two_body_ordering=two_body_ordering)
-        return h2
+        if hasattr(self, "molecule"):
+            return self.molecule.one_body_integrals
 
-    def compute_constant_part(self):
-        c, h1, h2 = self.get_integrals()
-        return c
+    def compute_two_body_integrals(self):
+        """ """
+        if hasattr(self, "molecule"):
+            return self.molecule.two_body_integrals
 
     def compute_ccsd_amplitudes(self) -> ClosedShellAmplitudes:
         """ """
@@ -1089,79 +922,11 @@ class QuantumChemistryBase:
 
         return prepare_product_state(self.reference_state(*args, **kwargs))
 
-    def get_pair_specific_indices(self,
-                                  pair_info: str = None,
-                                  include_singles: bool = True,
-                                  general_excitations: bool = True) -> list:
-        """
-        Assuming a pair-specific model, create a pair-specific index list 
-        to be used in make_upccgsd_ansatz(indices = ... ) 
-        Excite from a set of references (i) to any pair coming from (i),
-        i.e. any (i,j)/(j,i). If general excitations are allowed, also 
-        allow excitations from pairs to appendant pairs and reference.
-
-        Parameters
-        ----------
-        pair_info
-            file or list including information about pair structure
-            references single number, pair double
-            example: as file: "0,1,11,11,00,10" (hand over file name)
-                     in file, skip first row assuming some text with information
-                     as list:['0','1`','11','11','00','10']
-                     ~> two reference orbitals 0 and 1, 
-                     then two orbitals from pair 11, one from 00, one mixed 10
-        include_singles
-            include single excitations
-        general_excitations
-            allow general excitations 
-       Returns
-        -------
-            list of indices with pair-specific ansatz 
-        """
-
-        if pair_info is None:
-            raise TequilaException("Need to provide some pair information.")
-        # If pair-information given on file, load (layout see above)
-        if isinstance(pair_info, str):
-            pairs = numpy.loadtxt(pair_info, dtype=str, delimiter=",", skiprows=1)
-        elif isinstance(pair_info, list):
-            pairs = pair_info
-        elif not isinstance(pair_info, list):
-            raise TequilaException("Pair information needs to be contained in a list or filename.")
-
-        connect = [[]] * len(pairs)
-        # determine "connectivity"
-        generalized = 0
-        for idx, p in enumerate(pairs):
-            if len(p) == 1:
-                connect[idx] = [i for i in range(len(pairs))
-                                if ((len(pairs[i]) == 2) and (str(idx) in pairs[i]))]
-            elif (len(p) == 2) and general_excitations:
-                connect[idx] = [i for i in range(len(pairs))
-                                if (((p[0] in pairs[i]) or (p[1] in pairs[i]) or str(i) in p)
-                                    and not (i == idx))]
-            elif len(p) > 2:
-                raise TequilaException("Invalid reference of pair id.")
-
-        # create generating indices from connectivity
-        indices = []
-        for i, to in enumerate(connect):
-            for a in to:
-                indices.append(((2 * i, 2 * a), (2 * i + 1, 2 * a + 1)))
-                if include_singles:
-                    indices.append(((2 * i, 2 * a)))
-                    indices.append(((2 * i + 1, 2 * a + 1)))
-
-        return indices
-
-    def make_upccgsd_ansatz(self,
-                            include_singles: bool = True,
-                            include_reference: bool = True,
-                            indices: list = None,
-                            label: str = None,
-                            order: int = 1,
-                            assume_real: bool = True,
-                            angle_transform: typing.Callable = None,
+    def make_upgccsd_ansatz(self,
+                            include_singles:bool=True,
+                            include_reference:bool=True,
+                            indices:list=None,
+                            order:int =1,
                             *args, **kwargs):
         """
         UpGCCSD Ansatz similar as described by Lee et. al.
@@ -1175,19 +940,10 @@ class QuantumChemistryBase:
         indices
             pass custom defined set of indices from which the ansatz will be created
             List of tuples of tuples spin-indices e.g. [((2*p,2*q),(2*p+1,2*q+1)), ...]
-        label
-            An additional label that is set with the variables
-            default is None and no label will be set: variables names will be
-            (x, (p,q)) for x in range(order)
-            with a label the variables will be named
-            (label, (x, (p,q))) 
         order
             Order of the ansatz (default is 1)
             determines how often the ordering gets repeated
             parameters of repeating layers are independent
-        assume_real
-            assume a real wavefunction (that is always the case if the reference state is real)
-            reduces potential gradient costs from 4 to 2
         Returns
         -------
             UpGCCSD ansatz
@@ -1195,27 +951,23 @@ class QuantumChemistryBase:
 
         # indices defining the UpCCD ansatz
         if indices is None:
-            singles = []
             indices = []
             for i in range(self.n_orbitals):
                 for a in range(i + 1, self.n_orbitals):
                     indices.append(((2 * i, 2 * a), (2 * i + 1, 2 * a + 1)))
-                    singles.append(((2 * i, 2 * a)))
-                    singles.append(((2 * i + 1, 2 * a + 1)))
-
-            if include_singles:
-                indices += singles
+                    if include_singles:
+                        indices.append(((2 * i, 2 * a)))
+                        indices.append(((2 * i + 1, 2 * a + 1)))
 
         U = QCircuit()
         if include_reference:
             U = self.prepare_reference()
 
+        generators = [self.make_excitation_generator(i, *args, **kwargs) for i in indices]
+
         for k in range(order):
-            for idx in indices:
-                angle = Variable(name=(k, idx, label))
-                if angle_transform is not None:
-                    angle = angle_transform(angle)
-                U += self.make_excitation_gate(angle=angle, indices=idx, assume_real=assume_real)
+            idx = [(k,i) for i in indices]
+            U += gates.Trotterized(generators=generators, angles=idx, steps=1)
         return U
 
     def make_uccsd_ansatz(self, trotter_steps: int,
@@ -1282,12 +1034,12 @@ class QuantumChemistryBase:
                 tIA=numpy.zeros(shape=[nocc, nvirt]))
 
         closed_shell = isinstance(amplitudes, ClosedShellAmplitudes)
-        indices = []
+        generators = []
         variables = []
 
         if not isinstance(amplitudes, dict):
             amplitudes = amplitudes.make_parameter_dictionary(threshold=threshold)
-            amplitudes = dict(sorted(amplitudes.items(), key=lambda x: numpy.fabs(x[1]), reverse=True))
+            amplitudes = dict(sorted(amplitudes.items(), key=lambda x: x[1]))
 
         for key, t in amplitudes.items():
             assert (len(key) % 2 == 0)
@@ -1300,40 +1052,36 @@ class QuantumChemistryBase:
                         partner = None
                     else:
                         spin_indices.append([2 * key[0] + 1, 2 * key[1] + 1, 2 * key[2], 2 * key[3]])
-                        #spin_indices.append([2 * key[0], 2 * key[1], 2 * key[2] + 1, 2 * key[3] + 1])
+                        spin_indices.append([2 * key[0], 2 * key[1], 2 * key[2] + 1, 2 * key[3] + 1])
                         if key[0] != key[2] and key[1] != key[3]:
                             spin_indices.append([2 * key[0], 2 * key[1], 2 * key[2], 2 * key[3]])
-                            #spin_indices.append([2 * key[0] + 1, 2 * key[1] + 1, 2 * key[2] + 1, 2 * key[3] + 1])
+                            spin_indices.append([2 * key[0] + 1, 2 * key[1] + 1, 2 * key[2] + 1, 2 * key[3] + 1])
                         partner = tuple([key[2], key[1], key[0], key[3]])  # taibj -> tbiaj
                     for idx in spin_indices:
                         idx = [(idx[2 * i], idx[2 * i + 1]) for i in range(len(idx) // 2)]
-                        indices.append(idx)
+                        generators.append(self.make_excitation_generator(indices=idx))
 
                     if parametrized:
-                        variables.append(2.0*Variable(name=key))  # abab
-                        #variables.append(Variable(name=key))  # baba
+                        variables.append(Variable(name=key))  # abab
+                        variables.append(Variable(name=key))  # baba
                         if partner is not None and key[0] != key[1] and key[2] != key[3]:
-                            variables.append(2.0*(Variable(name=key) - Variable(partner))) # aaaa
-                            #variables.append(Variable(name=key) - Variable(partner))  # bbbb
+                            variables.append(Variable(name=key) - Variable(partner))  # aaaa
+                            variables.append(Variable(name=key) - Variable(partner))  # bbbb
                     else:
-                        variables.append(2.0*t)
-                        #variables.append(t)
+                        variables.append(t)
+                        variables.append(t)
                         if partner is not None and key[0] != key[1] and key[2] != key[3]:
-                            variables.append(2.0*(t - amplitudes[partner]))
-                            #variables.append(t - amplitudes[partner])
+                            variables.append(t - amplitudes[partner])
+                            variables.append(t - amplitudes[partner])
                 else:
-                    indices.append(spin_indices)
+                    generators.append(self.make_excitation_operator(indices=spin_indices))
                     if parametrized:
                         variables.append(Variable(name=key))
                     else:
                         variables.append(t)
-        UCCSD = QCircuit()
-        factor = 1.0 / trotter_steps
-        for step in range(trotter_steps):
-            for i, idx in enumerate(indices):
-                UCCSD += self.make_excitation_gate(indices=idx, angle=factor * variables[i])
 
-        return Uref + UCCSD
+        return Uref + gates.Trotterized(generators=generators, angles=variables, steps=trotter_steps,
+                                        parameters=trotter_parameters)
 
     def compute_amplitudes(self, method: str, *args, **kwargs):
         """
@@ -1492,113 +1240,96 @@ class QuantumChemistryBase:
         Returns
         -------
         """
-        # Check whether unitary circuit is not 0
-        if U is None:
-            raise TequilaException('Need to specify a Quantum Circuit.')
-
-        # Check whether transformation is BKSF.
-        # Issue here: when a single operator acts only on a subset of qubits, BKSF might not yield the correct
-        # transformation, because it computes the number of qubits incorrectly in this case.
-        # A hotfix such as for symmetry_conserving_bravyi_kitaev would require deeper changes, thus omitted for now
-        if self.transformation._trafo == openfermion.bravyi_kitaev_fast:
-            raise TequilaException(
-                "The Bravyi-Kitaev-Superfast transformation does not support general FermionOperators yet.")
-
         # Set up number of spin-orbitals and molecular orbitals respectively
         n_SOs = 2 * self.n_orbitals
         n_MOs = self.n_orbitals
 
         # Check whether unitary circuit is not 0
         if U is None:
-            raise TequilaException('Need to specify a Quantum Circuit.')
+            raise Exception('Need to specify a Quantum Circuit.')
 
-        def _get_of_op(operator_tuple):
-            """ Returns operator given by a operator tuple as OpenFermion - Fermion operator """
-            op = openfermion.FermionOperator(operator_tuple)
-            return op
-
-        def _get_qop_hermitian(of_operator) -> QubitHamiltonian:
+        def _get_qop_hermitian(operator_tuple) -> QubitHamiltonian:
             """ Returns Hermitian part of Fermion operator as QubitHamiltonian """
-            qop = QubitHamiltonian(self.transformation(of_operator))
+            op = openfermion.FermionOperator(operator_tuple)
+            qop = QubitHamiltonian(self.transformation(op))
             real, imag = qop.split(hermitian=True)
-            if real:
-                return real
-            elif not real:
-                print(of_operator)
-                raise TequilaException("Qubit Hamiltonian does not have a Hermitian part. Check this...")
+            return real
 
         def _build_1bdy_operators_spinful() -> list:
             """ Returns spinful one-body operators as a symmetry-reduced list of QubitHamiltonians """
             # Exploit symmetry pq = qp
-            ops = []
+            qops = []
             for p in range(n_SOs):
                 for q in range(p + 1):
-                    op_tuple = ((p, 1), (q, 0))
-                    op = _get_of_op(op_tuple)
-                    ops += [op]
+                    op_string = ((p, 1), (q, 0))
+                    qop = _get_qop_hermitian(op_string)
+                    if qop:  # should always exist here
+                        qops += [qop]
+                    else:  # should not happen
+                        qops += [QubitHamiltonian.zero()]
 
-            return ops
+            return qops
 
         def _build_2bdy_operators_spinful() -> list:
             """ Returns spinful two-body operators as a symmetry-reduced list of QubitHamiltonians """
             # Exploit symmetries pqrs = -pqsr = -qprs = qpsr
             #                and      =  rspq
-            ops = []
+            qops = []
             for p in range(n_SOs):
                 for q in range(p):
                     for r in range(n_SOs):
                         for s in range(r):
                             if p * n_SOs + q >= r * n_SOs + s:
-                                op_tuple = ((p, 1), (q, 1), (s, 0), (r, 0))
-                                op = _get_of_op(op_tuple)
-                                ops += [op]
+                                op_string = ((p, 1), (q, 1), (s, 0), (r, 0))
+                                qop = _get_qop_hermitian(op_string)
+                                qops += [qop]
 
-            return ops
+            return qops
 
         def _build_1bdy_operators_spinfree() -> list:
             """ Returns spinfree one-body operators as a symmetry-reduced list of QubitHamiltonians """
             # Exploit symmetry pq = qp (not changed by spin-summation)
-            ops = []
+            qops = []
             for p in range(n_MOs):
                 for q in range(p + 1):
                     # Spin aa
-                    op_tuple = ((2 * p, 1), (2 * q, 0))
-                    op = _get_of_op(op_tuple)
+                    op_list = ((2 * p, 1), (2 * q, 0))
+                    qop = _get_qop_hermitian(op_list)
                     # Spin bb
-                    op_tuple = ((2 * p + 1, 1), (2 * q + 1, 0))
-                    op += _get_of_op(op_tuple)
-                    ops += [op]
+                    op_list = ((2 * p + 1, 1), (2 * q + 1, 0))
+                    qop += _get_qop_hermitian(op_list)
+                    if qop:  # should always exist here
+                        qops += [qop]
+                    else:
+                        qops += [QubitHamiltonian.zero()]
 
-            return ops
+            return qops
 
         def _build_2bdy_operators_spinfree() -> list:
             """ Returns spinfree two-body operators as a symmetry-reduced list of QubitHamiltonians """
             # Exploit symmetries pqrs = qpsr (due to spin summation, '-pqsr = -qprs' drops out)
             #                and      = rspq
-            ops = []
+            qops = []
             for p, q, r, s in product(range(n_MOs), repeat=4):
                 if p * n_MOs + q >= r * n_MOs + s and (p >= q or r >= s):
                     # Spin aaaa
-                    op_tuple = ((2 * p, 1), (2 * q, 1), (2 * s, 0), (2 * r, 0)) if (p != q and r != s) else '0.0 []'
-                    op = _get_of_op(op_tuple)
+                    op_string = ((2 * p, 1), (2 * q, 1), (2 * s, 0), (2 * r, 0))
+                    qop = _get_qop_hermitian(op_string)
                     # Spin abab
-                    op_tuple = ((2 * p, 1), (2 * q + 1, 1), (2 * s + 1, 0), (2 * r, 0)) if (
-                            2 * p != 2 * q + 1 and 2 * r != 2 * s + 1) else '0.0 []'
-                    op += _get_of_op(op_tuple)
+                    op_string = ((2 * p, 1), (2 * q + 1, 1), (2 * s + 1, 0), (2 * r, 0))
+                    qop += _get_qop_hermitian(op_string)
                     # Spin baba
-                    op_tuple = ((2 * p + 1, 1), (2 * q, 1), (2 * s, 0), (2 * r + 1, 0)) if (
-                            2 * p + 1 != 2 * q and 2 * r + 1 != 2 * s) else '0.0 []'
-                    op += _get_of_op(op_tuple)
+                    op_string = ((2 * p + 1, 1), (2 * q, 1), (2 * s, 0), (2 * r + 1, 0))
+                    qop += _get_qop_hermitian(op_string)
                     # Spin bbbb
-                    op_tuple = ((2 * p + 1, 1), (2 * q + 1, 1), (2 * s + 1, 0), (2 * r + 1, 0)) if (
-                            p != q and r != s) else '0.0 []'
-                    op += _get_of_op(op_tuple)
+                    op_string = ((2 * p + 1, 1), (2 * q + 1, 1), (2 * s + 1, 0), (2 * r + 1, 0))
+                    qop += _get_qop_hermitian(op_string)
 
-                    ops += [op]
+                    qops += [qop]
 
-            return ops
+            return qops
 
-        def _assemble_rdm1(evals) -> numpy.ndarray:
+        def _assemble_rdm1(evals_1) -> numpy.ndarray:
             """
             Returns spin-ful or spin-free one-particle RDM built by symmetry conditions
             Same symmetry with or without spin, so we can use the same function
@@ -1608,14 +1339,14 @@ class QuantumChemistryBase:
             ctr: int = 0
             for p in range(N):
                 for q in range(p + 1):
-                    rdm1[p, q] = evals[ctr]
+                    rdm1[p, q] = evals_1[ctr]
                     # Symmetry pq = qp
                     rdm1[q, p] = rdm1[p, q]
                     ctr += 1
 
             return rdm1
 
-        def _assemble_rdm2_spinful(evals) -> numpy.ndarray:
+        def _assemble_rdm2_spinful(evals_2) -> numpy.ndarray:
             """ Returns spin-ful two-particle RDM built by symmetry conditions """
             ctr: int = 0
             rdm2 = numpy.zeros([n_SOs, n_SOs, n_SOs, n_SOs])
@@ -1624,7 +1355,7 @@ class QuantumChemistryBase:
                     for r in range(n_SOs):
                         for s in range(r):
                             if p * n_SOs + q >= r * n_SOs + s:
-                                rdm2[p, q, r, s] = evals[ctr]
+                                rdm2[p, q, r, s] = evals_2[ctr]
                                 # Symmetry pqrs = rspq
                                 rdm2[r, s, p, q] = rdm2[p, q, r, s]
                                 ctr += 1
@@ -1640,13 +1371,13 @@ class QuantumChemistryBase:
 
             return rdm2
 
-        def _assemble_rdm2_spinfree(evals) -> numpy.ndarray:
+        def _assemble_rdm2_spinfree(evals_2) -> numpy.ndarray:
             """ Returns spin-free two-particle RDM built by symmetry conditions """
             ctr: int = 0
             rdm2 = numpy.zeros([n_MOs, n_MOs, n_MOs, n_MOs])
             for p, q, r, s in product(range(n_MOs), repeat=4):
                 if p * n_MOs + q >= r * n_MOs + s and (p >= q or r >= s):
-                    rdm2[p, q, r, s] = evals[ctr]
+                    rdm2[p, q, r, s] = evals_2[ctr]
                     # Symmetry pqrs = rspq
                     rdm2[r, s, p, q] = rdm2[p, q, r, s]
                     ctr += 1
@@ -1667,8 +1398,6 @@ class QuantumChemistryBase:
             qops += _build_1bdy_operators_spinful() if get_rdm1 else []
             qops += _build_2bdy_operators_spinful() if get_rdm2 else []
 
-        # Transform operator lists to QubitHamiltonians
-        qops = [_get_qop_hermitian(op) for op in qops]
         # Compute expected values
         evals = simulate(ExpectationValue(H=qops, U=U, shape=[len(qops)]), variables=variables)
 
@@ -1710,7 +1439,7 @@ class QuantumChemistryBase:
         -------
             rdm1_spinsum, rdm2_spinsum :
                 The desired spin-free matrices
-        """
+          """
         n_MOs = self.n_orbitals
         rdm1_spinsum = None
         rdm2_spinsum = None
@@ -1719,10 +1448,10 @@ class QuantumChemistryBase:
         if sum_rdm1:
             # Check whether spin-rdm2 exists
             if self._rdm1 is None:
-                raise TequilaException("The spin-RDM for the 1-RDM does not exist!")
+                raise Exception("The spin-RDM for the 1-RDM does not exist!")
             # Check whether existing rdm1 is in spin-orbital basis
             if self._rdm1.shape[0] != 2 * n_MOs:
-                raise TequilaException("The existing RDM needs to be in spin-orbital basis, it is already spin-free!")
+                raise Exception("The existing RDM needs to be in spin-orbital basis, it is already spin-free!")
             # Do summation
             rdm1_spinsum = numpy.zeros([n_MOs, n_MOs])
             for p in range(n_MOs):
@@ -1737,10 +1466,10 @@ class QuantumChemistryBase:
         if sum_rdm2:
             # Check whether spin-rdm2 exists
             if self._rdm2 is None:
-                raise TequilaException("The spin-RDM for the 2-RDM does not exist!")
+                raise Exception("The spin-RDM for the 2-RDM does not exist!")
             # Check whether existing rdm2 is in spin-orbital basis
             if self._rdm2.shape[0] != 2 * n_MOs:
-                raise TequilaException("The existing RDM needs to be in spin-orbital basis, it is already spin-free!")
+                raise Exception("The existing RDM needs to be in spin-orbital basis, it is already spin-free!")
             # Do summation
             rdm2_spinsum = numpy.zeros([n_MOs, n_MOs, n_MOs, n_MOs])
             for p, q, r, s in product(range(n_MOs), repeat=4):
@@ -1754,9 +1483,7 @@ class QuantumChemistryBase:
     def __str__(self) -> str:
         result = str(type(self)) + "\n"
         result += "Qubit Encoding\n"
-        result += str(self.transformation) + "\n\n"
-        result += "Parameters\n"
+        result += str(self.transformation) + "\n"
         for k, v in self.parameters.__dict__.items():
             result += "{key:15} : {value:15} \n".format(key=str(k), value=str(v))
-        result += "\n"
         return result
