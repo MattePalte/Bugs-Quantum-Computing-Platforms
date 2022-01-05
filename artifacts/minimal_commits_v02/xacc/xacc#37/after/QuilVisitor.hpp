@@ -60,10 +60,7 @@ protected:
 	std::string classicalAddresses;
 
 	std::map<int, int> qubitToClassicalBitIndex;
-
-
 	int numAddresses = 0;
-
 public:
 
 	/**
@@ -86,9 +83,6 @@ public:
 		quilStr += "X " + std::to_string(x.bits()[0]) + "\n";
 	}
 
-	/**
-	 *
-	 */
 	void visit(Y& y) {
 		quilStr += "Y " + std::to_string(y.bits()[0]) + "\n";
 	}

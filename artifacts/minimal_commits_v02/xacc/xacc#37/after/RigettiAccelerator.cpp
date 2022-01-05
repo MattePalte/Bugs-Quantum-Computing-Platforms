@@ -196,9 +196,6 @@ void RigettiAccelerator::execute(std::shared_ptr<AcceleratorBuffer> buffer,
 		main_namespace["coef_string"] = std::string(buf, postResponse.contentLength);
 		main_namespace["num_addresses"] = visitor->getNumberOfAddresses();
 
-		// NOTE: This is taken from pyquil wavefunction implementation
-		// just using for now because I can't figure out parsing the
-		// binary just yet :(
 		const std::string code =
 				"import base64\n"
 				"import json\n"
