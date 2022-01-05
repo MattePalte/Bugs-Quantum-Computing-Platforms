@@ -228,17 +228,10 @@ namespace Microsoft.Quantum.Simulation.Simulators.QCTraceSimulators
             }
 
             var sample = uniformZeroOneSample * total;
-
             return unnormalizedDistribution
-                // Get the unnormalized CDF of the distribution.
                 .SelectAggregates((double acc, double x) => acc + x)
-                // Look for the first index at which the CDF is bigger
-                // than the random sample of 𝑈(0, 1) that we were given
-                // as a parameter.
                 .Select((cumulativeProb, idx) => (cumulativeProb, idx))
                 .Where(item => item.cumulativeProb >= sample)
-                // Cast that index to long, and default to returning
-                // the last item.
                 .Select(
                     item => (long)item.idx
                 )

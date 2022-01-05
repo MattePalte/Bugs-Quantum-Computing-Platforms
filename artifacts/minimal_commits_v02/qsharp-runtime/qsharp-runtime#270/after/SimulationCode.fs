@@ -1462,8 +1462,6 @@ module SimulationCode =
                 | QsTuple items -> items |> Seq.mapi (fun i x -> buildProps (current <|.|> ``ident`` ("Item" + (i+1).ToString())) x) |> Seq.collect id
                 | QsTupleItem (Anonymous _) -> Seq.empty
                 | QsTupleItem (Named decl) -> seq { yield produceProperty decl current }
-            // UDT types are packaged differently if there is one constituent type, or many.
-            // This function handles that difference in packaging.
             let rec readType typeItem =
                 match typeItem with
                 | QsTuple items when items.IsEmpty -> Seq.empty

@@ -3,9 +3,7 @@
 
 namespace Microsoft.Quantum.Instructions {
 
-    // We'll use TargetInstruction attribute to suppress Q#'s compiler decoration of names for the generated callbacks.
     open Microsoft.Quantum.Targeting;
-
     @TargetInstruction("single_qubit_op")
     operation single_qubit_op(op_id: Int, duration: Int, qb : Qubit) : Unit {
         body intrinsic;
@@ -108,7 +106,6 @@ namespace Microsoft.Quantum.Instructions {
 namespace Microsoft.Quantum.Tracer {
 
     open Microsoft.Quantum.Targeting;
-
     @TargetInstruction("inject_barrier")
     operation Barrier(id : Int, duration : Int) : Unit {
         body intrinsic;

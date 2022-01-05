@@ -130,7 +130,6 @@ namespace Microsoft.Quantum.Simulation.Simulators.Tests
 
                 Assert.Throws<NotEnoughQubits>(() => n_q = qm.Allocate(10));
                 Assert.Throws<NotEnoughQubits>(() => n_q = qm.Borrow(25, exclusion));
-
                 Assert.Throws<ArgumentException>(() => n_q = qm.Allocate(-2));
                 Assert.Throws<ArgumentException>(() => n_q = qm.Borrow(-2, exclusion));
             });

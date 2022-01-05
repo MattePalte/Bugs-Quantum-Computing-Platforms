@@ -225,7 +225,6 @@ namespace Microsoft.Quantum.Simulation.Simulators.Tests
             var NL = System.Environment.NewLine;
             var expectedHeader = "Offset  \tState Data" + NL +
                                  "========\t==========" + NL;
-
             var sim = new ToffoliSimulator();
 
             var allocate = sim.Get<Intrinsic.Allocate>();

@@ -38,8 +38,6 @@ if __name__ == '__main__':
   command = (qsc + " build --qir qir --input " + files_to_process + " --proj " + output_file)
   log("Executing: " + command)
   subprocess.run(command, shell = True)
-
-  # copy the generated file into tracer's input files
   generated_file = os.path.join(root_dir, "qir", output_file) + ".ll"
   build_input_file = os.path.join(root_dir, output_file) + ".ll"
   shutil.copyfile(generated_file, build_input_file)

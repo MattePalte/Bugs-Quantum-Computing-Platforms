@@ -123,11 +123,6 @@ namespace Microsoft.Quantum.Simulation.Simulators.Tests
                 Assert.True(n_q.Length == 0);
             }
 
-            // NOTE: The below tests trigger exceptions, which but the QubitManager into a bad
-            // state where it shouldn't be reused. Creating a separate QubitManager in a small
-            // scope to test the exceptions avoids having one test case pollute the other.
-
-            // Test for over allocating and over borrowing.
             {
                 QubitManager qm_small = new QubitManager(2);
                 IQArray<Qubit> n_q;
@@ -139,7 +134,6 @@ namespace Microsoft.Quantum.Simulation.Simulators.Tests
                 Assert.Throws<NotEnoughQubits>(() => n_q = qm_small.Borrow(5, null));
             }
 
-            // Test for negative input to allocate and borrow.
             {
                 QubitManager qm_small = new QubitManager(20);
                 IQArray<Qubit> n_q;
