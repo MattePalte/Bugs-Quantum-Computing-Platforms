@@ -2,7 +2,6 @@ import operator
 from typing import Any, List
 
 import sys
-
 import numpy as np
 from antlr4 import *
 from antlr4.IntervalSet import IntervalSet

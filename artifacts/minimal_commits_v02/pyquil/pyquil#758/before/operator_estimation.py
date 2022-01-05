@@ -448,7 +448,6 @@ def measure_observables(qc: QuantumComputer, tomo_experiment: TomographyExperime
         # measure (n_shots, n_qubits=2) obs_strings then the full operator value involves selecting
         # either the first column, second column, or both and multiplying along the row.
         for setting in settings:
-            # 3.2 Special case for measuring the "identity" operator, which doesn't make much
             #     sense but should happen perfectly.
             if is_identity(setting.out_operator):
                 yield ExperimentResult(
@@ -457,8 +456,6 @@ def measure_observables(qc: QuantumComputer, tomo_experiment: TomographyExperime
                     stddev=0.0,
                 )
                 continue
-
-            # 3.3 Get the term's coefficient so we can multiply it in later.
             assert setting.in_operator.coefficient == 1, 'in_operator should specify a state and ' \
                                                          'therefore cannot have a coefficient'
             coeff = complex(setting.out_operator.coefficient)

@@ -712,13 +712,6 @@ def commuting_sets(pauli_terms):
 
 
 def is_identity(term):
-    """
-    Tests to see if a PauliTerm or PauliSum is a scalar multiple of identity
-
-    :param term: Either a PauliTerm or PauliSum
-    :returns: True if the PauliTerm or PauliSum is a scalar multiple of identity, False otherwise
-    :rtype: bool
-    """
     if isinstance(term, PauliTerm):
         return (len(term) == 0) and (not np.isclose(term.coefficient, 0))
     elif isinstance(term, PauliSum):

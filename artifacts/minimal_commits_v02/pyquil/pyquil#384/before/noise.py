@@ -392,8 +392,6 @@ def _decoherence_noise_model(gates, T1=30e-6, T2=30e-6, gate_time_1q=50e-9,
                 if len(targets) != 2:
                     raise ValueError("Noisy gates on more than 2Q not currently supported")
 
-                # note this ordering of the tensor factors is necessary due to how the QVM orders
-                # the wavefunction basis
                 noisy_I = tensor_kraus_maps(noisy_identities_2q[targets[1]],
                                             noisy_identities_2q[targets[0]])
         else:

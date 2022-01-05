@@ -297,23 +297,7 @@ def damping_after_dephasing(T1, T2, gate_time):
 # You can only apply gate-noise to non-parametrized gates or parametrized gates at fixed parameters.
 NO_NOISE = ["RZ"]
 ANGLE_TOLERANCE = 1e-10
-
-
 class NoisyGateUndefined(Exception):
-    """Raise when user attempts to use noisy gate outside of currently supported set."""
-    pass
-
-
-def get_noisy_gate(gate_name, params):
-    """
-    Look up the numerical gate representation and a proposed 'noisy' name.
-
-    :param str gate_name: The Quil gate name
-    :param Tuple[float] params: The gate parameters.
-    :return: A tuple (matrix, noisy_name) with the representation of the ideal gate matrix
-        and a proposed name for the noisy version.
-    :rtype: Tuple[np.array, str]
-    """
     params = tuple(params)
     if gate_name == "I":
         assert params == ()
@@ -420,9 +404,6 @@ def _decoherence_noise_model(gates, T1=30e-6, T2=30e-6, gate_time_1q=50e-9,
         else:
             if len(targets) != 2:
                 raise ValueError("Noisy gates on more than 2Q not currently supported")
-
-            # note this ordering of the tensor factors is necessary due to how the QVM orders
-            # the wavefunction basis
             noisy_I = tensor_kraus_maps(noisy_identities_2q[targets[1]],
                                         noisy_identities_2q[targets[0]])
         kraus_maps.append(KrausModel(g.name, tuple(g.params), targets,

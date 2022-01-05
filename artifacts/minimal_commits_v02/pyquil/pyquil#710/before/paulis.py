@@ -712,13 +712,6 @@ def commuting_sets(pauli_terms):
 
 
 def is_identity(term):
-    """
-    Check if Pauli Term is a scalar multiple of identity
-
-    :param PauliTerm term: A PauliTerm object
-    :returns: True if the PauliTerm is a scalar multiple of identity, false otherwise
-    :rtype: bool
-    """
     return len(term) == 0
 
 

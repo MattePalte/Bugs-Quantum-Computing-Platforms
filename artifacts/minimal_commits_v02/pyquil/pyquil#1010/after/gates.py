@@ -645,13 +645,6 @@ def STORE(region_name, offset_reg, source):
 
 
 def CONVERT(classical_reg1, classical_reg2):
-    """
-    Produce a CONVERT instruction.
-
-    :param classical_reg1: MemoryReference to store to.
-    :param classical_reg2: MemoryReference to read from.
-    :return: A ClassicalConvert instance.
-    """
     return ClassicalConvert(unpack_classical_reg(classical_reg1),
                             unpack_classical_reg(classical_reg2))
 
