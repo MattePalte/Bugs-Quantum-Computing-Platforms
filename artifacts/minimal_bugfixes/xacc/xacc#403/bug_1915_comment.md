@@ -1,1 +1,1 @@
-The compiler (which in this framework is named qcor) assignes a random name to a register rpresenting a buffer, but during an optimization step the name of the register is lost, and substituted with a generic "q".
+The compiler (which in this framework is named qcor) assignes a random name to a register representing a buffer, but during an optimization step the name of the register is lost, and substituted with a generic "q".

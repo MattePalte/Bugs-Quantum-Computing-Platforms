@@ -1,1 +1,1 @@
-Fix a roblem with the schedulere, change ALAP (as late as possible) with ASAP (as soon as possible)
+Fix a problem with the scheduler, change ALAP (as late as possible) with ASAP (as soon as possible)

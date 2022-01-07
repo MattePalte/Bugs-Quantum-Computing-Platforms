@@ -1,1 +1,1 @@
-{"commit_hash": "103f6ffcee69b924417f59c0cc830815b6728387", "commit_msg": "fix no reg depth (#3513)", "project_name": "qiskit-terra", "id": "505", "human_id": "qiskit-terra#3513", "author_comment": "Bug-reporter: \"Create an empty circuit and run depth() on it.\""}
+{"commit_hash": "103f6ffcee69b924417f59c0cc830815b6728387", "commit_msg": "fix no reg depth (#3513)", "project_name": "qiskit-terra", "id": "505", "human_id": "qiskit-terra#3513", "annotator_comment": "Bug-reporter: \"Create an empty circuit and run depth() on it.\""}

@@ -223,8 +223,8 @@ def plot_histogram_quantum_vs_classical(
         ax.axvline(x=.5 + median_quantum, color=PALETTE["Quantum"])
         ax.text(
             median_quantum + median_shifts[0], median_heights[0],
-            f'Median {column_abbreviation}\nfor " \
-            "Quantum\nBug-fixes ({median_quantum})',
+            f'Median {column_abbreviation}\nfor ' + \
+            f'Quantum\nBug-fixes ({median_quantum})',
             fontsize=12, color=PALETTE["Quantum"])
         # MEDIAN VALUE - CLASSICAL
         median_classical = df[
@@ -232,8 +232,8 @@ def plot_histogram_quantum_vs_classical(
         ax.axvline(x=.5 + median_classical, color=PALETTE["Classical"])
         ax.text(
             median_classical + median_shifts[1], median_heights[1],
-            f'Median {column_abbreviation}\nfor " \
-            "Classical\nBug-fixes ({median_classical})',
+            f'Median {column_abbreviation}\nfor ' + \
+            f'Classical\nBug-fixes ({median_classical})',
             fontsize=12, color=PALETTE["Classical"])
     ax.set_xlabel(f"{column_label_name} ({column_abbreviation})", fontsize=15)
     ax.set_ylabel("Count", fontsize=15)

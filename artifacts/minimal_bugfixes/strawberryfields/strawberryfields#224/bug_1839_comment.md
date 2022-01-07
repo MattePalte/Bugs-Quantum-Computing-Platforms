@@ -1,1 +1,1 @@
-Fixer: "Currently, the gbs.sample.sample() function raises: AttributeError: 'list' object has no attribute 'tolist' when called with n_samples = 1 (which, ironically, is actually the default).
+Fixer: "Currently, the gbs.sample.sample() function raises: AttributeError: 'list' object has no attribute 'tolist' when called with n_samples = 1 (which, ironically, is actually the default)."

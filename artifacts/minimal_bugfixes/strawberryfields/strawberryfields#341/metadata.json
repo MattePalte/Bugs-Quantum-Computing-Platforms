@@ -1,1 +1,1 @@
-{"commit_hash": "beb7500622712186a9bf7f27fd3d8f354ac17d35", "commit_msg": "fixing assignment bug (#341)", "project_name": "strawberryfields", "id": "1847", "human_id": "strawberryfields#341", "author_comment": "Fix: how to udate the kwarg of a dictionary"}
+{"commit_hash": "beb7500622712186a9bf7f27fd3d8f354ac17d35", "commit_msg": "fixing assignment bug (#341)", "project_name": "strawberryfields", "id": "1847", "human_id": "strawberryfields#341", "annotator_comment": "Fix: how to udate the kwarg of a dictionary"}

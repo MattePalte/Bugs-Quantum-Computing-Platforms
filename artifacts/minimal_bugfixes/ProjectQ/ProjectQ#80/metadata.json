@@ -1,1 +1,1 @@
-{"commit_hash": "75e7a7fefea232e61327e7d7a7b09345e494c655", "commit_msg": "Fixed bug in setup.py: raise exception. (#80)", "project_name": "ProjectQ", "id": "1108", "human_id": "ProjectQ#80", "author_comment": "bug: declare an exception without the keyword raise in front of it."}
+{"commit_hash": "75e7a7fefea232e61327e7d7a7b09345e494c655", "commit_msg": "Fixed bug in setup.py: raise exception. (#80)", "project_name": "ProjectQ", "id": "1108", "human_id": "ProjectQ#80", "annotator_comment": "bug: declare an exception without the keyword raise in front of it."}

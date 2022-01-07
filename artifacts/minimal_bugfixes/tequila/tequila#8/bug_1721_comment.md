@@ -1,1 +1,1 @@
-In the Hamiltonian class, the mapping of qubits method generates a dictionary for the mappin, while generating it they use a wrong key.
+In the Hamiltonian class, the mapping of qubits method generates a dictionary for the mapping, while generating it they use a wrong key.
