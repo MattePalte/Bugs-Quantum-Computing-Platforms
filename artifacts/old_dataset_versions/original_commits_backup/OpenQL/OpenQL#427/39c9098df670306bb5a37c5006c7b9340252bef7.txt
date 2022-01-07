@@ -1,0 +1,3 @@
+Merge pull request #427 from QE-Lab/fix-ddg-build-assert-fail
+
+Fix assertion failure during DDG construction

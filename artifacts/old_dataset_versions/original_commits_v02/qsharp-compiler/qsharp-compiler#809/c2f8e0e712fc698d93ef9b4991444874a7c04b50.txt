@@ -1,0 +1,7 @@
+Monomorphization Bug Fixes (#809)
+
+* Update specialization names in monomorphization.
+
+* KeepAllIntrinsics option for monomorphization.
+
+* Add all specializations for a referenced callable to the concrete call graph.

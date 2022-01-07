@@ -1,0 +1,1 @@
+Reporter: 'While writing unit tests for a generic-typed function, I ran into some strange behavior. The function works perfectly when called from the same file, but it seems to return a QVoid when called from the test suite, instead of the expected Bool."

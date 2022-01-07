@@ -1,0 +1,1 @@
+Fix statements like an infinite loop not causing any data dependency graph events

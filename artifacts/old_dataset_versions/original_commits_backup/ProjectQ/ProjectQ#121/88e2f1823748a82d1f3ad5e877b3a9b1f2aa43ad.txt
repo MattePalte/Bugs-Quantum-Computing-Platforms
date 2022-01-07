@@ -1,0 +1,1 @@
+Bugfix OpenMP flags in setup.py (#121)

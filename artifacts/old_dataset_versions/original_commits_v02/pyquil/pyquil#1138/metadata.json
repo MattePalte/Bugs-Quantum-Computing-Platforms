@@ -1,0 +1,1 @@
+{"commit_hash": "75a7c7428235e017ac6740e804cce64057bc3a95", "commit_msg": "Fixes for migration2-qc.ipynb (#1138)", "project_name": "pyquil", "id": "2007", "human_id": "pyquil#1138", "author_comment": "Fix a parameter in an example notebook"}

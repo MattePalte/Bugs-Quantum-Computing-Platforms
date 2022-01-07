@@ -1,0 +1,3 @@
+Merge pull request #422 from randomir/bugfix/allow-config-solver-override-hybrid-samplers/issue-363
+
+Allow config solver override in hybrid samplers

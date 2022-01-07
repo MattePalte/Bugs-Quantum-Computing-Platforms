@@ -1,0 +1,1 @@
+{"commit_hash": "7fe4f9eadc835705c25c13c753b8550b199efa44", "commit_msg": "Fix expval tests (#1173)", "project_name": "qiskit-aer", "id": "1070", "human_id": "qiskit-aer#1173", "author_comment": "Fixer: \"The save expectation value tests are currently failing due to recent update in Terra\""}

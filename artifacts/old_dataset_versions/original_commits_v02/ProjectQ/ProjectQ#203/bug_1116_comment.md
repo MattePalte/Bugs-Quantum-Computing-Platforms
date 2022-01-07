@@ -1,0 +1,1 @@
+Bug: change code logic in the simulator to create a new output quantum state. The iteration over indice is changed.

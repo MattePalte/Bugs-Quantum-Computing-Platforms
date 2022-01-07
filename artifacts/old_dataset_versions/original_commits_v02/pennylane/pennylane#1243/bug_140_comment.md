@@ -1,0 +1,1 @@
+Reporter: "In v.0.15 of PennyLane, two conflicting changes were made: [...] As a result, qml.adjoint() no longer works with templates." 

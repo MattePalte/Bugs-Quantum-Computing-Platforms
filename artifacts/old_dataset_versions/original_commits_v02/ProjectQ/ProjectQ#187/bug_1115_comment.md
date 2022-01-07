@@ -1,0 +1,1 @@
+Bug-fix: In a decomposition pass (_recognize_arb1qubit), It does not allow gates which have control qubits as otherwise the AutoReplacer might go into an infinite loop.

@@ -1,0 +1,1 @@
+Reporter: "Folding with fidelities={"single": 1.0} should not affect single qubit gates, but it does when scale_factor > 3."

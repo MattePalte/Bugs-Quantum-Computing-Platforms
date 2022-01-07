@@ -1,0 +1,1 @@
+Fix symbol resolution misbehaior for GCC and Clang on MacOS (#158)

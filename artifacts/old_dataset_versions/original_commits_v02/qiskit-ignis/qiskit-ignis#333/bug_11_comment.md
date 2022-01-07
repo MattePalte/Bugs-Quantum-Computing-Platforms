@@ -1,0 +1,1 @@
+In a test of tomography, the function state_fidelity did not set a parameter as validate=False. Whereas the signature in Qiskit Terra is def state_fidelity(state1, state2, validate=True) . Fixer: "This commit fixes a small bug causing the tomography tests to fail."

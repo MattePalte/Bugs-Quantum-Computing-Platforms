@@ -1,0 +1,1 @@
+Reporter: "QIR code does not respect lazy evaluation of logical binary operator. Program should not seg-fault."

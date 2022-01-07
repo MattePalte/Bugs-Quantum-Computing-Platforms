@@ -1,0 +1,36 @@
+Modernize ProjectQ (isort, PEP 257 docstrings, drop Python 2 code, more flake8 plugins) and fix phase estimation unit tests (#408)
+
+* Fix tests for the phase estimation decomposition
+
+* Fix docstrings according to PEP257
+
+* Modernize code by removing some Python 2 compatibility code
+
+* Update CHANGELOG
+
+* Add isort to pre-commit-config.yaml and run it on the project
+
+* Move common exception classes to their own files
+
+* Fix changes from the latest on develop
+
+* Update CHANGELOG
+
+* Update Python code in documentation folder
+
+* Add `meta` repository to pre-commit configuration
+
+* Re-indent and cleanup .pre-commit-config.yaml
+
+* Add some more flake8 plugins to pre-commit config file
+
+- flake8-breakpoint
+- flake8-comprehensions
+- flake8-eradicate
+- flake8-mutable
+
+* Fix small bug with drawing using matplotlib
+
+* Address review comments
+
+* Better comment in docs/conf.py

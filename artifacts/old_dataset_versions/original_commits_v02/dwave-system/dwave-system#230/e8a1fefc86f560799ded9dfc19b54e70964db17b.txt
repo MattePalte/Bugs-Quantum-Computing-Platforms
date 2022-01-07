@@ -1,0 +1,3 @@
+Merge pull request #230 from randomir/bugfix-embedding-composite-initial-state-sampling-test
+
+Bugfix embedding composite initial state sampling test

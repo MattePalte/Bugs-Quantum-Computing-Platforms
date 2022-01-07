@@ -1,0 +1,12 @@
+Fix tox.ini lint job's basepython (#576)
+
+In #568 a change the lint job definition was accidently made which
+changed the base python version for the job from python3 to python 3.8.
+This was done for my local testing as the version of pylint we're
+currently using doesn't support python 3.9 (which is my default python3
+interpreter). However, this should not have been committed (especially
+as part of #568 which is completely unrelated) as it's not general and
+will only work if someone has a python3.8 interpreter installed. This
+commit reverts that change to ensure the tox.ini is usable for anyone.
+In a follow up commit we'll bump the pylint version to one that's python
+3.9 compatible so local workarounds like this aren't needed anymore.

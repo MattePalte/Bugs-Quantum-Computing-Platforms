@@ -1,0 +1,1 @@
+The token and device were collected from user input in the same variable, becasue of a copy paste pattern.

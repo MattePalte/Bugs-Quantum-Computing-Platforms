@@ -1,0 +1,29 @@
+Fixes a sampling bug affecting QubitDevice (#481)
+
+* fixes
+
+* more changes
+
+* fixes bug
+
+* increase shots
+
+* fix marginal prob
+
+* linting
+
+* linting
+
+* Update tests/test_qubit_device.py
+
+Co-Authored-By: antalszava <antalszava@gmail.com>
+
+* suggested changes
+
+* suggested changes
+
+* more tests
+
+* fix
+
+Co-authored-by: antalszava <antalszava@gmail.com>

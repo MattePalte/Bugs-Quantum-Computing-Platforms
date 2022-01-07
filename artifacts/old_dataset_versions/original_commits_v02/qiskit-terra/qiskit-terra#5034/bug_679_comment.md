@@ -1,0 +1,1 @@
+Reporter: "The problem is that the event infrastructure in Terra is global and sometimes we get crashes on the instance variable the TextBarProgress keeps (self.iter) since a single TextProgressBar receives all those events from parallel_map in mixed orders when actually they should apply to separate progress bars."

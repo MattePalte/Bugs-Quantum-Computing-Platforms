@@ -1,0 +1,1 @@
+{"commit_hash": "771e4f8ab46e7b29204d87541da34b76b081e855", "commit_msg": "Merge pull request #309 from tnguyen-ornl/tnguyen/fix-gate-merge\n\nFixed a couple of bugs in the gate merging optimization", "project_name": "xacc", "id": "1900", "human_id": "xacc#309", "author_comment": "Fixer: \"Gate fuser MSB-LSB convention mismatches b/w the indices and the matrix representation.\""}

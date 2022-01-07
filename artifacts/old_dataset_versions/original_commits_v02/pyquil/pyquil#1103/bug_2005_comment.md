@@ -1,0 +1,1 @@
+fix latex diagram output. Bug: confuse target_qubit with qubit valiables.

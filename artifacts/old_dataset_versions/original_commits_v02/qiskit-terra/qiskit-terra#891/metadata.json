@@ -1,0 +1,1 @@
+{"commit_hash": "e8c5a7e41b20fe3a4a1370d95a08be0c9b47c489", "commit_msg": "Fix to WeightedPauliOperator (Qiskit/qiskit-aqua#891)", "project_name": "qiskit-terra", "id": "567", "human_id": "qiskit-terra#891", "author_comment": "Reporter: \"Simplification done during in the constructor, of the pauli list that is passed, had a bug.\""}

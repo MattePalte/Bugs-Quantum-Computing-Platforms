@@ -1,0 +1,1 @@
+handles special cases in the hamiltonian mapping

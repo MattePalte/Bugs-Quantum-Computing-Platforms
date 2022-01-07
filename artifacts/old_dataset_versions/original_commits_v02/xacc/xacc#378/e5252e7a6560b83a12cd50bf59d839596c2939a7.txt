@@ -1,0 +1,3 @@
+Merge pull request #378 from tnguyen-ornl/tnguyen/fix-qlm-exp-val-calc
+
+Fixed a bug in the QLM Accelerator plugin when doing noisy sim

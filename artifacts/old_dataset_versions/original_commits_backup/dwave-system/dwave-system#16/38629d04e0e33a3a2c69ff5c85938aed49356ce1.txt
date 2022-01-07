@@ -1,0 +1,3 @@
+Merge pull request #16 from dwavesystems/initial_state_kwarg_bugfix
+
+Fix typo where initial_state_kwargs was not correct iterated over

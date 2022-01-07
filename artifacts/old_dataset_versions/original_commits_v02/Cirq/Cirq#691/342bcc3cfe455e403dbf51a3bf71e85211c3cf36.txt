@@ -1,0 +1,10 @@
+Fix sign error in EjectFullW and silent merge error in eject_z_test.py (#691)
+
+- Slipped by because of a silent merge conflict overwriting updated methods with old ones
+- The old methods were calling the new "canonicalize_up_to_measurement_phase" with the wrong number of arguments, triggering a type error, triggering a path expecting a type error for a *different reason* (i.e. non-unitary operations in the circuit)
+- Removed the non-unitary fallback path and renamed the method to make it clear only measurement-implies-terminal circuits were expected
+- Simplified the W-over-partial-W derivation
+- Fixed false-positive assertions that were now correctly failing
+- Added a test that fails for the old behavior but not for the new behavior
+
+Fixes https://github.com/quantumlib/Cirq/issues/684

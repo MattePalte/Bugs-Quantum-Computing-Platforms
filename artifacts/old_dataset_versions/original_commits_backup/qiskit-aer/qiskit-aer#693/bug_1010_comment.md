@@ -1,0 +1,1 @@
+Fixer: "Currently qubit truncation will fail for circuits containing barriers across inactive qubits. This fixes the order of circuit transpilation passes to apply the remove barrier pass before the qubit truncation pass."

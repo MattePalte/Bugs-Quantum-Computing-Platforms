@@ -1,0 +1,1 @@
+Fix DeprecationWarnings coming from Terra due to old-style bit access

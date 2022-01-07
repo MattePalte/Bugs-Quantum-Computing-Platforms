@@ -1,0 +1,1 @@
+Fixer: "fixed bug in keymap that prevented sample accumulation when mapped to smaller subregister". In the class QubitWaveFunction.

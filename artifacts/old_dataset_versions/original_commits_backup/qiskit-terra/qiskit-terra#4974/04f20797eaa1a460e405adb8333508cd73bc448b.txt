@@ -1,0 +1,7 @@
+Fix pulse transforms recursion bug fix that was lost in merge conflict (#4974)
+
+* Fix bug fix that was lost in merge conflict.
+
+* Added bug fix reno.
+
+* Revert style.

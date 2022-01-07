@@ -1,0 +1,5 @@
+Fix handling of identity in operator estimation (#758)
+
+* Fix handling of identity in operator estimation
+
+* Add a test, actually fix the issue

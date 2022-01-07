@@ -1,0 +1,1 @@
+Fixes a bug in the new QubitDevice class, where the marginal probability was not taking into account the ordering of the wires to be marginalized (qubit order).

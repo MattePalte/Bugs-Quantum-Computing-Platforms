@@ -1,0 +1,5 @@
+Fixes bug in CDKM adder (#303)
+
+* Enable and cleanup integer tests.
+
+* Fix bug in CDKM adder.

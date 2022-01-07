@@ -1,0 +1,1 @@
+Reporter: "I got error in QuantumState.get_zero_probability function, and it seems to be due to a simple mistake in bound-check of the index." The print is of the error is correct but the condition is contradictory.

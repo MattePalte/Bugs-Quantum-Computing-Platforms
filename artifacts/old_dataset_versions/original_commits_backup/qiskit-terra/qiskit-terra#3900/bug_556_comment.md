@@ -1,0 +1,1 @@
+Reporter: "When we have two different pulses with the same name in different schedules, assembler combines those pulses. The second my_gaussian pulse should be renamed and independently registered to the pulse library."

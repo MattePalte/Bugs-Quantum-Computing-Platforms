@@ -1,0 +1,1 @@
+The build procedure (setup.py) on Mac failed with ValueError. The problem involves the versions of the libraries.

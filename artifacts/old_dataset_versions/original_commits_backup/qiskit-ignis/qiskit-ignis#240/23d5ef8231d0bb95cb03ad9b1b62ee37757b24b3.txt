@@ -1,0 +1,5 @@
+Fixed some small errors in rb, add the ability to load multiple resul… (#240)
+
+* Fixed some small errors in rb, add the ability to load multiple results into a measurement cal
+
+* Complete measurement mitigation uses the tensored code

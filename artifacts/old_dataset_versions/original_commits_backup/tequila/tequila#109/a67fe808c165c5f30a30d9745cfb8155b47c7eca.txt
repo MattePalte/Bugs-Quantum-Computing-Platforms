@@ -1,0 +1,5 @@
+Pr keymap fix (#109)
+
+* fixed bug in keymap that prevented sample accumulation when mapped to smaller subregister
+
+* added a test for the last commit

@@ -1,0 +1,3 @@
+Hotfix/main ibm api url (#5)
+
+Updated the IBM API URL to the main URL, fixed issue with Python2 raw_input, added coverage and Travis CI badges to readme, and fixed some small bugs in docs.

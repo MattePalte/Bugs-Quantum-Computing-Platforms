@@ -1,0 +1,18 @@
+Fix cat state function array type without doing casting (#556)
+
+* Fixed cat state function array type (#554)
+
+* Fixed cat state function array type (XanaduAI#554)
+
+* Update ops.py
+
+* Update states.py
+
+* multiply by 1.0
+
+* Apply suggestions from code review
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+Co-authored-by: tguillaume <tguillaume506@gmail.com>
+Co-authored-by: antalszava <antalszava@gmail.com>

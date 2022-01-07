@@ -1,0 +1,1 @@
+Reporter: "Calling reduced_dm with a list of modes with length longer than one should give an output with the correct shape (e.g., for a system with three modes, using modes=[0,1] should return a density matrix with shape (D, D, D, D), where D is the cutoff dimension)" but it doesn't.

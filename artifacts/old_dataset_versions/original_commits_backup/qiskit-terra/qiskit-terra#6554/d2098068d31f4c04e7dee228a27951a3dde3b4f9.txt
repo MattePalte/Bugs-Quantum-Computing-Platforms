@@ -1,0 +1,10 @@
+Fix padding of zeros in keys of quasi-distribution and probabilities (#6554)
+
+* reno
+
+* black
+
+* review comments
+
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>

@@ -1,0 +1,5 @@
+Clarify docs and fix normalization in Random.qs (#48)
+
+* Clarify docs and fix normalization in Random.qs
+
+* Fix overflow for bitsRandom=64.

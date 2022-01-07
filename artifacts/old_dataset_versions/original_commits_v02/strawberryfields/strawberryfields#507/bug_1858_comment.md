@@ -1,0 +1,1 @@
+Fixer: "Fixes a bug where `Dgate`, `Coherent`, and `DisplacedSqueezed` do not support TensorFlow tensors if the tensor has an added dimension due to the existence of batching." The bug fix conssted in further checks on the type and numpy .

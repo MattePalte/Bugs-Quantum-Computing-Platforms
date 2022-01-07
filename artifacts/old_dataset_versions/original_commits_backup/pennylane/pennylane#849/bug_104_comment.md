@@ -1,0 +1,1 @@
+Fixer: "Fixed a bug within `default.qubit`, resulting in greater efficiency when applying a state vector to all wires on the device." Bug-fix: "The issue is simply that device_wires.labels is an n-tuple, e.g., (0, 1, 2), while sorted(device_wires.labels) is a list, e.g., [0, 1, 2]"

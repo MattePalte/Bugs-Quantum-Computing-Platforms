@@ -1,0 +1,1 @@
+{"commit_hash": "4c08588ab73c8a23537596a728a4b8f489ec4048", "commit_msg": "Merge pull request #48 from aspuru-guzik-group/fix_mappings\n\nFix mappings", "project_name": "tequila", "id": "1727", "human_id": "tequila#48", "author_comment": "Fixed conversion fermionic mapping. "}

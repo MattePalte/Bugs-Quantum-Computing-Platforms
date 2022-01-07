@@ -1,0 +1,34 @@
+Add adjoint to the operation `QFT` and fix the `qml.adjoint()` function (#1451)
+
+* QFT adjoint with tests.
+
+* Expand in test.
+
+* Comments and name of tests.
+
+* Typoo.
+
+* Update tests/ops/test_qubit_ops.py
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Correct adjoint function.
+
+* Update changelog.
+
+* Correction.
+
+* Correction for adjoint function.
+
+* black
+
+* Unused import.
+
+* Update .github/CHANGELOG.md
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Update .github/CHANGELOG.md
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+Co-authored-by: Josh Izaac <josh146@gmail.com>

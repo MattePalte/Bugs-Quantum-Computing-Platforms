@@ -1,0 +1,15 @@
+Fixing broken or skipped tests (#90)
+
+* Fixed broken Decomposition tests. Small doc improvements. Gaussian class hbar handling simplified.
+
+* Unnecessary test skips removed.
+
+* ops.Decomposition: ns set properly.
+
+* Now Gaussian always acts as a Preparation.
+
+* Integration test fixed.
+
+* Gaussian.merge() works.
+
+* Magic number removed. Test the displacement argument of ops.Gaussian.

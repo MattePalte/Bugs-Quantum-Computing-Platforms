@@ -1,0 +1,3 @@
+Merge pull request #1 from MichiRuY/comm-fix
+
+Fixing conflicts in qulacs simulator for comm-branch merge

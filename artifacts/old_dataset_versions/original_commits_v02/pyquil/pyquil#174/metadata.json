@@ -1,0 +1,1 @@
+{"commit_hash": "92cb256530f4793fee007b6c1e8c9db4a22a1a7f", "commit_msg": "Fix error with setup.py and add pi to parser (#174)", "project_name": "pyquil", "id": "1936", "human_id": "pyquil#174", "author_comment": "Fixer: \"Fix error with setup.py\""}

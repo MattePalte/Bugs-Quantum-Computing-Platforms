@@ -1,0 +1,1 @@
+The bug consisted in a wrong conversion of types form numpy to python integer in expression which use those integers as qubit indices: k.identity(np.uint32(qubit)). Changing a configuration file to force a certain conversion (in C++) was enough.

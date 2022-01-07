@@ -1,0 +1,1 @@
+Fixer: "Don't raise a chain strength warning when chains have length <= 1".

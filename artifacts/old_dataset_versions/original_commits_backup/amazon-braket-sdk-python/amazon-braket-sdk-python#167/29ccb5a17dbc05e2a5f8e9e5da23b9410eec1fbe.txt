@@ -1,0 +1,1 @@
+fix: add observable targets not in instructions to circuit qubit count and qubits (#167)

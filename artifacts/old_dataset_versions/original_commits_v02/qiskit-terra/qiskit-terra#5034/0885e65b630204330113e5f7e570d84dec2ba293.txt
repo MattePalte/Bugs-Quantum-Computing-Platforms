@@ -1,0 +1,18 @@
+Fix random crashes on TextProgressBar (#5034)
+
+This is a proposed fix for #5012.
+
+It allows more than one subscriber per event, so that bad subscribers
+don't block good subscribers from getting events. It does this by changing
+the internal _Subscriber class to determine equality based on the callback
+function object id, instead of just by name.
+
+To prevent errors described in #5012, it avoids running the progress bar update if it
+has not been initialized yet (i.e. start() has not run yet). It also
+skips update when it doesn't make sense (e.g. step iteration is greater than
+the set total number of iterations on start).
+
+This is sensitive to object ids in order to work, so as long as the callbacks
+are dynamically defined functions, this will work.
+
+Co-authored-by: Luciano Bello <luciano.bello@ibm.com>

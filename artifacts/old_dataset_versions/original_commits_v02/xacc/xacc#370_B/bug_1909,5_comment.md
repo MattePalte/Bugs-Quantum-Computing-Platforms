@@ -1,0 +1,1 @@
+A new gate set was added so a new command (rz) is now available. Due to the new gate (IBM interface) set the parsing process should be aware of it.

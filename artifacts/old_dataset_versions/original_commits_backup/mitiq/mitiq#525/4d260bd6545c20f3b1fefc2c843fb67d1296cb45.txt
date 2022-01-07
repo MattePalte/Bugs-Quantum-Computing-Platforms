@@ -1,0 +1,5 @@
+Fix folding by fidelity for scale factors larger than 3 (#525)
+
+* Use fidelities for scale factors larger than 3, if provided.
+
+* Add test.

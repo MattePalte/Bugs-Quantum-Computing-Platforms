@@ -1,0 +1,1 @@
+{"commit_hash": "144c8d1cc06214ff4be2a4ed79d5fa9753c8265b", "commit_msg": "Fix no-iteration loop running once (#113)", "project_name": "ProjectQ", "id": "1111", "human_id": "ProjectQ#113", "author_comment": "Bug: where the loop variable is not checked to be an integer, now it raises error for non sensical values."}

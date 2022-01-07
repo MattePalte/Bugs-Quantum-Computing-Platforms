@@ -1,0 +1,5 @@
+fix bit access (#231)
+
+* fix bit access
+
+* One more change to get rid of the deprecation errors

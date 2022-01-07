@@ -1,0 +1,1 @@
+Resolved type-casting bug to allow different int types for qubit numbers, fixes #62

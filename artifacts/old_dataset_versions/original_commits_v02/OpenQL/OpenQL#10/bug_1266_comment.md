@@ -1,0 +1,1 @@
+During compilation there were two registers used for the same purpose. One for "delay calibration" and the other for "FOR loop".

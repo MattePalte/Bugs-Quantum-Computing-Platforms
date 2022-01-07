@@ -1,0 +1,1 @@
+Fixing an issue where reference count increases were not applied in certain cases (#987)

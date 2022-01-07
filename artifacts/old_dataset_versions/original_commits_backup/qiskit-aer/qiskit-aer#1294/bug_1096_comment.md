@@ -1,0 +1,1 @@
+From user: "When running a simple test of the state vector simulator with 16 qubits I get a segmentation fault.". Bug fixer: "Fusion to generate diagonal gates has a bug to look up operations in a circuit and this PR fix this bug."

@@ -1,0 +1,3 @@
+Merge pull request #229 from qulacs/fix_gcc_version_detection_gpu
+
+Fix compiler specification in setup_gpu.py and setup_singlethread.py

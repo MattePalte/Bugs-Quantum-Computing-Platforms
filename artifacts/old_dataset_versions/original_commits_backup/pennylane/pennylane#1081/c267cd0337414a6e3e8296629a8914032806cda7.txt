@@ -1,0 +1,11 @@
+Fix qml.grad so that the returned gradient always matches the cost function return type if only a single argument is differentiated (#1081)
+
+* Revert "Fix qml.grad so that the returned gradient always matches the cost function return type if only a single argument is differentiated (#1067)"
+
+This reverts commit cfdb6f8a979a8b549a5446917f8c0fab029e0237.
+
+* qml fix
+
+* changelog
+
+* more

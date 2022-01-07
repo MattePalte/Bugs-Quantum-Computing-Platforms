@@ -1,0 +1,1 @@
+Reporter: "The most important condition that hash functions must satisfy is a == b implies hash(a) == hash(b), but the BasicQubit class doesn't meet it:"

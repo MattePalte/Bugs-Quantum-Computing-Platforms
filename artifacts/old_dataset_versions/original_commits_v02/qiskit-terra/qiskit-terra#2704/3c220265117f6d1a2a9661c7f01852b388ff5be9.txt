@@ -1,0 +1,87 @@
+Fix Scheduler MemorySlot mapping (issue #2704) (#3567)
+
+* fix MeasureChannel
+
+* fix bug
+
+* fix bug in bug
+
+* Fix MemorySlots
+
+* tweaking
+
+* Fix typo
+
+* Update the condition
+
+This commit intends to change the idea of raising Pulse error when the length of mem_slots and acquires are not equal. The main idea of this PR is to output the user only those channels and memory slots that the user used.
+
+* Revert "Update the condition"
+
+This reverts commit 0b14dbd4b730d0dc1c7c55996f04387b419e5269.
+
+* Cleaning up
+
+* Fix typo
+
+* tweaking m_slots
+
+* Refactoring the logic
+
+* Remove ipdb
+
+* Added tests
+
+* Fixed review suggestions
+
+* Add docstring to test
+
+* release notes
+
+* typo
+
+* Fix review suggestions
+
+* fix release notes
+
+* Adding more tests
+
+* Fix Lint
+
+* fix typo in test
+
+* remove ipdb
+
+* test test
+
+* tweaking test
+
+* lint
+
+* fix review suggestions
+
+* Remove assert (PR #225)
+
+* avoid shift and or
+
+* Remove or and shift operator from test
+
+* Tests
+
+* Add Github issue reference to release notes
+
+* Update release notes
+
+Co-Authored-By: Luciano Bello <luciano.bello@ibm.com>
+
+* Added descriptive QiskitError message
+
+* Add GitHub Issue link to release notes
+
+* Remove release note
+
+Release note is not required because Scheduler has not been included in any previous releases
+
+* Update tests
+
+* assertEqual instructions

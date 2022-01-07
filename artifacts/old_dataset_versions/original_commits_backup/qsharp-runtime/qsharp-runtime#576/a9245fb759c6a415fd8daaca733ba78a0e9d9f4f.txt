@@ -1,0 +1,3 @@
+Fix for dynamic type load when inheritance used (#576)
+
+If inheritance is used, the `this` in QCTraceSimulatorImpl wont resolve to the right assembly. This uses the QCTraceSimulatorImpl type itself so that the assembly matching the QDK can be resolved.

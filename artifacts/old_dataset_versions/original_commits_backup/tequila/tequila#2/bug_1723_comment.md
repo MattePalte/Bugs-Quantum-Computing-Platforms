@@ -1,0 +1,1 @@
+Bug: after the first measurment wiht a target qubit, the second addition of a measurmnet gate raise the "already measured" exception, but this is wrong since we might have more than one measurment, if they measure differnet qubits, so the check is done at qubit level (this is the fix).

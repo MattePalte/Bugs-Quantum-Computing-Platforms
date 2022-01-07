@@ -1,0 +1,14 @@
+Fix condtional instructions using `c_if` not working for reg of size>=64 on BasicAer backend (#1089)
+
+When executing on the `BasicAer` backend `c_if` either result in a
+crash for if the conditional register was 64-bits wide, or just not
+work for registers > 64-bits.
+
+The `hex2bin` routine in `util.hpp` used 8 hex-character instead
+for 16 for the block size to process in 64-bit chunks.
+Also added check to avoid invoking `std::stoull` with empty string,
+which was causing the crashes.
+
+In the implementation of `ClassicalRegister::apply_bfunc,` truncated
+the leading zeros before comparing the masked register value with the
+target value for the condtional.

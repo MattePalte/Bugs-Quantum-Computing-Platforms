@@ -1,0 +1,4 @@
+Fixed bug in sample_measure_using_probabilities (#1132)
+
+Co-authored-by: Victor Villar <vvilpas@gmail.com>
+Co-authored-by: Christopher J. Wood <cjwood@us.ibm.com>

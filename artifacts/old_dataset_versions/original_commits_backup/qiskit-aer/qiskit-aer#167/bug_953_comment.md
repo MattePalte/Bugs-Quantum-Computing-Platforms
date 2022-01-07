@@ -1,0 +1,1 @@
+From fixer: "When a simulation fails for whatever reason, the result object (or Qobj) doesn't have a results field, so we have to properly deal with this scenario."

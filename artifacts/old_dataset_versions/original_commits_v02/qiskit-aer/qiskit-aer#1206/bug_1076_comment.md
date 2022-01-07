@@ -1,0 +1,1 @@
+From fixer: "Fixed bug in matrix_product_state (simulation technique)::apply_kraus. After applying the kraus matrix to the relevant qubits, we should propagate the changes to the neighboring qubits.". In a related issue: "MPS: invariant that sum of probabilities = 1 is not preserved"

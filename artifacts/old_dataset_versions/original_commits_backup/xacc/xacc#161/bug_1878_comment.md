@@ -1,0 +1,1 @@
+Reporter: "If we build xacc from scratch in debug mode, then downstream plugins report usResourceCompiler-NOTFOUND when trying to use the CppMicroServices usResourceCompiler4 executable target."

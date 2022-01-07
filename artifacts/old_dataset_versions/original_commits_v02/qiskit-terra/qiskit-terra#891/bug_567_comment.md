@@ -1,0 +1,1 @@
+Reporter: "Simplification done during in the constructor, of the pauli list that is passed, had a bug."

@@ -1,0 +1,1 @@
+{"commit_hash": "58965c33b8314cda119ff36e46b705a03835d397", "commit_msg": "Fix control line offset in LaTeX for controlled gates (#1103)", "project_name": "pyquil", "id": "2005", "human_id": "pyquil#1103", "author_comment": "fix latex diagram output. Bug: confuse target_qubit with qubit valiables."}

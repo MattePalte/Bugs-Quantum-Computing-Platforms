@@ -1,0 +1,36 @@
+Fixes #709 (#899)
+
+* Fixes #709
+
+* Conform to PEP8
+
+* Fixes formatting using black
+
+* * Added a conditional test for a GPU enabled environment
+* Added changelog/contribution.
+* Fixed also for the tape mode
+
+* Fixes a condition to run a CUDA related test
+
+* Fixes a bug in test
+
+* Update .github/CHANGELOG.md
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Update tests/qnn/test_qnn_torch.py
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Update tests/qnn/test_qnn_torch.py
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Update tests/qnn/test_qnn_torch.py
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Indentation correction
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>

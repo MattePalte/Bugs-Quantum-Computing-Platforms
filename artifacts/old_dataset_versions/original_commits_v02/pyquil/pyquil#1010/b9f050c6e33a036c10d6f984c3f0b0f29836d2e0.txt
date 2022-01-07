@@ -1,0 +1,1 @@
+Fix operand types for STORE and comparison instructions (#1010)

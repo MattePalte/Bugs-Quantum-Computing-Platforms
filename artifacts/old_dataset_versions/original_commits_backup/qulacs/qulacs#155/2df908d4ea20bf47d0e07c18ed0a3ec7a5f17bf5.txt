@@ -1,0 +1,3 @@
+Merge pull request #155 from corryvrequan/bugfix/cmake_build_with_src_path
+
+Fix a problem in CMake script which didn't work when path contains "./src/"

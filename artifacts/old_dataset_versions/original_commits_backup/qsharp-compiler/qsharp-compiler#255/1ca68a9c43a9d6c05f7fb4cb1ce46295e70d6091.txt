@@ -1,0 +1,1 @@
+Fixes QsCompiler build scripts in macos, linux (#255)

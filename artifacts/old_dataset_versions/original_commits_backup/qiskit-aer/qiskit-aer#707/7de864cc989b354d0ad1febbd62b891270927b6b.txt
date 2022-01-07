@@ -1,0 +1,1 @@
+Fix tolerance when checking if diagonal is unitary (#707)

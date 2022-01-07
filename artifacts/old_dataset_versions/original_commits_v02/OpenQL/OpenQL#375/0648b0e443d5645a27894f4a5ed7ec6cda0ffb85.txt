@@ -1,0 +1,3 @@
+Merge pull request #375 from QE-Lab/fix-visualizer
+
+Fix problems with visualizer on Linux+GCC

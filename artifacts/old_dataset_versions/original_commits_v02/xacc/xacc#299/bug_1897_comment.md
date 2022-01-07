@@ -1,0 +1,1 @@
+Fixer: "Only test QNG (QuantumNatualGradient) module if LAPACK was installed."

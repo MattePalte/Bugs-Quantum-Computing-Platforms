@@ -1,0 +1,1 @@
+Bug-fix: In a script the version selected should have been greater than or equal to.

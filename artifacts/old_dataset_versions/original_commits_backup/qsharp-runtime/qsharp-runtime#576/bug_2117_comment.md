@@ -1,0 +1,1 @@
+Fixer: in case of dynamic type (corner case) "If inheritance is used, the `this` in QCTraceSimulatorImpl wont resolve to the right assembly. This uses the QCTraceSimulatorImpl type itself so that the assembly matching the QDK can be resolved." Using the wrong assembly will likely lead an incorrect result or crash.

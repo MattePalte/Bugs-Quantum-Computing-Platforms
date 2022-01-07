@@ -1,0 +1,3 @@
+fix: Get qubit count without instantiating op (#250)
+
+Introduces `fixed_qubit_count` so customers don't need to instantiate a gate or noise operation to see its qubit count. Also fixes a bug that occurs when checking compatibility of gate and noise qubit counts, where the gate is always instantiated with no arguments, which obviously fails for parametrized gates.

@@ -1,0 +1,4 @@
+Fix cpp-simulator not being installed causing many unrelated tests to fail (#25)
+
+- Reduce to a single dedicated test to check for the problem
+- Only run other tests on available simulators

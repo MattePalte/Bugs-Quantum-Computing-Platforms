@@ -1,0 +1,19 @@
+Fix issue when computing the specs of a qnode measuring a Hamiltonian (#1533)
+
+* fix
+
+* black
+
+* Update tests/test_vqe.py
+
+* update changelog
+
+* change solution
+
+* try to change codecov to v2
+
+* remove things from codecovrc file to fix issues
+
+* go back to v1
+
+* undo changes to coveragerc

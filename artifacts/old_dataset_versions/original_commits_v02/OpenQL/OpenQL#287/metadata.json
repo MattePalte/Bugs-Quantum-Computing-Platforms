@@ -1,0 +1,1 @@
+{"commit_hash": "bbf64b674b88cc87e27c235b954f1a905a29ccfb", "commit_msg": "Merge pull request #287 from QE-Lab/fix/swig-warning\n\nfixed swig deprecated module warning", "project_name": "OpenQL", "id": "1261", "human_id": "OpenQL#287", "author_comment": "Fixer: \"fixed swig deprecated module warning\""}

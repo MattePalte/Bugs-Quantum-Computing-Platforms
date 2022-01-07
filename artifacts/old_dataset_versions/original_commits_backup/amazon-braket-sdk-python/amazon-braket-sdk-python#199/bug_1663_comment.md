@@ -1,0 +1,1 @@
+The job is submitted to the server and run there. It uses the library ayncio in python. The bug consists in using the event_loop of the client instead of that of the server (https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.Server.get_loop )

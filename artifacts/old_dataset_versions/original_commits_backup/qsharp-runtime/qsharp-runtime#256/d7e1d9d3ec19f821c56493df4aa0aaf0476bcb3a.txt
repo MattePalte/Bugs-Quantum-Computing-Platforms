@@ -1,0 +1,13 @@
+Fix #256. (#257)
+
+* Fix #256.
+
+* Added regression test.
+
+* Fixed test target.
+
+* Add internal fact.
+
+* Fix fact.
+
+Co-authored-by: bettinaheim <34236215+bettinaheim@users.noreply.github.com>

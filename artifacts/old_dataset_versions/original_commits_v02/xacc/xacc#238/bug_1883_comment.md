@@ -1,0 +1,1 @@
+Fixer: "Fixed gate merge bug during circuit rewrite"

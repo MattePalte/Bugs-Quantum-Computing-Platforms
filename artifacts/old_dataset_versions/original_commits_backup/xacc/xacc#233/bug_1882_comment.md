@@ -1,0 +1,1 @@
+During the mac build procedure. Reporter: "xacc-quantum-py shared lib build config missed the 'magic' rpath config."

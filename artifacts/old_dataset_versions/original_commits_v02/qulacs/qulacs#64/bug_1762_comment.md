@@ -1,0 +1,1 @@
+In the binding code (pybind11), there were two identical signatures pointing to the same function. Bug-fi: one of them instead should have an additional number.

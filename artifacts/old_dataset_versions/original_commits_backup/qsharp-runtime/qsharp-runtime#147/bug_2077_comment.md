@@ -1,0 +1,1 @@
+FIxer: "This change modifies exception handling to use "throw" without arguments to re-throw exceptions without changing stack trace. This is needed for correct matching between C# and Q# stacks, which is needed to report correct locations in Q# stack"

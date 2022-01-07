@@ -1,0 +1,1 @@
+The Toffoly gate was wrongly represented by "MA" string, instead of "AM". Therefore the test code never called that toffoli related decomposition. Reporter: "the option is read and checked against "AM" and then the function toff_kernel.controlled_cnot_AM is called. Because the option enabled was "MA" this decomposition was never called."

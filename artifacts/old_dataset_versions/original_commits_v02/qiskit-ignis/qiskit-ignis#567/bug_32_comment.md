@@ -1,0 +1,1 @@
+Reporter: "The weight_syndrome_graph method of Decoder objects in topological_codes has not been successfully migrated to networkx."

@@ -1,0 +1,3 @@
+Merge pull request #288 from DmitryLyakh/qaoa_fix
+
+Fixed QAOA example

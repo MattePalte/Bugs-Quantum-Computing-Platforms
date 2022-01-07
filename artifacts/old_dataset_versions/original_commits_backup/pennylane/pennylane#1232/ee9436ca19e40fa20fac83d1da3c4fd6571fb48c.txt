@@ -1,0 +1,17 @@
+Fix using a shot_list with multiple shots for sampling (#1232)
+
+* fix shot_vector sampling for partitioned shots
+
+* formatting
+
+* add test cases
+
+* formatting
+
+* reshape the shape of results to align it with the multiple copy case
+
+* _has_partitioned_shots
+
+* changelog
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>

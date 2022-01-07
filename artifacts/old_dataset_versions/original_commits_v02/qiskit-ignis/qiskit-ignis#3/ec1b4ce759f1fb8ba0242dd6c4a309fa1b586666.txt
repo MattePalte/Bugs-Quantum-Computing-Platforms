@@ -1,0 +1,1 @@
+Fix to allow cvx_fit to retry and finally gracefully fail if the solver cannot handle the problem (#3)

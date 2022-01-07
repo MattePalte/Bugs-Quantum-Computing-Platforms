@@ -1,0 +1,3 @@
+Merge pull request #55 from rigetticomputing/bugfix/python3-rounding
+
+bugfix to accomodate how python3 no longer returns an int after division

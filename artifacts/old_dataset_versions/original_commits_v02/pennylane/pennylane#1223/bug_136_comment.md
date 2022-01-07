@@ -1,0 +1,1 @@
+Fixer: "Applying the Torch interface, twice, to an expanded tape, resulted in an error. This is because the expand() function was not retaining the __bare__ attribute of the tape, which stores the original (pre-interface) class of the tape."

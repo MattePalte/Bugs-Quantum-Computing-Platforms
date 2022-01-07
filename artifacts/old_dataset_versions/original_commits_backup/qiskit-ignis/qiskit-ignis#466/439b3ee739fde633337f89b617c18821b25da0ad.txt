@@ -1,0 +1,3 @@
+Fix measurement pulse alignment bug (#466)
+
+Co-authored-by: Matthew Treinish <mtreinish@kortar.org>

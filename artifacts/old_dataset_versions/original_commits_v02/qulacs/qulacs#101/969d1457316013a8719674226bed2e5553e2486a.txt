@@ -1,0 +1,3 @@
+Merge pull request #101 from corryvrequan/bugfix/take_ownership_of_new_gate_instance
+
+[bugfix] Change return value policy for avoiding memory leak

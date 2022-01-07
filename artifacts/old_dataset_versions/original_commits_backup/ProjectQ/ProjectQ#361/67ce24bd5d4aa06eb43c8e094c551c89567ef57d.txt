@@ -1,0 +1,7 @@
+Fix bugs with matplotlib drawer (#361)
+
+* Accept keywords arguments for Matplotlib drawing
+
+* fix circ drawer when depth == 1
+
+Co-authored-by: Damien Nguyen <damien1@huawei.com>

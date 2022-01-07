@@ -1,0 +1,3 @@
+Merge pull request #374 from QE-Lab/fix-backward
+
+Fix linkage with backward backends

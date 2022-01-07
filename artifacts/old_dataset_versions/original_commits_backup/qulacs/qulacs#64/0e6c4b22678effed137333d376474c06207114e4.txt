@@ -1,0 +1,3 @@
+Merge pull request #64 from kosukemtr/bugfix_63_add_gate_kosukemtr
+
+#63 bugfix for add_gate

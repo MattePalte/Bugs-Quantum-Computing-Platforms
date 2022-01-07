@@ -1,0 +1,1 @@
+Fixer: "Make QPU tests insensitive to QPU topology availability". So that if the qpu is not available the test is skipped and not failed.

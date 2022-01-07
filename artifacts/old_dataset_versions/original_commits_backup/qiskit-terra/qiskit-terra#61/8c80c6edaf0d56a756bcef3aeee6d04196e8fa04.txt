@@ -1,0 +1,3 @@
+Merge pull request #61 from atilag/fix-test-register-size-error
+
+Updates IBMQuantumExperience imports because of last version changes
