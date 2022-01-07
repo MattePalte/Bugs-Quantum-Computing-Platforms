@@ -4,9 +4,11 @@ from typing import Union
 from typing import List
 from typing import Tuple
 from typing import Dict
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+
 
 
 # UTILITY FUNCTIONS: DATA INGESTION AND MANIPULATION
@@ -142,7 +144,7 @@ def plot_bar_chart_quantum_vs_classical(
     args = {
         "hue": "type",
         "data": df,
-        "palette": PALTETTE,
+        "palette": PALETTE,
         "ax": ax,
         "order": categories_q_bugs
     }
@@ -176,47 +178,63 @@ def plot_histogram_quantum_vs_classical(
             cap_value: int = 20,
             out_file_name: str = None,
             out_folder_path: str = None,
+            column_label_name: str = None,
+            column_abbreviation: str = None,
+            figsize: Tuple[int, int] = (10, 5),
+            legend_placement: str = 'upper center',
+            median_heights: Tuple[int, int] = (41, 41),
+            median_shifts: Tuple[int, int] = (.75, .75),
+            median_on: bool = True
         ):
     """Plot a stacked histogram (quantum vs classical) for the given metric."""
     df = df_bugs
     df = normalize_complexity(df, verbose=True)
     df = cap_max_value(df, column_to_inspect, cap_value)
-    MAX_VAL = cap_value + 2
-    fig, ax = plt.subplots(figsize=(10, 5))
+    if column_label_name is None:
+        column_label_name = column_to_inspect
+    if column_abbreviation is None:
+        column_abbreviation = column_label_name
+    max_val = cap_value + 2
+    fig, ax = plt.subplots(figsize=figsize)
+
+    mpl.rcParams['legend.loc'] = legend_placement
     sns.histplot(
         data=df,
         hue='type',
         multiple='stack',
-        palette=PALTETTE,
+        palette=PALETTE,
         x=column_to_inspect,
-        bins=range(MAX_VAL)
+        bins=range(max_val),
+        ax=ax
     )
-    ax.set_xticks(np.arange(.5, MAX_VAL, 1))
+    mpl.rcParams['legend.loc'] = 'best'
+    ax.get_legend().set_title(title="Type of Bug")
+    ax.set_xticks(np.arange(.5, max_val, 1))
     new_labels = [
-        str(e) if e != MAX_VAL - 1 and e != 0 else ""
-        for e in range(MAX_VAL)
+        str(e) if e != max_val - 1 and e != 0 else ""
+        for e in range(max_val)
     ]
     new_labels[cap_value] = f"{cap_value}+"
     print(new_labels)
     ax.set_xticklabels(new_labels)
-    shift = 0.5
-    # MEDIAN VALUE - QUANTUM
-    median_quantum = df[df['type'] == 'Quantum'][column_to_inspect].median()
-    ax.axvline(x=shift + median_quantum, color=PALTETTE["Quantum"])
-    ax.text(
-        median_quantum + .75, 41,
-        f'Median LoC\nfor Quantum\nBug-fixes ({median_quantum})',
-        fontsize=12, color=PALTETTE["Quantum"])
-    # MEDIAN VALUE - CLASSICAL
-    median_classical = df[df['type'] == 'Classical'][column_to_inspect].median()
-    ax.axvline(x=shift + median_classical, color=PALTETTE["Classical"])
-    ax.text(
-        median_classical + .75, 41,
-        f'Median LoC\nfor Classical\nBug-fixes ({median_classical})',
-        fontsize=12, color=PALTETTE["Classical"])
-    ax.set_xlabel("Bug-Fix Complexity (LoC)", fontsize=15)
+    if median_on:
+        # MEDIAN VALUE - QUANTUM
+        median_quantum = df[df['type'] == 'Quantum'][column_to_inspect].median()
+        ax.axvline(x=.5 + median_quantum, color=PALETTE["Quantum"])
+        ax.text(
+            median_quantum + median_shifts[0], median_heights[0],
+            f'Median {column_abbreviation}\nfor Quantum\nBug-fixes ({median_quantum})',
+            fontsize=12, color=PALETTE["Quantum"])
+        # MEDIAN VALUE - CLASSICAL
+        median_classical = df[df['type'] == 'Classical'][column_to_inspect].median()
+        ax.axvline(x= .5 + median_classical, color=PALETTE["Classical"])
+        ax.text(
+            median_classical + median_shifts[1], median_heights[1],
+            f'Median {column_abbreviation}\nfor Classical\nBug-fixes ({median_classical})',
+            fontsize=12, color=PALETTE["Classical"])
+    ax.set_xlabel(f"{column_label_name} ({column_abbreviation})", fontsize=15)
     ax.set_ylabel("Count", fontsize=15)
-    ax.set_xlim(1, 21)
+    ax.set_xlim(1, cap_value + 1)
     plt.tight_layout()
     ax.grid(axis='y')
     # fig.set_dpi(300)
@@ -259,7 +277,7 @@ def plot_diagram_value(
 
 # CONSTANTS
 
-PALTETTE = {
+PALETTE = {
     'Quantum': sns.color_palette("tab10")[1],
     'Classical': sns.color_palette("tab10")[0]
 }
