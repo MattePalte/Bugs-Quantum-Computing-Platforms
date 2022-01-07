@@ -10,7 +10,6 @@ import seaborn as sns
 import os
 
 
-
 # UTILITY FUNCTIONS: DATA INGESTION AND MANIPULATION
 
 
@@ -188,7 +187,7 @@ def plot_histogram_quantum_vs_classical(
         ):
     """Plot a stacked histogram (quantum vs classical) for the given metric."""
     df = df_bugs
-    df = normalize_complexity(df, verbose=True)
+    # df = normalize_complexity(df, verbose=True)
     df = cap_max_value(df, column_to_inspect, cap_value)
     if column_label_name is None:
         column_label_name = column_to_inspect
@@ -215,22 +214,26 @@ def plot_histogram_quantum_vs_classical(
         for e in range(max_val)
     ]
     new_labels[cap_value] = f"{cap_value}+"
-    print(new_labels)
+    # print(new_labels)
     ax.set_xticklabels(new_labels)
     if median_on:
         # MEDIAN VALUE - QUANTUM
-        median_quantum = df[df['type'] == 'Quantum'][column_to_inspect].median()
+        median_quantum = df[
+            df['type'] == 'Quantum'][column_to_inspect].median()
         ax.axvline(x=.5 + median_quantum, color=PALETTE["Quantum"])
         ax.text(
             median_quantum + median_shifts[0], median_heights[0],
-            f'Median {column_abbreviation}\nfor Quantum\nBug-fixes ({median_quantum})',
+            f'Median {column_abbreviation}\nfor " \
+            "Quantum\nBug-fixes ({median_quantum})',
             fontsize=12, color=PALETTE["Quantum"])
         # MEDIAN VALUE - CLASSICAL
-        median_classical = df[df['type'] == 'Classical'][column_to_inspect].median()
-        ax.axvline(x= .5 + median_classical, color=PALETTE["Classical"])
+        median_classical = df[
+            df['type'] == 'Classical'][column_to_inspect].median()
+        ax.axvline(x=.5 + median_classical, color=PALETTE["Classical"])
         ax.text(
             median_classical + median_shifts[1], median_heights[1],
-            f'Median {column_abbreviation}\nfor Classical\nBug-fixes ({median_classical})',
+            f'Median {column_abbreviation}\nfor " \
+            "Classical\nBug-fixes ({median_classical})',
             fontsize=12, color=PALETTE["Classical"])
     ax.set_xlabel(f"{column_label_name} ({column_abbreviation})", fontsize=15)
     ax.set_ylabel("Count", fontsize=15)
@@ -275,7 +278,9 @@ def plot_diagram_value(
                 print(f"'{code}' was annotated {count} time(s).")
     print("-" * 80)
 
+
 # CONSTANTS
+
 
 PALETTE = {
     'Quantum': sns.color_palette("tab10")[1],

@@ -34,8 +34,8 @@ def iterate_over(folder_master, folder_slave):
     for filename in files_in_common:
         file_master = os.path.join(folder_master, filename)
         file_slave = os.path.join(folder_slave, filename)
-        print(file_master)
-        print(file_slave)
+        # print(file_master)
+        # print(file_slave)
         content_master = read_content(file_master)
         content_slave = read_content(file_slave)
         item = (filename, content_master, content_slave)
@@ -80,7 +80,6 @@ def get_hunks(text_diff):
         line = line.rstrip()
         count_deletions += 1
         count_additions += 1
-
 
         if line.startswith("@@"):
             c_section = 'header'
@@ -161,18 +160,21 @@ def compute_diff_per_file(
                 text_diff = "\n".join(list(diffs))
                 # remove the useless preface before the "@@" character
                 text_diff = text_diff[text_diff.find("@@"):]
-                print(name)
-                print(text_diff)
-                #print("-" * 80)
-                #print("HUNKS:")
-                #print("-" * 80)
+                # print(name)
+                # print(text_diff)
+                # print("-" * 80)
+                # print("HUNKS:")
+                # print("-" * 80)
                 hunks = get_hunks(text_diff)
                 # count the lines
                 n_modified_lines = 0
                 for h_i, hunk in enumerate(hunks):
-                    print(f"Hunk {h_i}")
-                    print(hunk)
-                    i_modified_lines = max(len(hunk["deleted"]), len(hunk["added"]))
+                    # print(f"Hunk {h_i}")
+                    # print(hunk)
+                    i_modified_lines = max(
+                        len(hunk["deleted"]),
+                        len(hunk["added"])
+                    )
                     n_modified_lines += i_modified_lines
                 # if the file has any change, store it
                 if len(hunks) > 0:
