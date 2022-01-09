@@ -53,14 +53,23 @@ We test the analysis on the following setup:
 
 **Step-by-Step Reproducibility**
 
-Follow these steps to reproduce the paper's results:
+Follow these steps to reproduce the paper's results. You can either use the docker container or set up the conda environment.
+
+**OPTION A - Docker Container Approach**
+1. Go in the main directory of this repo
+2. Run the following command to download and run the docker container with all the dependencies of the notebook:
+```bash
+docker run -i -p 8888:8888 -v "$(pwd)":/home/jovyan -t jupyter/datascience-notebook:ubuntu-20.04 /bin/bash
+```
+
+**OPTION B - Conda Environment Approach**
 
 1. To use the notebook with the exact dependencies we used, you have to create the same conda environment starting from the environment file named [conda_environment.yml](conda_environment.yml) in the root of the repository. Run the following command to set up your environment:
     ```bash
     conda env create --file conda_environment.yml
     ```
     Note that your system might have assigned a different name to the environment, thus use the one mentioned in your printout at the line `conda activate **environment_name**`. Make sure to use the right one, the default name should be `QuantumPlatformBugs`, but the name is an irrelevant detail.
-1. Then activate the conda environment by running:
+2. Then activate the conda environment by running:
     ```bash
     conda activate QuantumPlatformBugs
     ```
@@ -68,12 +77,14 @@ Follow these steps to reproduce the paper's results:
     ```bash
     (QuantumPlatformBugs) matteo@ubuntu:~/.../Bugs-Quantum-Computing-Platforms/
     ```
-1. Now run the jupyter notebook kernel:
+**Common Step for Analysis**
+
+3. Now run the jupyter notebook kernel:
     ```bash
     jupyter notebook
     ```
-1. Navigate to the `notebooks` directory, open and run top to bottom the [Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb) notebook.
-1. The notebook's output will be saved in the folder: [reproducibility_results](reproducibility_results).
+4. From the web UI, navigate to the `notebooks` directory, open and run top to bottom the [Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb) notebook.
+Note that the notebook will output images which will be saved in the folder: [reproducibility_results](reproducibility_results).
 
 
 
