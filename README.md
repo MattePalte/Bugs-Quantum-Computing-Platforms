@@ -4,8 +4,8 @@ Companion Repository for ["Bugs in Quantum Computing Platforms: An Empirical Stu
 ## Reusing this Research
 
 This publication can be reused in at least two ways:
-- **Bug Collection**: we provide a dataset of bugs that have been minimized accounting only the files and lines of code which were responsible for the bug fix. This can be manually inspected to get deeper insights on the types of bugs that occurs in quantum computing platforms. Each bugfix contains two subfolders, named `before` and `after`, with the files before and after the fix. We recommend using a visual tool like [*Meld*](https://meldmerge.org/) to compare the files before and after the bugfix.
-    **Target audience**: researchers interested in inspecting bug patters of quantum computing platforms in details.
+- **Bug Collection**: we provide a dataset of bugs that have been minimized accounting only the files and lines of code which were responsible for the bug fix. This can be manually inspected to get deeper insights on the types of bugs that occurs in quantum computing platforms. Each bug fix contains two subfolders, named `before` and `after`, with the files before and after the fix. We recommend using a visual tool like [*Meld*](https://meldmerge.org/) to compare the files before and after the bugfix.
+    **Target audience**: researchers interested in inspecting bug patterns of quantum computing platforms in details.
 
 - **Bug Study**: we provide the code to conduct our empirical study on the annotated data.  The code to produce the diagrams can be reused to compute these metrics for any other annotated bug datasets (e.g., in another context or for an extension of the current work).
     **Target audience**: researcher conducting an empirical study of bugs.
