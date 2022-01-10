@@ -8,7 +8,7 @@ This publication can be reused in at least two ways:
     **Target audience**: researchers interested in inspecting bug patterns of quantum computing platforms in details.
 
 - **Bug Study**: we provide the code to conduct our empirical study on the annotated data.  The code to produce the diagrams can be reused to compute these metrics for any other annotated bug datasets (e.g., in another context or for an extension of the current work).
-    **Target audience**: researcher conducting an empirical study of bugs.
+    **Target audience**: researchers conducting an empirical study of bugs.
 
 
 **Potential Ideas for Future Work**:
