@@ -13,7 +13,7 @@ This publication can be reused in at least two ways:
 
 **Potential Ideas for Future Work**:
 1. **Extension for APR**: The bug collection dataset could be augmented with bug-triggering test cases to create a quantum specific benchmark for automatic program repair (APR) techniques.
-1. **Extension for Code Evolution Study**: in some time, the current bug collection dataset could be extended with future bugfixes to investigate how the studied metrics has changed over time in the quantum computing platforms.
+1. **Extension for Code Evolution Study**: in some time, the current bug collection dataset could be extended with future bug fixes to investigate how the studied metrics has changed over time in the quantum computing platforms.
 
 
 ## Available Artifacts
