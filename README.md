@@ -4,10 +4,12 @@ Companion Repository for ["Bugs in Quantum Computing Platforms: An Empirical Stu
 ## Reusing this Research
 
 This publication can be reused in at least two ways:
-- **Bug Collection**: we provide a dataset of bugs that have been minimized accounting only the files and lines of code which were responsible for the bug fix. This can be manually inspected to get deeper insights on the types of bugs that occurs in quantum computing platforms. Each bug fix contains two subfolders, named `before` and `after`, with the files before and after the fix. We recommend using a visual tool like [*Meld*](https://meldmerge.org/) to compare the files before and after the bug fix.
+1. **Bug Collection**: we provide a dataset of bugs that have been minimized accounting only the files and lines of code which were responsible for the bug fix. This can be manually inspected to get deeper insights on the types of bugs that occurs in quantum computing platforms. Each bug fix contains two subfolders, named `before` and `after`, with the files before and after the fix. We recommend using a visual tool like [*Meld*](https://meldmerge.org/) to compare the files before and after the bug fix.
+
     **Target audience**: researchers interested in inspecting bug patterns of quantum computing platforms in details.
 
-- **Bug Study**: we provide the code to conduct our empirical study on the annotated data.  The code to produce the plots can be reused to compute these metrics for any other annotated bug datasets (e.g., in another context or for an extension of the current work).
+1. **Bug Study**: we provide the code to conduct our empirical study on the annotated data.  The code to produce the plots can be reused to compute these metrics for any other annotated bug datasets (e.g., in another context or for an extension of the current work).
+
     **Target audience**: researchers conducting an empirical study of bugs.
 
 
@@ -30,7 +32,7 @@ commit hash. Resource path: [artifacts/commits_considered_for_sampling.csv](arti
 
 The bugs have two unique ids for historical reasons, but a single id is enough to unequivocally identify a bug.
 The two ids are named:
-- `id`: which is an incremental number used to uniquely identify the bug, it was used during the annotation process, and if the same commit contains multiple bug fixes, we use a decimal number to refer to the additional bugs (e.g., given the commit `acb123`, first bug has id of `75`, whereas the second has `75,5` ).
+- `id`: which is an incremental number used to uniquely identify the bug, it was used during the annotation process, and if the same commit contains multiple bug fixes, we use a comma-separated nomenclature to refer to the additional bugs (e.g., given the commit `acb123`, first bug has id of `75`, whereas the second has `75,5` ).
 - `human_id`: which was introduced for readability purposes. It is a combination of repository name followed by the first issue mentioned in the commit message, such as `pennylane#481`. In case of multiple bugs in the same commit we use the naming convention: `pennylane#481` and `pennylane#481_B`.
 
 Note that we never have more than two bugs per commit in this dataset.
@@ -53,17 +55,20 @@ We test the analysis on the following setup:
 
 **Step-by-Step Reproducibility**
 
-Follow these steps to reproduce the paper's results. You can either use the docker container or set up the conda environment.
+Follow these steps to reproduce the paper's results. You can either use the docker container (OPTION A) or set up the conda environment (OPTION B). Instead, if you are only interested in the exact python packages and version used, you can find them in the [conda_environment.yml](conda_environment.yml)) file. We recommend OPTION A when possible.
 
 **OPTION A - Docker Container Approach**
+
+Requirement: you need [Docker](https://www.docker.com/) installed on your system.
 1. Go in the main directory of this repo
-2. Run the following command to download and run the docker container with all the dependencies of the notebook:
+2. Run the following command to download and run the docker container. This container has dependencies which have been tested to be compatible with the notebook [notebooks/Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb):
 ```bash
 docker run -i -p 8888:8888 -v "$(pwd)":/home/jovyan -t jupyter/datascience-notebook:ubuntu-20.04 /bin/bash
 ```
 
 **OPTION B - Conda Environment Approach**
 
+Requirement: you need [Conda](https://docs.conda.io/en/latest/) installed on your system.
 1. To use the notebook with the exact dependencies we used, you have to create the same conda environment starting from the environment file named [conda_environment.yml](conda_environment.yml) in the root of the repository. Run the following command to set up your environment:
     ```bash
     conda env create --file conda_environment.yml
