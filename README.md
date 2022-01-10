@@ -7,7 +7,7 @@ This publication can be reused in at least two ways:
 - **Bug Collection**: we provide a dataset of bugs that have been minimized accounting only the files and lines of code which were responsible for the bug fix. This can be manually inspected to get deeper insights on the types of bugs that occurs in quantum computing platforms. Each bug fix contains two subfolders, named `before` and `after`, with the files before and after the fix. We recommend using a visual tool like [*Meld*](https://meldmerge.org/) to compare the files before and after the bug fix.
     **Target audience**: researchers interested in inspecting bug patterns of quantum computing platforms in details.
 
-- **Bug Study**: we provide the code to conduct our empirical study on the annotated data.  The code to produce the diagrams can be reused to compute these metrics for any other annotated bug datasets (e.g., in another context or for an extension of the current work).
+- **Bug Study**: we provide the code to conduct our empirical study on the annotated data.  The code to produce the plots can be reused to compute these metrics for any other annotated bug datasets (e.g., in another context or for an extension of the current work).
     **Target audience**: researchers conducting an empirical study of bugs.
 
 
@@ -25,7 +25,7 @@ commit hash. Resource path: [artifacts/commits_considered_for_sampling.csv](arti
 2. **annotation_bugs.csv**: including all the annotated commits which resulted either in bugs or false positives. For the bugs, we further annotate `bug type`, `components`, `symptom`, and `bug patterns`. To describe the bug, we also have a `comment` column which contains a brief description of the bug or a quote from a developer involved in the discussion of such bug. Moreover, we also have a column `localization` which contains a link that roughly identifies the location of the bug in the commit or pointing to some relevant resource to understand the bug. Resource path: [artifacts/annotation_bugs.csv](artifacts/annotation_bugs.csv).
 3. **annotation_components.csv**: containing information on which part of the repository led us to the decision that a specific project includes a specific component, e.g., quantum abstraction or machine code generation. We report this for each platform together with the reference to the commit we used during manual source code inspection. Resource path: [artifacts/annotation_components.csv](artifacts/annotation_components.csv).
 4. **minimal_bugfixes** folder: containing the minimal bug fixes that are required to fix the annotated bugs. Resource path: [artifacts/minimal_bugfixes/](artifacts/minimal_bugfixes/). The bug fixes are grouped per repository, and each bug fix folder contains two subfolders, named `before` and `after`, which contain the relevant files before and after the bug fix.
-5. **Reproducibility_of_Paper_Analysis.ipynb**: containing the steps to reproduce the diagrams in the paper. Resource path: [notebooks/Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb).
+5. **Reproducibility_of_Paper_Analysis.ipynb**: containing the steps to reproduce the plots in the paper. Resource path: [notebooks/Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb).
 
 
 The bugs have two unique ids for historical reasons, but a single id is enough to unequivocally identify a bug.
@@ -38,7 +38,7 @@ Note that we never have more than two bugs per commit in this dataset.
 
 ## Reproducibility of Paper Analysis
 
-The notebook [Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb) contains all the required steps to reproduce all the main paper's results in terms of diagrams and tables.
+The notebook [Reproducibility_of_Paper_Analysis.ipynb](notebooks/Reproducibility_of_Paper_Analysis.ipynb) contains all the required steps to reproduce all the main paper's results in terms of plots and tables.
 
 **Hardware and Software Setup**
 
