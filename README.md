@@ -31,7 +31,7 @@ commit hash. Resource path: [artifacts/commits_considered_for_sampling.csv](arti
 The bugs have two unique ids for historical reasons, but a single id is enough to unequivocally identify a bug.
 The two ids are named:
 - `id`: which is an incremental number used to uniquely identify the bug, it was used during the annotation process, and if the same commit contains multiple bug fixes, we use a decimal number to refer to the additional bugs (e.g., given the commit `acb123`, first bug has id of `75`, whereas the second has `75,5` ).
-- `human_id`: which was introduced for readability purposes. It is a derived id s which is a combination of repository name followed by the first issue mentioned in the commit message, such as `pennylane#481`. In case of multiple bugs in the same commit we use the naming convention: `pennylane#481` and `pennylane#481_B`.
+- `human_id`: which was introduced for readability purposes. It is a combination of repository name followed by the first issue mentioned in the commit message, such as `pennylane#481`. In case of multiple bugs in the same commit we use the naming convention: `pennylane#481` and `pennylane#481_B`.
 
 Note that we never have more than two bugs per commit in this dataset.
 
